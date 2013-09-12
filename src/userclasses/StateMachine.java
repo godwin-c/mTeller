@@ -5293,7 +5293,7 @@ public class StateMachine extends StateMachineBase {
                 } else {
                     login(username, encodePWD(password));
 
-                    if (status == null || !(status.equals("200 OK"))) {
+                    if (status == null || !(status.equals("200"))) {
 
                         Dialog.show("", "unable to login", "OK", null);
 
