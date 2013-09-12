@@ -5059,7 +5059,7 @@ public class StateMachine extends StateMachineBase {
                 }
             }
         };
-        
+
         f.getMenuBar().addCommand(newUser);
 
     }
@@ -5300,40 +5300,26 @@ public class StateMachine extends StateMachineBase {
 
                     } else {
                         status = "";
-                        try {
-                            if (appUser.getEmailVerified().equals("false")) {
-                                Dialog.show("Email Unverified", username.toUpperCase() + " please verify your email first", "OK", null);
-                            } else {
+                        String respCode = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/Retval");
+                        String respMsg = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/Retmsg");
 
-//                        String token = this.getTodayID();
-//                        TextField body = new TextField("This is the transaction token for the day. It expires at the end of the day.\n"
-//                                + "it also expires when you log out of the Application.\n"
-//                                + "\n"
-//                                + "Teller Id : " + appUser.getUsername() + "\n"
-//                                + "Token : " + token);
-//                        System.out.println(body.getText());
-//                    Message msg = new Message(body.getText());
-                                //TodayToken
-                                // try {
-//                        Display.getInstance().sendMessage(new String[]{appUser.getEmail()}, "Transaction Token ", msg);
+                        if ("1".equals(respCode)) {
+                            String email = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/Email");
+                            String mfbCode = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/Mfbcode");
+                            String tranPassword = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/TranPwd");
+                            String tillAcct = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/TillAcct");
+                            String objectID = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/ObjectID");
+                            String offlineStatus = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/OfflineTeller");
 
-                                // Dialog.show("Transaction Token", body.getText(), "OK", null);
-//                        try {
-//                            Hashtable todayToken = new Hashtable();
-//                            todayToken.put("date", this.getCurrentDate());
-//                            todayToken.put("token", token);
-//                            Storage.getInstance().writeObject("TodayToken", todayToken);
+                            appUser = new AppUsers(username, email, objectID, offlineStatus, mfbCode, tranPassword, tillAcct);
+                            //
 
-                                Dialog.show("Logged In", appUser.getUsername().toUpperCase() + "  welcome", "OK", null);
-                                status = "";
-                                showForm("TransactionMenu", null);
-//                        } catch (Exception e) {
-//                            Dialog.show("Error Occured", e.getMessage(), "OK", null);
-//                        }
+                            Dialog.show("Logged In", appUser.getUsername().toUpperCase() + "  welcome", "OK", null);
+                            //status = "";
+                            showForm("TransactionMenu", null);
 
-                            }
-                        } catch (Exception e) {
-                            Dialog.show("OOPS!!!", "request may have been cancelled", "OK", null);
+                        } else {
+                            Dialog.show("", respMsg, "OK", null);
                         }
                     }
 
