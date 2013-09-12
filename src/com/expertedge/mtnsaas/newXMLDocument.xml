@@ -1,0 +1,857 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<root>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+   <S:Body>
+      <ns3:MiniStatementsResponse xmlns:ns2="http://tempuri.org/" xmlns:ns3="http://prime.ee.org/">
+         <return>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate/>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate/>
+               <ns2:Narration>B/F AS AT 04 Mar 2013</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit/>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>20940.30</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>0</ns2:TellerNo>
+               <ns2:PostingSeq>0</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>FOR TEST</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit>2000.00</ns2:Credit>
+               <ns2:Debit/>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>22940.30</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>123876</ns2:TellerNo>
+               <ns2:PostingSeq>424</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>WITHDRAWAL BY SELF [ TELLER NUMBER : 0101222 ]</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>3000.00</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>19940.30</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>101222</ns2:TellerNo>
+               <ns2:PostingSeq>511</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>DEPOSIT BY TOLU</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit>10000.00</ns2:Credit>
+               <ns2:Debit/>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>29940.30</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>1018892</ns2:TellerNo>
+               <ns2:PostingSeq>499</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>CASH WTD</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>2000.00</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>27940.30</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>9333</ns2:TellerNo>
+               <ns2:PostingSeq>429</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>E-Fincore Charge</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>10.00</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>27930.30</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>9333</ns2:TellerNo>
+               <ns2:PostingSeq>429</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:Narration>TEST</ns2:Narration>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit>6000.00</ns2:Credit>
+               <ns2:Debit/>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>33930.30</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>345612</ns2:TellerNo>
+               <ns2:PostingSeq>470</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>MAINSTR      MARINNAS     LANG</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>12.00</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>33918.30</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>**********</ns2:TellerNo>
+               <ns2:PostingSeq>552</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>MAINSTR   VI    LANG</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit>10.00</ns2:Credit>
+               <ns2:Debit/>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>33928.30</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>**********</ns2:TellerNo>
+               <ns2:PostingSeq>556</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>DEPOSIT BY ONO</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit>551.00</ns2:Credit>
+               <ns2:Debit/>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>34479.30</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>1191</ns2:TellerNo>
+               <ns2:PostingSeq>500</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>WITHDRAWAL BY SELF</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>6000.50</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>28478.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>1011100</ns2:TellerNo>
+               <ns2:PostingSeq>419</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>MAINSTR      MARINNAS     LANG</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>20.00</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>28458.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>**********</ns2:TellerNo>
+               <ns2:PostingSeq>557</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>WITHDRAWAL BY SELF [ TELLER NUMBER : 0178141 ]</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>6500.00</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>21958.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>178141</ns2:TellerNo>
+               <ns2:PostingSeq>509</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>E-Fincore Charge</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>10.00</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>21948.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>178141</ns2:TellerNo>
+               <ns2:PostingSeq>509</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>WITHDRAWAL BY JIMMY</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>100.00</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>21848.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>1089010</ns2:TellerNo>
+               <ns2:PostingSeq>425</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>WITHDRAWAL BY JIMMY</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>600.00</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>21248.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>1089010</ns2:TellerNo>
+               <ns2:PostingSeq>426</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>MAINSTR      MARINNAS     LANG</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>15.00</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>21233.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>**********</ns2:TellerNo>
+               <ns2:PostingSeq>527</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>WITHDRAWAL BY SELF [ TELLER NUMBER : 024840 ]</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>100.00</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>21133.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>24840</ns2:TellerNo>
+               <ns2:PostingSeq>548</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>WITHDRAWAL BY JIMMY</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>600.00</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>20533.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>1089010</ns2:TellerNo>
+               <ns2:PostingSeq>427</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>MAINSTR      MARINNAS     LANG</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>15.00</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>20518.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>**********</ns2:TellerNo>
+               <ns2:PostingSeq>528</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>MAINSTR      MARINNAS     LANG</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>15.00</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>20503.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>**********</ns2:TellerNo>
+               <ns2:PostingSeq>529</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>WITHDRAWAL BY JIMMY</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>600.00</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>19903.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>1089010</ns2:TellerNo>
+               <ns2:PostingSeq>428</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>TEST</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit>6000.00</ns2:Credit>
+               <ns2:Debit/>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>25903.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>345612</ns2:TellerNo>
+               <ns2:PostingSeq>475</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>DEPOSIT BY TOLU</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit>10000.00</ns2:Credit>
+               <ns2:Debit/>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>35903.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>1018892</ns2:TellerNo>
+               <ns2:PostingSeq>422</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>WITHDRAWAL BY JIMMY</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>200.00</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>35703.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>1089010</ns2:TellerNo>
+               <ns2:PostingSeq>423</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>NAWAHOOO</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>100.00</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>35603.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>12345678</ns2:TellerNo>
+               <ns2:PostingSeq>431</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>TEST</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit>6000.00</ns2:Credit>
+               <ns2:Debit/>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>41603.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>345612</ns2:TellerNo>
+               <ns2:PostingSeq>468</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>NAWAHOOO</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>100.00</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>41503.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>12345678</ns2:TellerNo>
+               <ns2:PostingSeq>432</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>NAWAHOOO</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>100.00</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>41403.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>12345678</ns2:TellerNo>
+               <ns2:PostingSeq>433</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>TEST</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit>6000.00</ns2:Credit>
+               <ns2:Debit/>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>47403.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>345612</ns2:TellerNo>
+               <ns2:PostingSeq>469</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>WED</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit>4000.00</ns2:Credit>
+               <ns2:Debit/>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>51403.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>567439</ns2:TellerNo>
+               <ns2:PostingSeq>485</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>FOR KEEPS</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>20000.00</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>31403.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>12314</ns2:TellerNo>
+               <ns2:PostingSeq>571</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>E-Fincore Charge</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>20.00</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>31383.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>12314</ns2:TellerNo>
+               <ns2:PostingSeq>571</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>DFSDFG</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit>6782.00</ns2:Credit>
+               <ns2:Debit/>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>38165.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>123234</ns2:TellerNo>
+               <ns2:PostingSeq>489</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>WITHDRAWAL THURSDAY</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>6000.00</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>32165.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>234121</ns2:TellerNo>
+               <ns2:PostingSeq>492</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>E-Fincore Charge</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>6.00</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>32159.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>234121</ns2:TellerNo>
+               <ns2:PostingSeq>492</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>TRYING</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit>3000.00</ns2:Credit>
+               <ns2:Debit/>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>35159.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>12342</ns2:TellerNo>
+               <ns2:PostingSeq>452</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>TRYING</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit>3000.00</ns2:Credit>
+               <ns2:Debit/>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>38159.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>12342</ns2:TellerNo>
+               <ns2:PostingSeq>455</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>MONDAY</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit>8009.00</ns2:Credit>
+               <ns2:Debit/>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>46168.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>213245</ns2:TellerNo>
+               <ns2:PostingSeq>493</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>THE TEST</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit>1200.00</ns2:Credit>
+               <ns2:Debit/>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>47368.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>12302</ns2:TellerNo>
+               <ns2:PostingSeq>506</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>MAINSTR      MARINNAS     LANG</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>15.00</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>47353.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>**********</ns2:TellerNo>
+               <ns2:PostingSeq>530</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+            <ns2:MiniStatement>
+               <ns2:Accountnumber>00120100001</ns2:Accountnumber>
+               <ns2:Trandate>05 Mar 2013</ns2:Trandate>
+               <ns2:BranchName>Head Office Branch</ns2:BranchName>
+               <ns2:BranchAddress>50 Libreville Street Aminu Kano Crescent Wuse 2 BRANCH</ns2:BranchAddress>
+               <ns2:ValueDate>05 Mar 2013</ns2:ValueDate>
+               <ns2:Narration>WITHDRAWAL BY SELF [ TELLER NUMBER : 0123140 ]</ns2:Narration>
+               <ns2:Fullname>CLEMENTINA MONISOLA OGUNNIYI</ns2:Fullname>
+               <ns2:Credit/>
+               <ns2:Debit>5800.00</ns2:Debit>
+               <ns2:OpenBalance>20940.30</ns2:OpenBalance>
+               <ns2:BkBalance>41553.80</ns2:BkBalance>
+               <ns2:Startdate>05 Mar 2013</ns2:Startdate>
+               <ns2:EndDate>05 Mar 2013</ns2:EndDate>
+               <ns2:Amount>0</ns2:Amount>
+               <ns2:TellerNo>123140</ns2:TellerNo>
+               <ns2:PostingSeq>508</ns2:PostingSeq>
+               <ns2:Retval>0</ns2:Retval>
+               <ns2:RetMsg>Succesfull</ns2:RetMsg>
+            </ns2:MiniStatement>
+         </return>
+      </ns3:MiniStatementsResponse>
+   </S:Body>
+</S:Envelope>
+</root>
