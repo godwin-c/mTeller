@@ -35,6 +35,7 @@ public abstract class StateMachineBase extends UIBuilder {
         initVars();
         UIBuilder.registerCustomComponent("Button", com.codename1.ui.Button.class);
         UIBuilder.registerCustomComponent("Form", com.codename1.ui.Form.class);
+        UIBuilder.registerCustomComponent("Dialog", com.codename1.ui.Dialog.class);
         UIBuilder.registerCustomComponent("MultiList", com.codename1.ui.list.MultiList.class);
         UIBuilder.registerCustomComponent("Label", com.codename1.ui.Label.class);
         UIBuilder.registerCustomComponent("TextArea", com.codename1.ui.TextArea.class);
@@ -77,6 +78,7 @@ public abstract class StateMachineBase extends UIBuilder {
         initVars();
         UIBuilder.registerCustomComponent("Button", com.codename1.ui.Button.class);
         UIBuilder.registerCustomComponent("Form", com.codename1.ui.Form.class);
+        UIBuilder.registerCustomComponent("Dialog", com.codename1.ui.Dialog.class);
         UIBuilder.registerCustomComponent("MultiList", com.codename1.ui.list.MultiList.class);
         UIBuilder.registerCustomComponent("Label", com.codename1.ui.Label.class);
         UIBuilder.registerCustomComponent("TextArea", com.codename1.ui.TextArea.class);
@@ -118,18 +120,6 @@ public abstract class StateMachineBase extends UIBuilder {
 
     public StateMachineBase(Resources res, boolean loadTheme) {
         this(res, null, loadTheme);
-    }
-
-    public com.codename1.ui.TextField findOfflineTellerNumberTextField(Component root) {
-        return (com.codename1.ui.TextField)findByName("offlineTellerNumberTextField", root);
-    }
-
-    public com.codename1.ui.TextField findOfflineTellerNumberTextField() {
-        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("offlineTellerNumberTextField", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.TextField)findByName("offlineTellerNumberTextField", aboutToShowThisContainer);
-        }
-        return cmp;
     }
 
     public com.codename1.ui.Button findChangeOfflineTeller(Component root) {
@@ -216,54 +206,6 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.TextField findPasswordTextField(Component root) {
-        return (com.codename1.ui.TextField)findByName("passwordTextField", root);
-    }
-
-    public com.codename1.ui.TextField findPasswordTextField() {
-        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("passwordTextField", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.TextField)findByName("passwordTextField", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Label findMiniStatRetMessage(Component root) {
-        return (com.codename1.ui.Label)findByName("miniStatRetMessage", root);
-    }
-
-    public com.codename1.ui.Label findMiniStatRetMessage() {
-        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("miniStatRetMessage", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Label)findByName("miniStatRetMessage", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.List findAccountsWithErrorStatusList(Component root) {
-        return (com.codename1.ui.List)findByName("accountsWithErrorStatusList", root);
-    }
-
-    public com.codename1.ui.List findAccountsWithErrorStatusList() {
-        com.codename1.ui.List cmp = (com.codename1.ui.List)findByName("accountsWithErrorStatusList", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.List)findByName("accountsWithErrorStatusList", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.TextField findNewOfflineTellerPWDTextField(Component root) {
-        return (com.codename1.ui.TextField)findByName("newOfflineTellerPWDTextField", root);
-    }
-
-    public com.codename1.ui.TextField findNewOfflineTellerPWDTextField() {
-        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("newOfflineTellerPWDTextField", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.TextField)findByName("newOfflineTellerPWDTextField", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
     public com.codename1.ui.TextField findNewOfflineTellerTextField(Component root) {
         return (com.codename1.ui.TextField)findByName("newOfflineTellerTextField", root);
     }
@@ -288,30 +230,6 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.Button findCancelFetch(Component root) {
-        return (com.codename1.ui.Button)findByName("cancelFetch", root);
-    }
-
-    public com.codename1.ui.Button findCancelFetch() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("cancelFetch", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("cancelFetch", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.TextArea findTranURLTextArea(Component root) {
-        return (com.codename1.ui.TextArea)findByName("tranURLTextArea", root);
-    }
-
-    public com.codename1.ui.TextArea findTranURLTextArea() {
-        com.codename1.ui.TextArea cmp = (com.codename1.ui.TextArea)findByName("tranURLTextArea", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.TextArea)findByName("tranURLTextArea", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
     public com.codename1.ui.Button findSignature(Component root) {
         return (com.codename1.ui.Button)findByName("signature", root);
     }
@@ -320,42 +238,6 @@ public abstract class StateMachineBase extends UIBuilder {
         com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("signature", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
             cmp = (com.codename1.ui.Button)findByName("signature", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Button findOkToDeposit(Component root) {
-        return (com.codename1.ui.Button)findByName("okToDeposit", root);
-    }
-
-    public com.codename1.ui.Button findOkToDeposit() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("okToDeposit", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("okToDeposit", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.TextField findTellerTilTextField(Component root) {
-        return (com.codename1.ui.TextField)findByName("tellerTilTextField", root);
-    }
-
-    public com.codename1.ui.TextField findTellerTilTextField() {
-        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("tellerTilTextField", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.TextField)findByName("tellerTilTextField", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Button findAdminSettings(Component root) {
-        return (com.codename1.ui.Button)findByName("adminSettings", root);
-    }
-
-    public com.codename1.ui.Button findAdminSettings() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("adminSettings", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("adminSettings", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -380,30 +262,6 @@ public abstract class StateMachineBase extends UIBuilder {
         com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("verifyBalInquiry", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
             cmp = (com.codename1.ui.Button)findByName("verifyBalInquiry", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.TextField findNewAdminPasswordTextField(Component root) {
-        return (com.codename1.ui.TextField)findByName("newAdminPasswordTextField", root);
-    }
-
-    public com.codename1.ui.TextField findNewAdminPasswordTextField() {
-        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("newAdminPasswordTextField", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.TextField)findByName("newAdminPasswordTextField", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Button findLoginOffline(Component root) {
-        return (com.codename1.ui.Button)findByName("loginOffline", root);
-    }
-
-    public com.codename1.ui.Button findLoginOffline() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("loginOffline", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("loginOffline", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -456,18 +314,6 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.Label findMiniStatValueDate(Component root) {
-        return (com.codename1.ui.Label)findByName("miniStatValueDate", root);
-    }
-
-    public com.codename1.ui.Label findMiniStatValueDate() {
-        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("miniStatValueDate", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Label)findByName("miniStatValueDate", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
     public com.codename1.ui.TextField findTranPasswordTextField(Component root) {
         return (com.codename1.ui.TextField)findByName("tranPasswordTextField", root);
     }
@@ -476,6 +322,18 @@ public abstract class StateMachineBase extends UIBuilder {
         com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("tranPasswordTextField", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
             cmp = (com.codename1.ui.TextField)findByName("tranPasswordTextField", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextField findOfflinePassword(Component root) {
+        return (com.codename1.ui.TextField)findByName("offlinePassword", root);
+    }
+
+    public com.codename1.ui.TextField findOfflinePassword() {
+        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("offlinePassword", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextField)findByName("offlinePassword", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -516,14 +374,14 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.Button findCancelBalInquiry(Component root) {
-        return (com.codename1.ui.Button)findByName("cancelBalInquiry", root);
+    public com.codename1.ui.Button findCancelWithdraw(Component root) {
+        return (com.codename1.ui.Button)findByName("cancelWithdraw", root);
     }
 
-    public com.codename1.ui.Button findCancelBalInquiry() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("cancelBalInquiry", Display.getInstance().getCurrent());
+    public com.codename1.ui.Button findCancelWithdraw() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("cancelWithdraw", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("cancelBalInquiry", aboutToShowThisContainer);
+            cmp = (com.codename1.ui.Button)findByName("cancelWithdraw", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -540,14 +398,14 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.Button findCancelWithdraw(Component root) {
-        return (com.codename1.ui.Button)findByName("cancelWithdraw", root);
+    public com.codename1.ui.Button findCancelBalInquiry(Component root) {
+        return (com.codename1.ui.Button)findByName("cancelBalInquiry", root);
     }
 
-    public com.codename1.ui.Button findCancelWithdraw() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("cancelWithdraw", Display.getInstance().getCurrent());
+    public com.codename1.ui.Button findCancelBalInquiry() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("cancelBalInquiry", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("cancelWithdraw", aboutToShowThisContainer);
+            cmp = (com.codename1.ui.Button)findByName("cancelBalInquiry", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -560,18 +418,6 @@ public abstract class StateMachineBase extends UIBuilder {
         com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("miniStatTellerNumber", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
             cmp = (com.codename1.ui.Label)findByName("miniStatTellerNumber", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Button findCustomerPhoto(Component root) {
-        return (com.codename1.ui.Button)findByName("customerPhoto", root);
-    }
-
-    public com.codename1.ui.Button findCustomerPhoto() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("customerPhoto", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("customerPhoto", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -612,18 +458,6 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.TextField findMfbCodeTextField(Component root) {
-        return (com.codename1.ui.TextField)findByName("mfbCodeTextField", root);
-    }
-
-    public com.codename1.ui.TextField findMfbCodeTextField() {
-        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("mfbCodeTextField", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.TextField)findByName("mfbCodeTextField", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
     public com.codename1.ui.list.MultiList findStoredCustomersMultiList(Component root) {
         return (com.codename1.ui.list.MultiList)findByName("storedCustomersMultiList", root);
     }
@@ -660,66 +494,6 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.Button findCancelWithdrawaToken(Component root) {
-        return (com.codename1.ui.Button)findByName("cancelWithdrawaToken", root);
-    }
-
-    public com.codename1.ui.Button findCancelWithdrawaToken() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("cancelWithdrawaToken", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("cancelWithdrawaToken", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Button findViewOfflineTrans(Component root) {
-        return (com.codename1.ui.Button)findByName("viewOfflineTrans", root);
-    }
-
-    public com.codename1.ui.Button findViewOfflineTrans() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("viewOfflineTrans", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("viewOfflineTrans", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.TextArea findAppURLTextArea(Component root) {
-        return (com.codename1.ui.TextArea)findByName("appURLTextArea", root);
-    }
-
-    public com.codename1.ui.TextArea findAppURLTextArea() {
-        com.codename1.ui.TextArea cmp = (com.codename1.ui.TextArea)findByName("appURLTextArea", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.TextArea)findByName("appURLTextArea", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.List findAccountsStoredList(Component root) {
-        return (com.codename1.ui.List)findByName("accountsStoredList", root);
-    }
-
-    public com.codename1.ui.List findAccountsStoredList() {
-        com.codename1.ui.List cmp = (com.codename1.ui.List)findByName("accountsStoredList", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.List)findByName("accountsStoredList", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Button findPullAccounts(Component root) {
-        return (com.codename1.ui.Button)findByName("pullAccounts", root);
-    }
-
-    public com.codename1.ui.Button findPullAccounts() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("pullAccounts", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("pullAccounts", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
     public com.codename1.ui.Button findShowDepositOffline(Component root) {
         return (com.codename1.ui.Button)findByName("showDepositOffline", root);
     }
@@ -728,18 +502,6 @@ public abstract class StateMachineBase extends UIBuilder {
         com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("showDepositOffline", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
             cmp = (com.codename1.ui.Button)findByName("showDepositOffline", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Button findWithdraw(Component root) {
-        return (com.codename1.ui.Button)findByName("withdraw", root);
-    }
-
-    public com.codename1.ui.Button findWithdraw() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("withdraw", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("withdraw", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -756,50 +518,14 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.TextArea findBearerKeyTextArea(Component root) {
-        return (com.codename1.ui.TextArea)findByName("bearerKeyTextArea", root);
+    public com.codename1.ui.Button findAddOfflineTeller(Component root) {
+        return (com.codename1.ui.Button)findByName("addOfflineTeller", root);
     }
 
-    public com.codename1.ui.TextArea findBearerKeyTextArea() {
-        com.codename1.ui.TextArea cmp = (com.codename1.ui.TextArea)findByName("bearerKeyTextArea", Display.getInstance().getCurrent());
+    public com.codename1.ui.Button findAddOfflineTeller() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("addOfflineTeller", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.TextArea)findByName("bearerKeyTextArea", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.TextField findAcctNumberField(Component root) {
-        return (com.codename1.ui.TextField)findByName("acctNumberField", root);
-    }
-
-    public com.codename1.ui.TextField findAcctNumberField() {
-        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("acctNumberField", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.TextField)findByName("acctNumberField", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Label findOfflineTranAcctName(Component root) {
-        return (com.codename1.ui.Label)findByName("offlineTranAcctName", root);
-    }
-
-    public com.codename1.ui.Label findOfflineTranAcctName() {
-        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("offlineTranAcctName", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Label)findByName("offlineTranAcctName", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Button findMiniStatement(Component root) {
-        return (com.codename1.ui.Button)findByName("miniStatement", root);
-    }
-
-    public com.codename1.ui.Button findMiniStatement() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("miniStatement", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("miniStatement", aboutToShowThisContainer);
+            cmp = (com.codename1.ui.Button)findByName("addOfflineTeller", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -816,18 +542,6 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.Button findAddOfflineTeller(Component root) {
-        return (com.codename1.ui.Button)findByName("addOfflineTeller", root);
-    }
-
-    public com.codename1.ui.Button findAddOfflineTeller() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("addOfflineTeller", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("addOfflineTeller", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
     public com.codename1.ui.list.MultiList findTransactionsNotUploadedMultiList(Component root) {
         return (com.codename1.ui.list.MultiList)findByName("transactionsNotUploadedMultiList", root);
     }
@@ -836,18 +550,6 @@ public abstract class StateMachineBase extends UIBuilder {
         com.codename1.ui.list.MultiList cmp = (com.codename1.ui.list.MultiList)findByName("transactionsNotUploadedMultiList", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
             cmp = (com.codename1.ui.list.MultiList)findByName("transactionsNotUploadedMultiList", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.TextField findOfflinePasswordTextField(Component root) {
-        return (com.codename1.ui.TextField)findByName("offlinePasswordTextField", root);
-    }
-
-    public com.codename1.ui.TextField findOfflinePasswordTextField() {
-        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("offlinePasswordTextField", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.TextField)findByName("offlinePasswordTextField", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -864,42 +566,6 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.list.MultiList findBalInquiryMFBMultiList(Component root) {
-        return (com.codename1.ui.list.MultiList)findByName("balInquiryMFBMultiList", root);
-    }
-
-    public com.codename1.ui.list.MultiList findBalInquiryMFBMultiList() {
-        com.codename1.ui.list.MultiList cmp = (com.codename1.ui.list.MultiList)findByName("balInquiryMFBMultiList", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.list.MultiList)findByName("balInquiryMFBMultiList", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Button findAdminLogin(Component root) {
-        return (com.codename1.ui.Button)findByName("adminLogin", root);
-    }
-
-    public com.codename1.ui.Button findAdminLogin() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("adminLogin", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("adminLogin", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Label findMiniStatBookBalance(Component root) {
-        return (com.codename1.ui.Label)findByName("miniStatBookBalance", root);
-    }
-
-    public com.codename1.ui.Label findMiniStatBookBalance() {
-        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("miniStatBookBalance", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Label)findByName("miniStatBookBalance", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
     public com.codename1.ui.TextField findAmountToDepositField(Component root) {
         return (com.codename1.ui.TextField)findByName("amountToDepositField", root);
     }
@@ -912,14 +578,14 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.TextField findMiniStatAcctNumberTextField(Component root) {
-        return (com.codename1.ui.TextField)findByName("miniStatAcctNumberTextField", root);
+    public com.codename1.ui.Button findOfflineUserLogin(Component root) {
+        return (com.codename1.ui.Button)findByName("offlineUserLogin", root);
     }
 
-    public com.codename1.ui.TextField findMiniStatAcctNumberTextField() {
-        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("miniStatAcctNumberTextField", Display.getInstance().getCurrent());
+    public com.codename1.ui.Button findOfflineUserLogin() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("offlineUserLogin", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.TextField)findByName("miniStatAcctNumberTextField", aboutToShowThisContainer);
+            cmp = (com.codename1.ui.Button)findByName("offlineUserLogin", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -932,18 +598,6 @@ public abstract class StateMachineBase extends UIBuilder {
         com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("tranPWDDepositTextField", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
             cmp = (com.codename1.ui.TextField)findByName("tranPWDDepositTextField", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Label findTellerNum(Component root) {
-        return (com.codename1.ui.Label)findByName("tellerNum", root);
-    }
-
-    public com.codename1.ui.Label findTellerNum() {
-        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("tellerNum", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Label)findByName("tellerNum", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -972,18 +626,6 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.Container findAppSettingsContainer(Component root) {
-        return (com.codename1.ui.Container)findByName("appSettingsContainer", root);
-    }
-
-    public com.codename1.ui.Container findAppSettingsContainer() {
-        com.codename1.ui.Container cmp = (com.codename1.ui.Container)findByName("appSettingsContainer", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Container)findByName("appSettingsContainer", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
     public com.codename1.ui.Label findMiniStatTranDate(Component root) {
         return (com.codename1.ui.Label)findByName("miniStatTranDate", root);
     }
@@ -996,18 +638,6 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.Button findUploadSingleTran(Component root) {
-        return (com.codename1.ui.Button)findByName("uploadSingleTran", root);
-    }
-
-    public com.codename1.ui.Button findUploadSingleTran() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("uploadSingleTran", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("uploadSingleTran", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
     public com.codename1.ui.Label findLabel(Component root) {
         return (com.codename1.ui.Label)findByName("Label", root);
     }
@@ -1016,18 +646,6 @@ public abstract class StateMachineBase extends UIBuilder {
         com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("Label", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
             cmp = (com.codename1.ui.Label)findByName("Label", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.list.MultiList findMiniStatMultiList(Component root) {
-        return (com.codename1.ui.list.MultiList)findByName("miniStatMultiList", root);
-    }
-
-    public com.codename1.ui.list.MultiList findMiniStatMultiList() {
-        com.codename1.ui.list.MultiList cmp = (com.codename1.ui.list.MultiList)findByName("miniStatMultiList", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.list.MultiList)findByName("miniStatMultiList", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -1092,14 +710,14 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.Button findCancelAddAdmin(Component root) {
-        return (com.codename1.ui.Button)findByName("cancelAddAdmin", root);
+    public com.codename1.ui.Container findContainer1(Component root) {
+        return (com.codename1.ui.Container)findByName("Container1", root);
     }
 
-    public com.codename1.ui.Button findCancelAddAdmin() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("cancelAddAdmin", Display.getInstance().getCurrent());
+    public com.codename1.ui.Container findContainer1() {
+        com.codename1.ui.Container cmp = (com.codename1.ui.Container)findByName("Container1", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("cancelAddAdmin", aboutToShowThisContainer);
+            cmp = (com.codename1.ui.Container)findByName("Container1", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -1116,38 +734,14 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.Container findContainer1(Component root) {
-        return (com.codename1.ui.Container)findByName("Container1", root);
+    public com.codename1.ui.Button findCancelAddAdmin(Component root) {
+        return (com.codename1.ui.Button)findByName("cancelAddAdmin", root);
     }
 
-    public com.codename1.ui.Container findContainer1() {
-        com.codename1.ui.Container cmp = (com.codename1.ui.Container)findByName("Container1", Display.getInstance().getCurrent());
+    public com.codename1.ui.Button findCancelAddAdmin() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("cancelAddAdmin", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Container)findByName("Container1", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Button findSaveAdmin(Component root) {
-        return (com.codename1.ui.Button)findByName("saveAdmin", root);
-    }
-
-    public com.codename1.ui.Button findSaveAdmin() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("saveAdmin", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("saveAdmin", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.list.MultiList findDepositMFBsMultiList(Component root) {
-        return (com.codename1.ui.list.MultiList)findByName("depositMFBsMultiList", root);
-    }
-
-    public com.codename1.ui.list.MultiList findDepositMFBsMultiList() {
-        com.codename1.ui.list.MultiList cmp = (com.codename1.ui.list.MultiList)findByName("depositMFBsMultiList", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.list.MultiList)findByName("depositMFBsMultiList", aboutToShowThisContainer);
+            cmp = (com.codename1.ui.Button)findByName("cancelAddAdmin", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -1160,6 +754,18 @@ public abstract class StateMachineBase extends UIBuilder {
         com.codename1.ui.Container cmp = (com.codename1.ui.Container)findByName("Container6", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
             cmp = (com.codename1.ui.Container)findByName("Container6", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.list.MultiList findDepositMFBsMultiList(Component root) {
+        return (com.codename1.ui.list.MultiList)findByName("depositMFBsMultiList", root);
+    }
+
+    public com.codename1.ui.list.MultiList findDepositMFBsMultiList() {
+        com.codename1.ui.list.MultiList cmp = (com.codename1.ui.list.MultiList)findByName("depositMFBsMultiList", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.list.MultiList)findByName("depositMFBsMultiList", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -1188,14 +794,14 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.Button findCheckToken(Component root) {
-        return (com.codename1.ui.Button)findByName("checkToken", root);
+    public com.codename1.ui.Button findConfigureOfflineTeller(Component root) {
+        return (com.codename1.ui.Button)findByName("configureOfflineTeller", root);
     }
 
-    public com.codename1.ui.Button findCheckToken() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("checkToken", Display.getInstance().getCurrent());
+    public com.codename1.ui.Button findConfigureOfflineTeller() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("configureOfflineTeller", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("checkToken", aboutToShowThisContainer);
+            cmp = (com.codename1.ui.Button)findByName("configureOfflineTeller", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -1212,30 +818,6 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.Button findCancelOfflineTeller(Component root) {
-        return (com.codename1.ui.Button)findByName("cancelOfflineTeller", root);
-    }
-
-    public com.codename1.ui.Button findCancelOfflineTeller() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("cancelOfflineTeller", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("cancelOfflineTeller", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Button findConfigureOfflineTeller(Component root) {
-        return (com.codename1.ui.Button)findByName("configureOfflineTeller", root);
-    }
-
-    public com.codename1.ui.Button findConfigureOfflineTeller() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("configureOfflineTeller", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("configureOfflineTeller", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
     public com.codename1.ui.Label findAccountNumber(Component root) {
         return (com.codename1.ui.Label)findByName("accountNumber", root);
     }
@@ -1244,6 +826,810 @@ public abstract class StateMachineBase extends UIBuilder {
         com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("accountNumber", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
             cmp = (com.codename1.ui.Label)findByName("accountNumber", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextField findBankCodeTextField(Component root) {
+        return (com.codename1.ui.TextField)findByName("bankCodeTextField", root);
+    }
+
+    public com.codename1.ui.TextField findBankCodeTextField() {
+        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("bankCodeTextField", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextField)findByName("bankCodeTextField", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findLogin(Component root) {
+        return (com.codename1.ui.Button)findByName("login", root);
+    }
+
+    public com.codename1.ui.Button findLogin() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("login", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("login", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Label findMiniStatFullName(Component root) {
+        return (com.codename1.ui.Label)findByName("miniStatFullName", root);
+    }
+
+    public com.codename1.ui.Label findMiniStatFullName() {
+        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("miniStatFullName", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Label)findByName("miniStatFullName", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Label findOfflineTranNarration(Component root) {
+        return (com.codename1.ui.Label)findByName("offlineTranNarration", root);
+    }
+
+    public com.codename1.ui.Label findOfflineTranNarration() {
+        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("offlineTranNarration", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Label)findByName("offlineTranNarration", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findSendAmountToDeposit(Component root) {
+        return (com.codename1.ui.Button)findByName("sendAmountToDeposit", root);
+    }
+
+    public com.codename1.ui.Button findSendAmountToDeposit() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("sendAmountToDeposit", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("sendAmountToDeposit", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextField findNewUserEmailTextField(Component root) {
+        return (com.codename1.ui.TextField)findByName("newUserEmailTextField", root);
+    }
+
+    public com.codename1.ui.TextField findNewUserEmailTextField() {
+        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("newUserEmailTextField", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextField)findByName("newUserEmailTextField", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findDepositToPhone(Component root) {
+        return (com.codename1.ui.Button)findByName("depositToPhone", root);
+    }
+
+    public com.codename1.ui.Button findDepositToPhone() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("depositToPhone", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("depositToPhone", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Label findMiniStatPostingSeq(Component root) {
+        return (com.codename1.ui.Label)findByName("miniStatPostingSeq", root);
+    }
+
+    public com.codename1.ui.Label findMiniStatPostingSeq() {
+        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("miniStatPostingSeq", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Label)findByName("miniStatPostingSeq", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findCancelAppSettings(Component root) {
+        return (com.codename1.ui.Button)findByName("cancelAppSettings", root);
+    }
+
+    public com.codename1.ui.Button findCancelAppSettings() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("cancelAppSettings", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("cancelAppSettings", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.list.MultiList findTransactionsUploadedMultiList(Component root) {
+        return (com.codename1.ui.list.MultiList)findByName("transactionsUploadedMultiList", root);
+    }
+
+    public com.codename1.ui.list.MultiList findTransactionsUploadedMultiList() {
+        com.codename1.ui.list.MultiList cmp = (com.codename1.ui.list.MultiList)findByName("transactionsUploadedMultiList", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.list.MultiList)findByName("transactionsUploadedMultiList", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findCancelSignUp(Component root) {
+        return (com.codename1.ui.Button)findByName("cancelSignUp", root);
+    }
+
+    public com.codename1.ui.Button findCancelSignUp() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("cancelSignUp", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("cancelSignUp", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextField findTellerUsername(Component root) {
+        return (com.codename1.ui.TextField)findByName("tellerUsername", root);
+    }
+
+    public com.codename1.ui.TextField findTellerUsername() {
+        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("tellerUsername", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextField)findByName("tellerUsername", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextArea findWithdrawalNarrationTextArea(Component root) {
+        return (com.codename1.ui.TextArea)findByName("withdrawalNarrationTextArea", root);
+    }
+
+    public com.codename1.ui.TextArea findWithdrawalNarrationTextArea() {
+        com.codename1.ui.TextArea cmp = (com.codename1.ui.TextArea)findByName("withdrawalNarrationTextArea", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextArea)findByName("withdrawalNarrationTextArea", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextField findNewAdminNameTextField(Component root) {
+        return (com.codename1.ui.TextField)findByName("newAdminNameTextField", root);
+    }
+
+    public com.codename1.ui.TextField findNewAdminNameTextField() {
+        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("newAdminNameTextField", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextField)findByName("newAdminNameTextField", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextArea findMiniStatBranchAddress(Component root) {
+        return (com.codename1.ui.TextArea)findByName("miniStatBranchAddress", root);
+    }
+
+    public com.codename1.ui.TextArea findMiniStatBranchAddress() {
+        com.codename1.ui.TextArea cmp = (com.codename1.ui.TextArea)findByName("miniStatBranchAddress", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextArea)findByName("miniStatBranchAddress", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextArea findTranDescArea(Component root) {
+        return (com.codename1.ui.TextArea)findByName("tranDescArea", root);
+    }
+
+    public com.codename1.ui.TextArea findTranDescArea() {
+        com.codename1.ui.TextArea cmp = (com.codename1.ui.TextArea)findByName("tranDescArea", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextArea)findByName("tranDescArea", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextField findWithdrawalAcctNumberTextField(Component root) {
+        return (com.codename1.ui.TextField)findByName("withdrawalAcctNumberTextField", root);
+    }
+
+    public com.codename1.ui.TextField findWithdrawalAcctNumberTextField() {
+        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("withdrawalAcctNumberTextField", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextField)findByName("withdrawalAcctNumberTextField", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextArea findTextArea(Component root) {
+        return (com.codename1.ui.TextArea)findByName("TextArea", root);
+    }
+
+    public com.codename1.ui.TextArea findTextArea() {
+        com.codename1.ui.TextArea cmp = (com.codename1.ui.TextArea)findByName("TextArea", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextArea)findByName("TextArea", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findUploadAllTransactions(Component root) {
+        return (com.codename1.ui.Button)findByName("uploadAllTransactions", root);
+    }
+
+    public com.codename1.ui.Button findUploadAllTransactions() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("uploadAllTransactions", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("uploadAllTransactions", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextField findOfflineAmountTextField(Component root) {
+        return (com.codename1.ui.TextField)findByName("offlineAmountTextField", root);
+    }
+
+    public com.codename1.ui.TextField findOfflineAmountTextField() {
+        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("offlineAmountTextField", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextField)findByName("offlineAmountTextField", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findCancel(Component root) {
+        return (com.codename1.ui.Button)findByName("Cancel", root);
+    }
+
+    public com.codename1.ui.Button findCancel() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("Cancel", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("Cancel", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findAddAccount(Component root) {
+        return (com.codename1.ui.Button)findByName("addAccount", root);
+    }
+
+    public com.codename1.ui.Button findAddAccount() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("addAccount", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("addAccount", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findLoginUser(Component root) {
+        return (com.codename1.ui.Button)findByName("loginUser", root);
+    }
+
+    public com.codename1.ui.Button findLoginUser() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("loginUser", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("loginUser", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Label findMiniStatStartDate(Component root) {
+        return (com.codename1.ui.Label)findByName("miniStatStartDate", root);
+    }
+
+    public com.codename1.ui.Label findMiniStatStartDate() {
+        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("miniStatStartDate", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Label)findByName("miniStatStartDate", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findFetchInfo(Component root) {
+        return (com.codename1.ui.Button)findByName("fetchInfo", root);
+    }
+
+    public com.codename1.ui.Button findFetchInfo() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("fetchInfo", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("fetchInfo", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Label findMiniStatCreditOrDebit(Component root) {
+        return (com.codename1.ui.Label)findByName("miniStatCreditOrDebit", root);
+    }
+
+    public com.codename1.ui.Label findMiniStatCreditOrDebit() {
+        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("miniStatCreditOrDebit", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Label)findByName("miniStatCreditOrDebit", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Label findMiniStatBranchName(Component root) {
+        return (com.codename1.ui.Label)findByName("miniStatBranchName", root);
+    }
+
+    public com.codename1.ui.Label findMiniStatBranchName() {
+        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("miniStatBranchName", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Label)findByName("miniStatBranchName", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextField findAdminPassword(Component root) {
+        return (com.codename1.ui.TextField)findByName("adminPassword", root);
+    }
+
+    public com.codename1.ui.TextField findAdminPassword() {
+        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("adminPassword", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextField)findByName("adminPassword", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextField findOfflineTellerNumberTextField(Component root) {
+        return (com.codename1.ui.TextField)findByName("offlineTellerNumberTextField", root);
+    }
+
+    public com.codename1.ui.TextField findOfflineTellerNumberTextField() {
+        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("offlineTellerNumberTextField", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextField)findByName("offlineTellerNumberTextField", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextField findPasswordTextField(Component root) {
+        return (com.codename1.ui.TextField)findByName("passwordTextField", root);
+    }
+
+    public com.codename1.ui.TextField findPasswordTextField() {
+        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("passwordTextField", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextField)findByName("passwordTextField", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Label findMiniStatRetMessage(Component root) {
+        return (com.codename1.ui.Label)findByName("miniStatRetMessage", root);
+    }
+
+    public com.codename1.ui.Label findMiniStatRetMessage() {
+        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("miniStatRetMessage", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Label)findByName("miniStatRetMessage", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.List findAccountsWithErrorStatusList(Component root) {
+        return (com.codename1.ui.List)findByName("accountsWithErrorStatusList", root);
+    }
+
+    public com.codename1.ui.List findAccountsWithErrorStatusList() {
+        com.codename1.ui.List cmp = (com.codename1.ui.List)findByName("accountsWithErrorStatusList", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.List)findByName("accountsWithErrorStatusList", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextField findNewOfflineTellerPWDTextField(Component root) {
+        return (com.codename1.ui.TextField)findByName("newOfflineTellerPWDTextField", root);
+    }
+
+    public com.codename1.ui.TextField findNewOfflineTellerPWDTextField() {
+        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("newOfflineTellerPWDTextField", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextField)findByName("newOfflineTellerPWDTextField", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextArea findTranURLTextArea(Component root) {
+        return (com.codename1.ui.TextArea)findByName("tranURLTextArea", root);
+    }
+
+    public com.codename1.ui.TextArea findTranURLTextArea() {
+        com.codename1.ui.TextArea cmp = (com.codename1.ui.TextArea)findByName("tranURLTextArea", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextArea)findByName("tranURLTextArea", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findCancelFetch(Component root) {
+        return (com.codename1.ui.Button)findByName("cancelFetch", root);
+    }
+
+    public com.codename1.ui.Button findCancelFetch() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("cancelFetch", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("cancelFetch", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findOkToDeposit(Component root) {
+        return (com.codename1.ui.Button)findByName("okToDeposit", root);
+    }
+
+    public com.codename1.ui.Button findOkToDeposit() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("okToDeposit", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("okToDeposit", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findAdminSettings(Component root) {
+        return (com.codename1.ui.Button)findByName("adminSettings", root);
+    }
+
+    public com.codename1.ui.Button findAdminSettings() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("adminSettings", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("adminSettings", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextField findTellerTilTextField(Component root) {
+        return (com.codename1.ui.TextField)findByName("tellerTilTextField", root);
+    }
+
+    public com.codename1.ui.TextField findTellerTilTextField() {
+        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("tellerTilTextField", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextField)findByName("tellerTilTextField", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextField findNewAdminPasswordTextField(Component root) {
+        return (com.codename1.ui.TextField)findByName("newAdminPasswordTextField", root);
+    }
+
+    public com.codename1.ui.TextField findNewAdminPasswordTextField() {
+        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("newAdminPasswordTextField", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextField)findByName("newAdminPasswordTextField", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findLoginOffline(Component root) {
+        return (com.codename1.ui.Button)findByName("loginOffline", root);
+    }
+
+    public com.codename1.ui.Button findLoginOffline() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("loginOffline", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("loginOffline", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Label findMiniStatValueDate(Component root) {
+        return (com.codename1.ui.Label)findByName("miniStatValueDate", root);
+    }
+
+    public com.codename1.ui.Label findMiniStatValueDate() {
+        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("miniStatValueDate", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Label)findByName("miniStatValueDate", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextField findOfflineUsername(Component root) {
+        return (com.codename1.ui.TextField)findByName("offlineUsername", root);
+    }
+
+    public com.codename1.ui.TextField findOfflineUsername() {
+        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("offlineUsername", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextField)findByName("offlineUsername", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findCustomerPhoto(Component root) {
+        return (com.codename1.ui.Button)findByName("customerPhoto", root);
+    }
+
+    public com.codename1.ui.Button findCustomerPhoto() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("customerPhoto", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("customerPhoto", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextField findMfbCodeTextField(Component root) {
+        return (com.codename1.ui.TextField)findByName("mfbCodeTextField", root);
+    }
+
+    public com.codename1.ui.TextField findMfbCodeTextField() {
+        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("mfbCodeTextField", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextField)findByName("mfbCodeTextField", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findCancelWithdrawaToken(Component root) {
+        return (com.codename1.ui.Button)findByName("cancelWithdrawaToken", root);
+    }
+
+    public com.codename1.ui.Button findCancelWithdrawaToken() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("cancelWithdrawaToken", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("cancelWithdrawaToken", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findViewOfflineTrans(Component root) {
+        return (com.codename1.ui.Button)findByName("viewOfflineTrans", root);
+    }
+
+    public com.codename1.ui.Button findViewOfflineTrans() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("viewOfflineTrans", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("viewOfflineTrans", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextArea findAppURLTextArea(Component root) {
+        return (com.codename1.ui.TextArea)findByName("appURLTextArea", root);
+    }
+
+    public com.codename1.ui.TextArea findAppURLTextArea() {
+        com.codename1.ui.TextArea cmp = (com.codename1.ui.TextArea)findByName("appURLTextArea", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextArea)findByName("appURLTextArea", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.List findAccountsStoredList(Component root) {
+        return (com.codename1.ui.List)findByName("accountsStoredList", root);
+    }
+
+    public com.codename1.ui.List findAccountsStoredList() {
+        com.codename1.ui.List cmp = (com.codename1.ui.List)findByName("accountsStoredList", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.List)findByName("accountsStoredList", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findPullAccounts(Component root) {
+        return (com.codename1.ui.Button)findByName("pullAccounts", root);
+    }
+
+    public com.codename1.ui.Button findPullAccounts() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("pullAccounts", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("pullAccounts", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findWithdraw(Component root) {
+        return (com.codename1.ui.Button)findByName("withdraw", root);
+    }
+
+    public com.codename1.ui.Button findWithdraw() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("withdraw", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("withdraw", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextArea findBearerKeyTextArea(Component root) {
+        return (com.codename1.ui.TextArea)findByName("bearerKeyTextArea", root);
+    }
+
+    public com.codename1.ui.TextArea findBearerKeyTextArea() {
+        com.codename1.ui.TextArea cmp = (com.codename1.ui.TextArea)findByName("bearerKeyTextArea", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextArea)findByName("bearerKeyTextArea", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextField findAcctNumberField(Component root) {
+        return (com.codename1.ui.TextField)findByName("acctNumberField", root);
+    }
+
+    public com.codename1.ui.TextField findAcctNumberField() {
+        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("acctNumberField", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextField)findByName("acctNumberField", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findMiniStatement(Component root) {
+        return (com.codename1.ui.Button)findByName("miniStatement", root);
+    }
+
+    public com.codename1.ui.Button findMiniStatement() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("miniStatement", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("miniStatement", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Label findOfflineTranAcctName(Component root) {
+        return (com.codename1.ui.Label)findByName("offlineTranAcctName", root);
+    }
+
+    public com.codename1.ui.Label findOfflineTranAcctName() {
+        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("offlineTranAcctName", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Label)findByName("offlineTranAcctName", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextField findOfflinePasswordTextField(Component root) {
+        return (com.codename1.ui.TextField)findByName("offlinePasswordTextField", root);
+    }
+
+    public com.codename1.ui.TextField findOfflinePasswordTextField() {
+        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("offlinePasswordTextField", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextField)findByName("offlinePasswordTextField", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.list.MultiList findBalInquiryMFBMultiList(Component root) {
+        return (com.codename1.ui.list.MultiList)findByName("balInquiryMFBMultiList", root);
+    }
+
+    public com.codename1.ui.list.MultiList findBalInquiryMFBMultiList() {
+        com.codename1.ui.list.MultiList cmp = (com.codename1.ui.list.MultiList)findByName("balInquiryMFBMultiList", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.list.MultiList)findByName("balInquiryMFBMultiList", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findAdminLogin(Component root) {
+        return (com.codename1.ui.Button)findByName("adminLogin", root);
+    }
+
+    public com.codename1.ui.Button findAdminLogin() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("adminLogin", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("adminLogin", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Label findMiniStatBookBalance(Component root) {
+        return (com.codename1.ui.Label)findByName("miniStatBookBalance", root);
+    }
+
+    public com.codename1.ui.Label findMiniStatBookBalance() {
+        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("miniStatBookBalance", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Label)findByName("miniStatBookBalance", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextField findMiniStatAcctNumberTextField(Component root) {
+        return (com.codename1.ui.TextField)findByName("miniStatAcctNumberTextField", root);
+    }
+
+    public com.codename1.ui.TextField findMiniStatAcctNumberTextField() {
+        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("miniStatAcctNumberTextField", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextField)findByName("miniStatAcctNumberTextField", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Label findTellerNum(Component root) {
+        return (com.codename1.ui.Label)findByName("tellerNum", root);
+    }
+
+    public com.codename1.ui.Label findTellerNum() {
+        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("tellerNum", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Label)findByName("tellerNum", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Container findAppSettingsContainer(Component root) {
+        return (com.codename1.ui.Container)findByName("appSettingsContainer", root);
+    }
+
+    public com.codename1.ui.Container findAppSettingsContainer() {
+        com.codename1.ui.Container cmp = (com.codename1.ui.Container)findByName("appSettingsContainer", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Container)findByName("appSettingsContainer", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findUploadSingleTran(Component root) {
+        return (com.codename1.ui.Button)findByName("uploadSingleTran", root);
+    }
+
+    public com.codename1.ui.Button findUploadSingleTran() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("uploadSingleTran", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("uploadSingleTran", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.list.MultiList findMiniStatMultiList(Component root) {
+        return (com.codename1.ui.list.MultiList)findByName("miniStatMultiList", root);
+    }
+
+    public com.codename1.ui.list.MultiList findMiniStatMultiList() {
+        com.codename1.ui.list.MultiList cmp = (com.codename1.ui.list.MultiList)findByName("miniStatMultiList", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.list.MultiList)findByName("miniStatMultiList", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findSaveAdmin(Component root) {
+        return (com.codename1.ui.Button)findByName("saveAdmin", root);
+    }
+
+    public com.codename1.ui.Button findSaveAdmin() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("saveAdmin", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("saveAdmin", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findCheckToken(Component root) {
+        return (com.codename1.ui.Button)findByName("checkToken", root);
+    }
+
+    public com.codename1.ui.Button findCheckToken() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("checkToken", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("checkToken", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextField findPassword(Component root) {
+        return (com.codename1.ui.TextField)findByName("password", root);
+    }
+
+    public com.codename1.ui.TextField findPassword() {
+        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("password", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextField)findByName("password", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.Button findCancelOfflineTeller(Component root) {
+        return (com.codename1.ui.Button)findByName("cancelOfflineTeller", root);
+    }
+
+    public com.codename1.ui.Button findCancelOfflineTeller() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("cancelOfflineTeller", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("cancelOfflineTeller", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -1284,30 +1670,6 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.Label findOfflineTranNarration(Component root) {
-        return (com.codename1.ui.Label)findByName("offlineTranNarration", root);
-    }
-
-    public com.codename1.ui.Label findOfflineTranNarration() {
-        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("offlineTranNarration", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Label)findByName("offlineTranNarration", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Label findMiniStatFullName(Component root) {
-        return (com.codename1.ui.Label)findByName("miniStatFullName", root);
-    }
-
-    public com.codename1.ui.Label findMiniStatFullName() {
-        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("miniStatFullName", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Label)findByName("miniStatFullName", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
     public com.codename1.ui.TextField findBalInquiryAcctNumberTextField(Component root) {
         return (com.codename1.ui.TextField)findByName("balInquiryAcctNumberTextField", root);
     }
@@ -1332,18 +1694,6 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.Button findSendAmountToDeposit(Component root) {
-        return (com.codename1.ui.Button)findByName("sendAmountToDeposit", root);
-    }
-
-    public com.codename1.ui.Button findSendAmountToDeposit() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("sendAmountToDeposit", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("sendAmountToDeposit", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
     public com.codename1.ui.TextField findInstrumentNumberField(Component root) {
         return (com.codename1.ui.TextField)findByName("instrumentNumberField", root);
     }
@@ -1352,30 +1702,6 @@ public abstract class StateMachineBase extends UIBuilder {
         com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("instrumentNumberField", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
             cmp = (com.codename1.ui.TextField)findByName("instrumentNumberField", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.TextField findNewUserEmailTextField(Component root) {
-        return (com.codename1.ui.TextField)findByName("newUserEmailTextField", root);
-    }
-
-    public com.codename1.ui.TextField findNewUserEmailTextField() {
-        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("newUserEmailTextField", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.TextField)findByName("newUserEmailTextField", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Button findAppSettings(Component root) {
-        return (com.codename1.ui.Button)findByName("appSettings", root);
-    }
-
-    public com.codename1.ui.Button findAppSettings() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("appSettings", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("appSettings", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -1392,6 +1718,18 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
+    public com.codename1.ui.Button findAppSettings(Component root) {
+        return (com.codename1.ui.Button)findByName("appSettings", root);
+    }
+
+    public com.codename1.ui.Button findAppSettings() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("appSettings", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("appSettings", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
     public com.codename1.ui.Label findLabel4(Component root) {
         return (com.codename1.ui.Label)findByName("Label4", root);
     }
@@ -1404,14 +1742,14 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.Button findDepositToPhone(Component root) {
-        return (com.codename1.ui.Button)findByName("depositToPhone", root);
+    public com.codename1.ui.Label findLabel5(Component root) {
+        return (com.codename1.ui.Label)findByName("Label5", root);
     }
 
-    public com.codename1.ui.Button findDepositToPhone() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("depositToPhone", Display.getInstance().getCurrent());
+    public com.codename1.ui.Label findLabel5() {
+        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("Label5", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("depositToPhone", aboutToShowThisContainer);
+            cmp = (com.codename1.ui.Label)findByName("Label5", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -1440,30 +1778,6 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.Label findMiniStatPostingSeq(Component root) {
-        return (com.codename1.ui.Label)findByName("miniStatPostingSeq", root);
-    }
-
-    public com.codename1.ui.Label findMiniStatPostingSeq() {
-        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("miniStatPostingSeq", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Label)findByName("miniStatPostingSeq", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Button findCancelAppSettings(Component root) {
-        return (com.codename1.ui.Button)findByName("cancelAppSettings", root);
-    }
-
-    public com.codename1.ui.Button findCancelAppSettings() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("cancelAppSettings", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("cancelAppSettings", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
     public com.codename1.ui.TextField findNewUserPasswordTextField(Component root) {
         return (com.codename1.ui.TextField)findByName("newUserPasswordTextField", root);
     }
@@ -1476,54 +1790,6 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.Button findCancelSignUp(Component root) {
-        return (com.codename1.ui.Button)findByName("cancelSignUp", root);
-    }
-
-    public com.codename1.ui.Button findCancelSignUp() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("cancelSignUp", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("cancelSignUp", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.list.MultiList findTransactionsUploadedMultiList(Component root) {
-        return (com.codename1.ui.list.MultiList)findByName("transactionsUploadedMultiList", root);
-    }
-
-    public com.codename1.ui.list.MultiList findTransactionsUploadedMultiList() {
-        com.codename1.ui.list.MultiList cmp = (com.codename1.ui.list.MultiList)findByName("transactionsUploadedMultiList", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.list.MultiList)findByName("transactionsUploadedMultiList", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.TextArea findWithdrawalNarrationTextArea(Component root) {
-        return (com.codename1.ui.TextArea)findByName("withdrawalNarrationTextArea", root);
-    }
-
-    public com.codename1.ui.TextArea findWithdrawalNarrationTextArea() {
-        com.codename1.ui.TextArea cmp = (com.codename1.ui.TextArea)findByName("withdrawalNarrationTextArea", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.TextArea)findByName("withdrawalNarrationTextArea", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.TextField findNewAdminNameTextField(Component root) {
-        return (com.codename1.ui.TextField)findByName("newAdminNameTextField", root);
-    }
-
-    public com.codename1.ui.TextField findNewAdminNameTextField() {
-        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("newAdminNameTextField", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.TextField)findByName("newAdminNameTextField", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
     public com.codename1.ui.Button findMiniStatOK(Component root) {
         return (com.codename1.ui.Button)findByName("miniStatOK", root);
     }
@@ -1532,18 +1798,6 @@ public abstract class StateMachineBase extends UIBuilder {
         com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("miniStatOK", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
             cmp = (com.codename1.ui.Button)findByName("miniStatOK", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.TextArea findMiniStatBranchAddress(Component root) {
-        return (com.codename1.ui.TextArea)findByName("miniStatBranchAddress", root);
-    }
-
-    public com.codename1.ui.TextArea findMiniStatBranchAddress() {
-        com.codename1.ui.TextArea cmp = (com.codename1.ui.TextArea)findByName("miniStatBranchAddress", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.TextArea)findByName("miniStatBranchAddress", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -1596,90 +1850,6 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.TextField findWithdrawalAcctNumberTextField(Component root) {
-        return (com.codename1.ui.TextField)findByName("withdrawalAcctNumberTextField", root);
-    }
-
-    public com.codename1.ui.TextField findWithdrawalAcctNumberTextField() {
-        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("withdrawalAcctNumberTextField", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.TextField)findByName("withdrawalAcctNumberTextField", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.TextArea findTranDescArea(Component root) {
-        return (com.codename1.ui.TextArea)findByName("tranDescArea", root);
-    }
-
-    public com.codename1.ui.TextArea findTranDescArea() {
-        com.codename1.ui.TextArea cmp = (com.codename1.ui.TextArea)findByName("tranDescArea", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.TextArea)findByName("tranDescArea", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.TextArea findTextArea(Component root) {
-        return (com.codename1.ui.TextArea)findByName("TextArea", root);
-    }
-
-    public com.codename1.ui.TextArea findTextArea() {
-        com.codename1.ui.TextArea cmp = (com.codename1.ui.TextArea)findByName("TextArea", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.TextArea)findByName("TextArea", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Button findUploadAllTransactions(Component root) {
-        return (com.codename1.ui.Button)findByName("uploadAllTransactions", root);
-    }
-
-    public com.codename1.ui.Button findUploadAllTransactions() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("uploadAllTransactions", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("uploadAllTransactions", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.TextField findOfflineAmountTextField(Component root) {
-        return (com.codename1.ui.TextField)findByName("offlineAmountTextField", root);
-    }
-
-    public com.codename1.ui.TextField findOfflineAmountTextField() {
-        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("offlineAmountTextField", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.TextField)findByName("offlineAmountTextField", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Button findAddAccount(Component root) {
-        return (com.codename1.ui.Button)findByName("addAccount", root);
-    }
-
-    public com.codename1.ui.Button findAddAccount() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("addAccount", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("addAccount", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Button findCancel(Component root) {
-        return (com.codename1.ui.Button)findByName("Cancel", root);
-    }
-
-    public com.codename1.ui.Button findCancel() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("Cancel", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("Cancel", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
     public com.codename1.ui.Button findCheckTokenToWithdraw(Component root) {
         return (com.codename1.ui.Button)findByName("checkTokenToWithdraw", root);
     }
@@ -1688,18 +1858,6 @@ public abstract class StateMachineBase extends UIBuilder {
         com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("checkTokenToWithdraw", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
             cmp = (com.codename1.ui.Button)findByName("checkTokenToWithdraw", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Button findBalInquiryOK(Component root) {
-        return (com.codename1.ui.Button)findByName("balInquiryOK", root);
-    }
-
-    public com.codename1.ui.Button findBalInquiryOK() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("balInquiryOK", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("balInquiryOK", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -1716,6 +1874,18 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
+    public com.codename1.ui.Button findBalInquiryOK(Component root) {
+        return (com.codename1.ui.Button)findByName("balInquiryOK", root);
+    }
+
+    public com.codename1.ui.Button findBalInquiryOK() {
+        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("balInquiryOK", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.Button)findByName("balInquiryOK", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
     public com.codename1.ui.Container findContainer(Component root) {
         return (com.codename1.ui.Container)findByName("Container", root);
     }
@@ -1724,18 +1894,6 @@ public abstract class StateMachineBase extends UIBuilder {
         com.codename1.ui.Container cmp = (com.codename1.ui.Container)findByName("Container", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
             cmp = (com.codename1.ui.Container)findByName("Container", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Button findLoginUser(Component root) {
-        return (com.codename1.ui.Button)findByName("loginUser", root);
-    }
-
-    public com.codename1.ui.Button findLoginUser() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("loginUser", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("loginUser", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -1764,18 +1922,6 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.Label findMiniStatStartDate(Component root) {
-        return (com.codename1.ui.Label)findByName("miniStatStartDate", root);
-    }
-
-    public com.codename1.ui.Label findMiniStatStartDate() {
-        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("miniStatStartDate", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Label)findByName("miniStatStartDate", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
     public com.codename1.ui.List findAccountList(Component root) {
         return (com.codename1.ui.List)findByName("accountList", root);
     }
@@ -1788,50 +1934,14 @@ public abstract class StateMachineBase extends UIBuilder {
         return cmp;
     }
 
-    public com.codename1.ui.Button findFetchInfo(Component root) {
-        return (com.codename1.ui.Button)findByName("fetchInfo", root);
+    public com.codename1.ui.TextField findAdminName(Component root) {
+        return (com.codename1.ui.TextField)findByName("adminName", root);
     }
 
-    public com.codename1.ui.Button findFetchInfo() {
-        com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("fetchInfo", Display.getInstance().getCurrent());
+    public com.codename1.ui.TextField findAdminName() {
+        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("adminName", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Button)findByName("fetchInfo", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Label findMiniStatCreditOrDebit(Component root) {
-        return (com.codename1.ui.Label)findByName("miniStatCreditOrDebit", root);
-    }
-
-    public com.codename1.ui.Label findMiniStatCreditOrDebit() {
-        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("miniStatCreditOrDebit", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Label)findByName("miniStatCreditOrDebit", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.Label findMiniStatBranchName(Component root) {
-        return (com.codename1.ui.Label)findByName("miniStatBranchName", root);
-    }
-
-    public com.codename1.ui.Label findMiniStatBranchName() {
-        com.codename1.ui.Label cmp = (com.codename1.ui.Label)findByName("miniStatBranchName", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.Label)findByName("miniStatBranchName", aboutToShowThisContainer);
-        }
-        return cmp;
-    }
-
-    public com.codename1.ui.TextField findAdminPasswordTextField(Component root) {
-        return (com.codename1.ui.TextField)findByName("adminPasswordTextField", root);
-    }
-
-    public com.codename1.ui.TextField findAdminPasswordTextField() {
-        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("adminPasswordTextField", Display.getInstance().getCurrent());
-        if(cmp == null && aboutToShowThisContainer != null) {
-            cmp = (com.codename1.ui.TextField)findByName("adminPasswordTextField", aboutToShowThisContainer);
+            cmp = (com.codename1.ui.TextField)findByName("adminName", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -1844,6 +1954,18 @@ public abstract class StateMachineBase extends UIBuilder {
         com.codename1.ui.Button cmp = (com.codename1.ui.Button)findByName("cancelWithdrawal", Display.getInstance().getCurrent());
         if(cmp == null && aboutToShowThisContainer != null) {
             cmp = (com.codename1.ui.Button)findByName("cancelWithdrawal", aboutToShowThisContainer);
+        }
+        return cmp;
+    }
+
+    public com.codename1.ui.TextField findAdminPasswordTextField(Component root) {
+        return (com.codename1.ui.TextField)findByName("adminPasswordTextField", root);
+    }
+
+    public com.codename1.ui.TextField findAdminPasswordTextField() {
+        com.codename1.ui.TextField cmp = (com.codename1.ui.TextField)findByName("adminPasswordTextField", Display.getInstance().getCurrent());
+        if(cmp == null && aboutToShowThisContainer != null) {
+            cmp = (com.codename1.ui.TextField)findByName("adminPasswordTextField", aboutToShowThisContainer);
         }
         return cmp;
     }
@@ -1993,6 +2115,12 @@ public abstract class StateMachineBase extends UIBuilder {
             return;
         }
 
+        if("SettingLogin".equals(f.getName())) {
+            exitSettingLogin(f);
+            aboutToShowThisContainer = null;
+            return;
+        }
+
         if("Settings".equals(f.getName())) {
             exitSettings(f);
             aboutToShowThisContainer = null;
@@ -2077,6 +2205,12 @@ public abstract class StateMachineBase extends UIBuilder {
             return;
         }
 
+        if("AppUserLoginOffline".equals(f.getName())) {
+            exitAppUserLoginOffline(f);
+            aboutToShowThisContainer = null;
+            return;
+        }
+
         if("CustomerToWithdraw".equals(f.getName())) {
             exitCustomerToWithdraw(f);
             aboutToShowThisContainer = null;
@@ -2109,6 +2243,12 @@ public abstract class StateMachineBase extends UIBuilder {
 
         if("BalInquiryDisplay".equals(f.getName())) {
             exitBalInquiryDisplay(f);
+            aboutToShowThisContainer = null;
+            return;
+        }
+
+        if("AppUserLogin".equals(f.getName())) {
+            exitAppUserLogin(f);
             aboutToShowThisContainer = null;
             return;
         }
@@ -2185,6 +2325,10 @@ public abstract class StateMachineBase extends UIBuilder {
     }
 
 
+    protected void exitSettingLogin(Form f) {
+    }
+
+
     protected void exitSettings(Form f) {
     }
 
@@ -2241,6 +2385,10 @@ public abstract class StateMachineBase extends UIBuilder {
     }
 
 
+    protected void exitAppUserLoginOffline(Form f) {
+    }
+
+
     protected void exitCustomerToWithdraw(Form f) {
     }
 
@@ -2262,6 +2410,10 @@ public abstract class StateMachineBase extends UIBuilder {
 
 
     protected void exitBalInquiryDisplay(Form f) {
+    }
+
+
+    protected void exitAppUserLogin(Form f) {
     }
 
 
@@ -2358,6 +2510,12 @@ public abstract class StateMachineBase extends UIBuilder {
             return;
         }
 
+        if("SettingLogin".equals(f.getName())) {
+            beforeSettingLogin(f);
+            aboutToShowThisContainer = null;
+            return;
+        }
+
         if("Settings".equals(f.getName())) {
             beforeSettings(f);
             aboutToShowThisContainer = null;
@@ -2442,6 +2600,12 @@ public abstract class StateMachineBase extends UIBuilder {
             return;
         }
 
+        if("AppUserLoginOffline".equals(f.getName())) {
+            beforeAppUserLoginOffline(f);
+            aboutToShowThisContainer = null;
+            return;
+        }
+
         if("CustomerToWithdraw".equals(f.getName())) {
             beforeCustomerToWithdraw(f);
             aboutToShowThisContainer = null;
@@ -2474,6 +2638,12 @@ public abstract class StateMachineBase extends UIBuilder {
 
         if("BalInquiryDisplay".equals(f.getName())) {
             beforeBalInquiryDisplay(f);
+            aboutToShowThisContainer = null;
+            return;
+        }
+
+        if("AppUserLogin".equals(f.getName())) {
+            beforeAppUserLogin(f);
             aboutToShowThisContainer = null;
             return;
         }
@@ -2550,6 +2720,10 @@ public abstract class StateMachineBase extends UIBuilder {
     }
 
 
+    protected void beforeSettingLogin(Form f) {
+    }
+
+
     protected void beforeSettings(Form f) {
     }
 
@@ -2606,6 +2780,10 @@ public abstract class StateMachineBase extends UIBuilder {
     }
 
 
+    protected void beforeAppUserLoginOffline(Form f) {
+    }
+
+
     protected void beforeCustomerToWithdraw(Form f) {
     }
 
@@ -2627,6 +2805,10 @@ public abstract class StateMachineBase extends UIBuilder {
 
 
     protected void beforeBalInquiryDisplay(Form f) {
+    }
+
+
+    protected void beforeAppUserLogin(Form f) {
     }
 
 
@@ -2723,6 +2905,12 @@ public abstract class StateMachineBase extends UIBuilder {
             return;
         }
 
+        if("SettingLogin".equals(c.getName())) {
+            beforeContainerSettingLogin(c);
+            aboutToShowThisContainer = null;
+            return;
+        }
+
         if("Settings".equals(c.getName())) {
             beforeContainerSettings(c);
             aboutToShowThisContainer = null;
@@ -2807,6 +2995,12 @@ public abstract class StateMachineBase extends UIBuilder {
             return;
         }
 
+        if("AppUserLoginOffline".equals(c.getName())) {
+            beforeContainerAppUserLoginOffline(c);
+            aboutToShowThisContainer = null;
+            return;
+        }
+
         if("CustomerToWithdraw".equals(c.getName())) {
             beforeContainerCustomerToWithdraw(c);
             aboutToShowThisContainer = null;
@@ -2839,6 +3033,12 @@ public abstract class StateMachineBase extends UIBuilder {
 
         if("BalInquiryDisplay".equals(c.getName())) {
             beforeContainerBalInquiryDisplay(c);
+            aboutToShowThisContainer = null;
+            return;
+        }
+
+        if("AppUserLogin".equals(c.getName())) {
+            beforeContainerAppUserLogin(c);
             aboutToShowThisContainer = null;
             return;
         }
@@ -2915,6 +3115,10 @@ public abstract class StateMachineBase extends UIBuilder {
     }
 
 
+    protected void beforeContainerSettingLogin(Container c) {
+    }
+
+
     protected void beforeContainerSettings(Container c) {
     }
 
@@ -2971,6 +3175,10 @@ public abstract class StateMachineBase extends UIBuilder {
     }
 
 
+    protected void beforeContainerAppUserLoginOffline(Container c) {
+    }
+
+
     protected void beforeContainerCustomerToWithdraw(Container c) {
     }
 
@@ -2992,6 +3200,10 @@ public abstract class StateMachineBase extends UIBuilder {
 
 
     protected void beforeContainerBalInquiryDisplay(Container c) {
+    }
+
+
+    protected void beforeContainerAppUserLogin(Container c) {
     }
 
 
@@ -3087,6 +3299,12 @@ public abstract class StateMachineBase extends UIBuilder {
             return;
         }
 
+        if("SettingLogin".equals(f.getName())) {
+            postSettingLogin(f);
+            aboutToShowThisContainer = null;
+            return;
+        }
+
         if("Settings".equals(f.getName())) {
             postSettings(f);
             aboutToShowThisContainer = null;
@@ -3171,6 +3389,12 @@ public abstract class StateMachineBase extends UIBuilder {
             return;
         }
 
+        if("AppUserLoginOffline".equals(f.getName())) {
+            postAppUserLoginOffline(f);
+            aboutToShowThisContainer = null;
+            return;
+        }
+
         if("CustomerToWithdraw".equals(f.getName())) {
             postCustomerToWithdraw(f);
             aboutToShowThisContainer = null;
@@ -3203,6 +3427,12 @@ public abstract class StateMachineBase extends UIBuilder {
 
         if("BalInquiryDisplay".equals(f.getName())) {
             postBalInquiryDisplay(f);
+            aboutToShowThisContainer = null;
+            return;
+        }
+
+        if("AppUserLogin".equals(f.getName())) {
+            postAppUserLogin(f);
             aboutToShowThisContainer = null;
             return;
         }
@@ -3279,6 +3509,10 @@ public abstract class StateMachineBase extends UIBuilder {
     }
 
 
+    protected void postSettingLogin(Form f) {
+    }
+
+
     protected void postSettings(Form f) {
     }
 
@@ -3335,6 +3569,10 @@ public abstract class StateMachineBase extends UIBuilder {
     }
 
 
+    protected void postAppUserLoginOffline(Form f) {
+    }
+
+
     protected void postCustomerToWithdraw(Form f) {
     }
 
@@ -3356,6 +3594,10 @@ public abstract class StateMachineBase extends UIBuilder {
 
 
     protected void postBalInquiryDisplay(Form f) {
+    }
+
+
+    protected void postAppUserLogin(Form f) {
     }
 
 
@@ -3451,6 +3693,12 @@ public abstract class StateMachineBase extends UIBuilder {
             return;
         }
 
+        if("SettingLogin".equals(c.getName())) {
+            postContainerSettingLogin(c);
+            aboutToShowThisContainer = null;
+            return;
+        }
+
         if("Settings".equals(c.getName())) {
             postContainerSettings(c);
             aboutToShowThisContainer = null;
@@ -3535,6 +3783,12 @@ public abstract class StateMachineBase extends UIBuilder {
             return;
         }
 
+        if("AppUserLoginOffline".equals(c.getName())) {
+            postContainerAppUserLoginOffline(c);
+            aboutToShowThisContainer = null;
+            return;
+        }
+
         if("CustomerToWithdraw".equals(c.getName())) {
             postContainerCustomerToWithdraw(c);
             aboutToShowThisContainer = null;
@@ -3567,6 +3821,12 @@ public abstract class StateMachineBase extends UIBuilder {
 
         if("BalInquiryDisplay".equals(c.getName())) {
             postContainerBalInquiryDisplay(c);
+            aboutToShowThisContainer = null;
+            return;
+        }
+
+        if("AppUserLogin".equals(c.getName())) {
+            postContainerAppUserLogin(c);
             aboutToShowThisContainer = null;
             return;
         }
@@ -3643,6 +3903,10 @@ public abstract class StateMachineBase extends UIBuilder {
     }
 
 
+    protected void postContainerSettingLogin(Container c) {
+    }
+
+
     protected void postContainerSettings(Container c) {
     }
 
@@ -3699,6 +3963,10 @@ public abstract class StateMachineBase extends UIBuilder {
     }
 
 
+    protected void postContainerAppUserLoginOffline(Container c) {
+    }
+
+
     protected void postContainerCustomerToWithdraw(Container c) {
     }
 
@@ -3720,6 +3988,10 @@ public abstract class StateMachineBase extends UIBuilder {
 
 
     protected void postContainerBalInquiryDisplay(Container c) {
+    }
+
+
+    protected void postContainerAppUserLogin(Container c) {
     }
 
 
@@ -3815,6 +4087,12 @@ public abstract class StateMachineBase extends UIBuilder {
             return;
         }
 
+        if("SettingLogin".equals(rootName)) {
+            onCreateSettingLogin();
+            aboutToShowThisContainer = null;
+            return;
+        }
+
         if("Settings".equals(rootName)) {
             onCreateSettings();
             aboutToShowThisContainer = null;
@@ -3899,6 +4177,12 @@ public abstract class StateMachineBase extends UIBuilder {
             return;
         }
 
+        if("AppUserLoginOffline".equals(rootName)) {
+            onCreateAppUserLoginOffline();
+            aboutToShowThisContainer = null;
+            return;
+        }
+
         if("CustomerToWithdraw".equals(rootName)) {
             onCreateCustomerToWithdraw();
             aboutToShowThisContainer = null;
@@ -3931,6 +4215,12 @@ public abstract class StateMachineBase extends UIBuilder {
 
         if("BalInquiryDisplay".equals(rootName)) {
             onCreateBalInquiryDisplay();
+            aboutToShowThisContainer = null;
+            return;
+        }
+
+        if("AppUserLogin".equals(rootName)) {
+            onCreateAppUserLogin();
             aboutToShowThisContainer = null;
             return;
         }
@@ -4007,6 +4297,10 @@ public abstract class StateMachineBase extends UIBuilder {
     }
 
 
+    protected void onCreateSettingLogin() {
+    }
+
+
     protected void onCreateSettings() {
     }
 
@@ -4063,6 +4357,10 @@ public abstract class StateMachineBase extends UIBuilder {
     }
 
 
+    protected void onCreateAppUserLoginOffline() {
+    }
+
+
     protected void onCreateCustomerToWithdraw() {
     }
 
@@ -4084,6 +4382,10 @@ public abstract class StateMachineBase extends UIBuilder {
 
 
     protected void onCreateBalInquiryDisplay() {
+    }
+
+
+    protected void onCreateAppUserLogin() {
     }
 
 
@@ -4180,6 +4482,12 @@ public abstract class StateMachineBase extends UIBuilder {
             return h;
         }
 
+        if("SettingLogin".equals(f.getName())) {
+            getStateSettingLogin(f, h);
+            aboutToShowThisContainer = null;
+            return h;
+        }
+
         if("Settings".equals(f.getName())) {
             getStateSettings(f, h);
             aboutToShowThisContainer = null;
@@ -4264,6 +4572,12 @@ public abstract class StateMachineBase extends UIBuilder {
             return h;
         }
 
+        if("AppUserLoginOffline".equals(f.getName())) {
+            getStateAppUserLoginOffline(f, h);
+            aboutToShowThisContainer = null;
+            return h;
+        }
+
         if("CustomerToWithdraw".equals(f.getName())) {
             getStateCustomerToWithdraw(f, h);
             aboutToShowThisContainer = null;
@@ -4296,6 +4610,12 @@ public abstract class StateMachineBase extends UIBuilder {
 
         if("BalInquiryDisplay".equals(f.getName())) {
             getStateBalInquiryDisplay(f, h);
+            aboutToShowThisContainer = null;
+            return h;
+        }
+
+        if("AppUserLogin".equals(f.getName())) {
+            getStateAppUserLogin(f, h);
             aboutToShowThisContainer = null;
             return h;
         }
@@ -4372,6 +4692,10 @@ public abstract class StateMachineBase extends UIBuilder {
     }
 
 
+    protected void getStateSettingLogin(Form f, Hashtable h) {
+    }
+
+
     protected void getStateSettings(Form f, Hashtable h) {
     }
 
@@ -4428,6 +4752,10 @@ public abstract class StateMachineBase extends UIBuilder {
     }
 
 
+    protected void getStateAppUserLoginOffline(Form f, Hashtable h) {
+    }
+
+
     protected void getStateCustomerToWithdraw(Form f, Hashtable h) {
     }
 
@@ -4449,6 +4777,10 @@ public abstract class StateMachineBase extends UIBuilder {
 
 
     protected void getStateBalInquiryDisplay(Form f, Hashtable h) {
+    }
+
+
+    protected void getStateAppUserLogin(Form f, Hashtable h) {
     }
 
 
@@ -4545,6 +4877,12 @@ public abstract class StateMachineBase extends UIBuilder {
             return;
         }
 
+        if("SettingLogin".equals(f.getName())) {
+            setStateSettingLogin(f, state);
+            aboutToShowThisContainer = null;
+            return;
+        }
+
         if("Settings".equals(f.getName())) {
             setStateSettings(f, state);
             aboutToShowThisContainer = null;
@@ -4629,6 +4967,12 @@ public abstract class StateMachineBase extends UIBuilder {
             return;
         }
 
+        if("AppUserLoginOffline".equals(f.getName())) {
+            setStateAppUserLoginOffline(f, state);
+            aboutToShowThisContainer = null;
+            return;
+        }
+
         if("CustomerToWithdraw".equals(f.getName())) {
             setStateCustomerToWithdraw(f, state);
             aboutToShowThisContainer = null;
@@ -4661,6 +5005,12 @@ public abstract class StateMachineBase extends UIBuilder {
 
         if("BalInquiryDisplay".equals(f.getName())) {
             setStateBalInquiryDisplay(f, state);
+            aboutToShowThisContainer = null;
+            return;
+        }
+
+        if("AppUserLogin".equals(f.getName())) {
+            setStateAppUserLogin(f, state);
             aboutToShowThisContainer = null;
             return;
         }
@@ -4737,6 +5087,10 @@ public abstract class StateMachineBase extends UIBuilder {
     }
 
 
+    protected void setStateSettingLogin(Form f, Hashtable state) {
+    }
+
+
     protected void setStateSettings(Form f, Hashtable state) {
     }
 
@@ -4793,6 +5147,10 @@ public abstract class StateMachineBase extends UIBuilder {
     }
 
 
+    protected void setStateAppUserLoginOffline(Form f, Hashtable state) {
+    }
+
+
     protected void setStateCustomerToWithdraw(Form f, Hashtable state) {
     }
 
@@ -4817,6 +5175,10 @@ public abstract class StateMachineBase extends UIBuilder {
     }
 
 
+    protected void setStateAppUserLogin(Form f, Hashtable state) {
+    }
+
+
     protected void setStateStoredCustomer(Form f, Hashtable state) {
     }
 
@@ -4826,9 +5188,6 @@ public abstract class StateMachineBase extends UIBuilder {
 
     protected boolean setListModel(List cmp) {
         String listName = cmp.getName();
-        if("accountsWithErrorStatusList".equals(listName)) {
-            return initListModelAccountsWithErrorStatusList(cmp);
-        }
         if("withdrawaBankMultiList".equals(listName)) {
             return initListModelWithdrawaBankMultiList(cmp);
         }
@@ -4841,20 +5200,11 @@ public abstract class StateMachineBase extends UIBuilder {
         if("storedCustomersMultiList".equals(listName)) {
             return initListModelStoredCustomersMultiList(cmp);
         }
-        if("accountsStoredList".equals(listName)) {
-            return initListModelAccountsStoredList(cmp);
-        }
         if("allOfflineTransactionsMultiList".equals(listName)) {
             return initListModelAllOfflineTransactionsMultiList(cmp);
         }
         if("transactionsNotUploadedMultiList".equals(listName)) {
             return initListModelTransactionsNotUploadedMultiList(cmp);
-        }
-        if("balInquiryMFBMultiList".equals(listName)) {
-            return initListModelBalInquiryMFBMultiList(cmp);
-        }
-        if("miniStatMultiList".equals(listName)) {
-            return initListModelMiniStatMultiList(cmp);
         }
         if("depositMFBsMultiList".equals(listName)) {
             return initListModelDepositMFBsMultiList(cmp);
@@ -4862,14 +5212,22 @@ public abstract class StateMachineBase extends UIBuilder {
         if("transactionsUploadedMultiList".equals(listName)) {
             return initListModelTransactionsUploadedMultiList(cmp);
         }
+        if("accountsWithErrorStatusList".equals(listName)) {
+            return initListModelAccountsWithErrorStatusList(cmp);
+        }
+        if("accountsStoredList".equals(listName)) {
+            return initListModelAccountsStoredList(cmp);
+        }
+        if("balInquiryMFBMultiList".equals(listName)) {
+            return initListModelBalInquiryMFBMultiList(cmp);
+        }
+        if("miniStatMultiList".equals(listName)) {
+            return initListModelMiniStatMultiList(cmp);
+        }
         if("accountList".equals(listName)) {
             return initListModelAccountList(cmp);
         }
         return super.setListModel(cmp);
-    }
-
-    protected boolean initListModelAccountsWithErrorStatusList(List cmp) {
-        return false;
     }
 
     protected boolean initListModelWithdrawaBankMultiList(List cmp) {
@@ -4888,10 +5246,6 @@ public abstract class StateMachineBase extends UIBuilder {
         return false;
     }
 
-    protected boolean initListModelAccountsStoredList(List cmp) {
-        return false;
-    }
-
     protected boolean initListModelAllOfflineTransactionsMultiList(List cmp) {
         return false;
     }
@@ -4900,19 +5254,27 @@ public abstract class StateMachineBase extends UIBuilder {
         return false;
     }
 
-    protected boolean initListModelBalInquiryMFBMultiList(List cmp) {
-        return false;
-    }
-
-    protected boolean initListModelMiniStatMultiList(List cmp) {
-        return false;
-    }
-
     protected boolean initListModelDepositMFBsMultiList(List cmp) {
         return false;
     }
 
     protected boolean initListModelTransactionsUploadedMultiList(List cmp) {
+        return false;
+    }
+
+    protected boolean initListModelAccountsWithErrorStatusList(List cmp) {
+        return false;
+    }
+
+    protected boolean initListModelAccountsStoredList(List cmp) {
+        return false;
+    }
+
+    protected boolean initListModelBalInquiryMFBMultiList(List cmp) {
+        return false;
+    }
+
+    protected boolean initListModelMiniStatMultiList(List cmp) {
         return false;
     }
 
@@ -5042,6 +5404,10 @@ public abstract class StateMachineBase extends UIBuilder {
                 onNewAppUser_TellerTilTextFieldAction(c, event);
                 return;
             }
+            if("bankCodeTextField".equals(c.getName())) {
+                onNewAppUser_BankCodeTextFieldAction(c, event);
+                return;
+            }
             if("signUpUser".equals(c.getName())) {
                 onNewAppUser_SignUpUserAction(c, event);
                 return;
@@ -5166,6 +5532,24 @@ public abstract class StateMachineBase extends UIBuilder {
             }
             if("cancelDeposit".equals(c.getName())) {
                 onCustomerToDeposit_CancelDepositAction(c, event);
+                return;
+            }
+        }
+        if(rootContainerName.equals("SettingLogin")) {
+            if("adminName".equals(c.getName())) {
+                onSettingLogin_AdminNameAction(c, event);
+                return;
+            }
+            if("adminPassword".equals(c.getName())) {
+                onSettingLogin_AdminPasswordAction(c, event);
+                return;
+            }
+            if("adminLogin".equals(c.getName())) {
+                onSettingLogin_AdminLoginAction(c, event);
+                return;
+            }
+            if("cancel".equals(c.getName())) {
+                onSettingLogin_CancelAction(c, event);
                 return;
             }
         }
@@ -5377,6 +5761,24 @@ public abstract class StateMachineBase extends UIBuilder {
                 return;
             }
         }
+        if(rootContainerName.equals("AppUserLoginOffline")) {
+            if("offlineUsername".equals(c.getName())) {
+                onAppUserLoginOffline_OfflineUsernameAction(c, event);
+                return;
+            }
+            if("offlinePassword".equals(c.getName())) {
+                onAppUserLoginOffline_OfflinePasswordAction(c, event);
+                return;
+            }
+            if("offlineUserLogin".equals(c.getName())) {
+                onAppUserLoginOffline_OfflineUserLoginAction(c, event);
+                return;
+            }
+            if("cancel".equals(c.getName())) {
+                onAppUserLoginOffline_CancelAction(c, event);
+                return;
+            }
+        }
         if(rootContainerName.equals("CustomerToWithdraw")) {
             if("customerPhoto".equals(c.getName())) {
                 onCustomerToWithdraw_CustomerPhotoAction(c, event);
@@ -5458,6 +5860,24 @@ public abstract class StateMachineBase extends UIBuilder {
             }
             if("balInquiryOK".equals(c.getName())) {
                 onBalInquiryDisplay_BalInquiryOKAction(c, event);
+                return;
+            }
+        }
+        if(rootContainerName.equals("AppUserLogin")) {
+            if("tellerUsername".equals(c.getName())) {
+                onAppUserLogin_TellerUsernameAction(c, event);
+                return;
+            }
+            if("password".equals(c.getName())) {
+                onAppUserLogin_PasswordAction(c, event);
+                return;
+            }
+            if("login".equals(c.getName())) {
+                onAppUserLogin_LoginAction(c, event);
+                return;
+            }
+            if("cancel".equals(c.getName())) {
+                onAppUserLogin_CancelAction(c, event);
                 return;
             }
         }
@@ -5574,6 +5994,9 @@ public abstract class StateMachineBase extends UIBuilder {
       protected void onNewAppUser_TellerTilTextFieldAction(Component c, ActionEvent event) {
       }
 
+      protected void onNewAppUser_BankCodeTextFieldAction(Component c, ActionEvent event) {
+      }
+
       protected void onNewAppUser_SignUpUserAction(Component c, ActionEvent event) {
       }
 
@@ -5656,6 +6079,18 @@ public abstract class StateMachineBase extends UIBuilder {
       }
 
       protected void onCustomerToDeposit_CancelDepositAction(Component c, ActionEvent event) {
+      }
+
+      protected void onSettingLogin_AdminNameAction(Component c, ActionEvent event) {
+      }
+
+      protected void onSettingLogin_AdminPasswordAction(Component c, ActionEvent event) {
+      }
+
+      protected void onSettingLogin_AdminLoginAction(Component c, ActionEvent event) {
+      }
+
+      protected void onSettingLogin_CancelAction(Component c, ActionEvent event) {
       }
 
       protected void onSettings_AppSettingsAction(Component c, ActionEvent event) {
@@ -5793,6 +6228,18 @@ public abstract class StateMachineBase extends UIBuilder {
       protected void onAdminCreateName_CancelAddAdminAction(Component c, ActionEvent event) {
       }
 
+      protected void onAppUserLoginOffline_OfflineUsernameAction(Component c, ActionEvent event) {
+      }
+
+      protected void onAppUserLoginOffline_OfflinePasswordAction(Component c, ActionEvent event) {
+      }
+
+      protected void onAppUserLoginOffline_OfflineUserLoginAction(Component c, ActionEvent event) {
+      }
+
+      protected void onAppUserLoginOffline_CancelAction(Component c, ActionEvent event) {
+      }
+
       protected void onCustomerToWithdraw_CustomerPhotoAction(Component c, ActionEvent event) {
       }
 
@@ -5845,6 +6292,18 @@ public abstract class StateMachineBase extends UIBuilder {
       }
 
       protected void onBalInquiryDisplay_BalInquiryOKAction(Component c, ActionEvent event) {
+      }
+
+      protected void onAppUserLogin_TellerUsernameAction(Component c, ActionEvent event) {
+      }
+
+      protected void onAppUserLogin_PasswordAction(Component c, ActionEvent event) {
+      }
+
+      protected void onAppUserLogin_LoginAction(Component c, ActionEvent event) {
+      }
+
+      protected void onAppUserLogin_CancelAction(Component c, ActionEvent event) {
       }
 
       protected void onStoredCustomer_CustomerPhotoAction(Component c, ActionEvent event) {

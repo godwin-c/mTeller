@@ -19,6 +19,7 @@ import com.expertedge.mtnsaas.Customers;
 import com.expertedge.mtnsaas.MFBs;
 import com.expertedge.mtnsaas.MiniStatements;
 import com.expertedge.mtnsaas.OfflineTransactions;
+import com.expertedge.mtnsaas.TransactionReplies;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -79,6 +80,7 @@ public class StateMachine extends StateMachineBase {
     private Hashtable<String, String> returns;
     private MiniStatements miniStatement;
     private boolean credit;
+    TransactionReplies transactionReply;
 
     public StateMachine(String resFile) {
         super(resFile);
@@ -118,7 +120,6 @@ public class StateMachine extends StateMachineBase {
     }
 
     public void fetchAllMFBs() {
-
         InputParameter = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:tem='http://tempuri.org/'>"
                 + "<soapenv:Header/>"
                 + "<soapenv:Body>"
@@ -182,7 +183,7 @@ public class StateMachine extends StateMachineBase {
         manager.addToQueueAndWait(request);
     }
 
-    public void signUp(String tellerID, String password, String email, String tranPWD, String tillAcct) {
+    public void signUp(String tellerID, String password, String email, String tranPWD, String tillAcct, String mfbCode) {
 //
 //        Hashtable data = new Hashtable();
 //        data.put("username", tellerID);
@@ -206,7 +207,7 @@ public class StateMachine extends StateMachineBase {
                 + "<!--Optional:-->"
                 + "<tem:Email>" + email + "</tem:Email>"
                 + "<!--Optional:-->"
-                + "<tem:Mfbcode>" + "00" + "</tem:Mfbcode>"
+                + "<tem:Mfbcode>" + mfbCode + "</tem:Mfbcode>"
                 + "<!--Optional:-->"
                 + "<tem:OffLineTeller>" + "0" + "</tem:OffLineTeller>"
                 + "<!--Optional:-->"
@@ -540,7 +541,7 @@ public class StateMachine extends StateMachineBase {
         //request.addRequestHeader("SOAPAction", "");
         request.addRequestHeader("Authorization", "Bearer " + app_Settings.get("Bearer_Key").toString());
         request.setDuplicateSupported(true);
-        //request.setFailSilently(true);//stops user from seeing error message on failure
+        request.setFailSilently(true);//stops user from seeing error message on failure
         request.setPost(true);
         request.setHttpMethod("POST");
 
@@ -966,12 +967,7 @@ public class StateMachine extends StateMachineBase {
 
     private void uploadTranReplies(String acctNumber, String amount, String tranType,
             String post_seq) {
-//
-//        Hashtable data = new Hashtable();
-//        data.put("account_number", acctNumber);
-//        data.put("transaction_type", tranType);
-//        data.put("amount", amount);
-//        data.put("post_sequence", post_seq);
+
 
         InputParameter = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:tem='http://tempuri.org/'>"
                 + "<soapenv:Header/>"
@@ -1112,9 +1108,11 @@ public class StateMachine extends StateMachineBase {
     @Override
     protected void onMain_UserLoginAction(Component c, ActionEvent event) {
 
+        //("AppUserLogin", null);
         if (Storage.getInstance().exists("Application_Settings")) {
             app_Settings = (Hashtable<String, String>) Storage.getInstance().readObject("Application_Settings");
-            showForm("OnlineLogin", null);
+            //showForm("OnlineLogin", null);
+            showForm("AppUserLogin", null);
         } else {
             Dialog.show("Sorry", "You need to provide Application Settings before Login", "OK", null);
         }
@@ -1124,7 +1122,15 @@ public class StateMachine extends StateMachineBase {
     @Override
     protected void onMain_UserGoOfflineAction(Component c, ActionEvent event) {
 
-        showForm("OfflineLogin", null);
+        //showForm("OfflineLogin", null);
+
+        if (Storage.getInstance().exists("Application_Settings")) {
+            app_Settings = (Hashtable<String, String>) Storage.getInstance().readObject("Application_Settings");
+            //showForm("OnlineLogin", null);
+            showForm("AppUserLoginOffline", null);
+        } else {
+            Dialog.show("Sorry", "You need to provide Application Settings before Login", "OK", null);
+        }
     }
 
     @Override
@@ -1167,43 +1173,6 @@ public class StateMachine extends StateMachineBase {
                 } else {
                     Dialog.show("", respMsg, "OK", null);
                 }
-
-
-//                try {
-//                    if (appUser.getEmailVerified().equals("false")) {
-//                        Dialog.show("Email Unverified", username.toUpperCase() + " please verify your email first", "OK", null);
-//                    } else {
-//
-////                        String token = this.getTodayID();
-////                        TextField body = new TextField("This is the transaction token for the day. It expires at the end of the day.\n"
-////                                + "it also expires when you log out of the Application.\n"
-////                                + "\n"
-////                                + "Teller Id : " + appUser.getUsername() + "\n"
-////                                + "Token : " + token);
-////                        System.out.println(body.getText());
-////                    Message msg = new Message(body.getText());
-//                        //TodayToken
-//                        // try {
-////                        Display.getInstance().sendMessage(new String[]{appUser.getEmail()}, "Transaction Token ", msg);
-//
-//                        // Dialog.show("Transaction Token", body.getText(), "OK", null);
-////                        try {
-////                            Hashtable todayToken = new Hashtable();
-////                            todayToken.put("date", this.getCurrentDate());
-////                            todayToken.put("token", token);
-////                            Storage.getInstance().writeObject("TodayToken", todayToken);
-//
-//                        Dialog.show("Logged In", appUser.getUsername().toUpperCase() + "  welcome", "OK", null);
-//                        status = "";
-//                        showForm("TransactionMenu", null);
-////                        } catch (Exception e) {
-////                            Dialog.show("Error Occured", e.getMessage(), "OK", null);
-////                        }
-//
-//                    }
-//                } catch (Exception e) {
-//                    Dialog.show("OOPS!!!", "request may have been cancelled", "OK", null);
-//                }
             }
 
         }
@@ -1212,38 +1181,40 @@ public class StateMachine extends StateMachineBase {
     @Override
     protected void onTransactionMenu_DepositOnlineAction(Component c, ActionEvent event) {
 
-        if (MFBsList == null || MFBsList.isEmpty()) {
-            fetchAllMFBs();
-            if (!"200".equals(status)) {
-                Dialog.show("", "Please check your internet", "OK", null);
-            } else {
-                status = "";
-
-                if (mfbResult == null || mfbResult.toString().equals("")) {
-                    Dialog.show("Oh dear", "no MFBs were fetched", "OK", null);
-                } else {
-
-                    MFBsList = new Vector<Hashtable>();
-
-                    for (Object o : mfbResult.getAsArray("/soap:Envelope/soap:Body/FetchMFBsResponse/FetchMFBsResult/FetchMFBs")) {
-                        Result lineitem = Result.fromContent(((Element) o).getChildAt(0));
-
-                        returns = new Hashtable<String, String>();
-
-                        returns.put("mfb_id", lineitem.getAsString("MFBID"));
-                        returns.put("mfb_name", lineitem.getAsString("MFBName"));
-
-                        MFBsList.add(returns);
-
-                    }
-
-                    showForm("DepositMFBs", null);
-                }
-
-            }
-        } else {
-            showForm("DepositMFBs", null);
-        }
+        showForm("DepositAcctNumber", null);
+//        
+//        if (MFBsList == null || MFBsList.isEmpty()) {
+//            fetchAllMFBs();
+//            if (!"200".equals(status)) {
+//                Dialog.show("", "Please check your internet", "OK", null);
+//            } else {
+//                status = "";
+//
+//                if (mfbResult == null || mfbResult.toString().equals("")) {
+//                    Dialog.show("Oh dear", "no MFBs were fetched", "OK", null);
+//                } else {
+//
+//                    MFBsList = new Vector<Hashtable>();
+//
+//                    for (Object o : mfbResult.getAsArray("/soap:Envelope/soap:Body/FetchMFBsResponse/FetchMFBsResult/FetchMFBs")) {
+//                        Result lineitem = Result.fromContent(((Element) o).getChildAt(0));
+//
+//                        returns = new Hashtable<String, String>();
+//
+//                        returns.put("mfb_id", lineitem.getAsString("MFBID"));
+//                        returns.put("mfb_name", lineitem.getAsString("MFBName"));
+//
+//                        MFBsList.add(returns);
+//
+//                    }
+//
+//                    showForm("DepositMFBs", null);
+//                }
+//
+//            }
+//        } else {
+//            showForm("DepositMFBs", null);
+//        }
     }
 
     @Override
@@ -1255,39 +1226,41 @@ public class StateMachine extends StateMachineBase {
     @Override
     protected void onTransactionMenu_WithdrawOnlineAction(Component c, ActionEvent event) {
 
-        if (MFBsList == null || (MFBsList.isEmpty())) {
-            fetchAllMFBs();
-            if ("200".equals(status)) {
-                status = "";
-
-                if (mfbResult == null || mfbResult.toString().equals("")) {
-                    Dialog.show("Oh dear", "no MFBs were fetched", "OK", null);
-                } else {
-
-                    MFBsList = new Vector<Hashtable>();
-
-                    for (Object o : mfbResult.getAsArray("/soap:Envelope/soap:Body/FetchMFBsResponse/FetchMFBsResult/FetchMFBs")) {
-                        Result lineitem = Result.fromContent(((Element) o).getChildAt(0));
-
-                        returns = new Hashtable<String, String>();
-
-                        returns.put("mfb_id", lineitem.getAsString("MFBID"));
-                        returns.put("mfb_name", lineitem.getAsString("MFBName"));
-
-                        MFBsList.add(returns);
-
-                    }
-
-                    showForm("WithdrawalMFBs", null);
-                }
-
-
-            } else {
-                Dialog.show("", "Please check your internet", "OK", null);
-            }
-        } else {
-            showForm("WithdrawalMFBs", null);
-        }
+        showForm("WithdrawalAcctNumber", null);
+        
+//        if (MFBsList == null || (MFBsList.isEmpty())) {
+//            fetchAllMFBs();
+//            if ("200".equals(status)) {
+//                status = "";
+//
+//                if (mfbResult == null || mfbResult.toString().equals("")) {
+//                    Dialog.show("Oh dear", "no MFBs were fetched", "OK", null);
+//                } else {
+//
+//                    MFBsList = new Vector<Hashtable>();
+//
+//                    for (Object o : mfbResult.getAsArray("/soap:Envelope/soap:Body/FetchMFBsResponse/FetchMFBsResult/FetchMFBs")) {
+//                        Result lineitem = Result.fromContent(((Element) o).getChildAt(0));
+//
+//                        returns = new Hashtable<String, String>();
+//
+//                        returns.put("mfb_id", lineitem.getAsString("MFBID"));
+//                        returns.put("mfb_name", lineitem.getAsString("MFBName"));
+//
+//                        MFBsList.add(returns);
+//
+//                    }
+//
+//                    showForm("WithdrawalMFBs", null);
+//                }
+//
+//
+//            } else {
+//                Dialog.show("", "Please check your internet", "OK", null);
+//            }
+//        } else {
+//            showForm("WithdrawalMFBs", null);
+//        }
     }
 
     @Override
@@ -1299,74 +1272,79 @@ public class StateMachine extends StateMachineBase {
     @Override
     protected void onTransactionMenu_MiniStatementAction(Component c, ActionEvent event) {
 
-        if (MFBsList == null || MFBsList.isEmpty()) {
-            fetchAllMFBs();
-            if ("200".equals(status)) {
-                status = "";
-
-                if (mfbResult == null || mfbResult.toString().equals("")) {
-                    Dialog.show("Oh dear", "no MFBs were fetched", "OK", null);
-                } else {
-
-                    MFBsList = new Vector<Hashtable>();
-
-                    for (Object o : mfbResult.getAsArray("/soap:Envelope/soap:Body/FetchMFBsResponse/FetchMFBsResult/FetchMFBs")) {
-                        Result lineitem = Result.fromContent(((Element) o).getChildAt(0));
-
-                        returns = new Hashtable<String, String>();
-
-                        returns.put("mfb_id", lineitem.getAsString("MFBID"));
-                        returns.put("mfb_name", lineitem.getAsString("MFBName"));
-
-                        MFBsList.add(returns);
-
-                    }
-
-                    showForm("MiniStatMFBs", null);
-                }
-
-            } else {
-                Dialog.show("", "Please check your internet", "OK", null);
-            }
-        } else {
-            showForm("MiniStatMFBs", null);
-        }
+         showForm("MiniStatForm", null);
+         
+//        if (MFBsList == null || MFBsList.isEmpty()) {
+//            fetchAllMFBs();
+//            if ("200".equals(status)) {
+//                status = "";
+//
+//                if (mfbResult == null || mfbResult.toString().equals("")) {
+//                    Dialog.show("Oh dear", "no MFBs were fetched", "OK", null);
+//                } else {
+//
+//                    MFBsList = new Vector<Hashtable>();
+//
+//                    for (Object o : mfbResult.getAsArray("/soap:Envelope/soap:Body/FetchMFBsResponse/FetchMFBsResult/FetchMFBs")) {
+//                        Result lineitem = Result.fromContent(((Element) o).getChildAt(0));
+//
+//                        returns = new Hashtable<String, String>();
+//
+//                        returns.put("mfb_id", lineitem.getAsString("MFBID"));
+//                        returns.put("mfb_name", lineitem.getAsString("MFBName"));
+//
+//                        MFBsList.add(returns);
+//
+//                    }
+//
+//                    showForm("MiniStatMFBs", null);
+//                }
+//
+//            } else {
+//                Dialog.show("", "Please check your internet", "OK", null);
+//            }
+//        } else {
+//            showForm("MiniStatMFBs", null);
+//        }
     }
 
     @Override
     protected void onTransactionMenu_BalanceInquiryAction(Component c, ActionEvent event) {
-        if (MFBsList == null || MFBsList.isEmpty()) {
-            fetchAllMFBs();
-            if ("200".equals(status)) {
-                status = "";
-
-                if (mfbResult == null || mfbResult.toString().equals("")) {
-                    Dialog.show("Oh dear", "no MFBs were fetched", "OK", null);
-                } else {
-
-                    MFBsList = new Vector<Hashtable>();
-
-                    for (Object o : mfbResult.getAsArray("/soap:envelope/soap:body/FetchMFBsResponse/FetchMFBsResult/FetchMFBs")) {
-                        Result lineitem = Result.fromContent(((Element) o).getChildAt(0));
-
-                        returns = new Hashtable<String, String>();
-
-                        returns.put("mfb_id", lineitem.getAsString("MFBID"));
-                        returns.put("mfb_name", lineitem.getAsString("MFBName"));
-
-                        MFBsList.add(returns);
-
-                    }
-
-                    showForm("BalInquiryMFBs", null);
-                }
-
-            } else {
-                Dialog.show("", "Please check your internet", "OK", null);
-            }
-        } else {
-            showForm("BalInquiryMFBs", null);
-        }
+        
+        showForm("BalInquiryAcctNumber", null);
+        
+//        if (MFBsList == null || MFBsList.isEmpty()) {
+//            fetchAllMFBs();
+//            if ("200".equals(status)) {
+//                status = "";
+//
+//                if (mfbResult == null || mfbResult.toString().equals("")) {
+//                    Dialog.show("Oh dear", "no MFBs were fetched", "OK", null);
+//                } else {
+//
+//                    MFBsList = new Vector<Hashtable>();
+//
+//                    for (Object o : mfbResult.getAsArray("/soap:envelope/soap:body/FetchMFBsResponse/FetchMFBsResult/FetchMFBs")) {
+//                        Result lineitem = Result.fromContent(((Element) o).getChildAt(0));
+//
+//                        returns = new Hashtable<String, String>();
+//
+//                        returns.put("mfb_id", lineitem.getAsString("MFBID"));
+//                        returns.put("mfb_name", lineitem.getAsString("MFBName"));
+//
+//                        MFBsList.add(returns);
+//
+//                    }
+//
+//                    showForm("BalInquiryMFBs", null);
+//                }
+//
+//            } else {
+//                Dialog.show("", "Please check your internet", "OK", null);
+//            }
+//        } else {
+//            showForm("BalInquiryMFBs", null);
+//        }
     }
 
     @Override
@@ -1389,8 +1367,9 @@ public class StateMachine extends StateMachineBase {
         String email = findNewUserEmailTextField(c.getComponentForm()).getText();
         String tranPWD = findTranPasswordTextField(c.getComponentForm()).getText();
         String tillAcct = findTellerTilTextField(c.getComponentForm()).getText();
+        String bankCode = findBankCodeTextField(c.getComponentForm()).getText();
 
-        if (("".equals(username)) || ("".equals(password)) || ("".equals(tillAcct)) || ("".equals(email)) || ("".equals(tranPWD))) {
+        if (("".equals(bankCode)) || ("".equals(username)) || ("".equals(password)) || ("".equals(tillAcct)) || ("".equals(email)) || ("".equals(tranPWD))) {
             Dialog.show("", "all fields are required", "OK", null);
         } else {
 
@@ -1398,7 +1377,7 @@ public class StateMachine extends StateMachineBase {
                 Dialog.show("", "passwords should be more than six(6) characters", "OK", null);
             } else {
 
-                signUp(username, encodePWD(password), email, encodePWD(tranPWD), tillAcct);
+                signUp(username, encodePWD(password), email, encodePWD(tranPWD), tillAcct, bankCode);
 
                 if ((status == null) || !("200".equals(status))) {
                     Dialog.show("Oh Dear", "Could not create Teller, please check your internet", "OK", null);
@@ -1460,7 +1439,7 @@ public class StateMachine extends StateMachineBase {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 //super.actionPerformed(evt); //To change body of generated methods, choose Tools | Templates.
-                showForm("SettingsLogin", null);
+                showForm("Main", null);
             }
         };
 
@@ -1509,7 +1488,7 @@ public class StateMachine extends StateMachineBase {
     @Override
     protected void onMain_SettingsAction(Component c, ActionEvent event) {
 
-        showForm("SettingsLogin", null);
+        showForm("SettingLogin", null);
     }
 
     @Override
@@ -1568,7 +1547,8 @@ public class StateMachine extends StateMachineBase {
 
     @Override
     protected void onSettings_CancelAppSettingsAction(Component c, ActionEvent event) {
-        back();
+        showForm("Main", null);
+
     }
 
     @Override
@@ -1583,7 +1563,7 @@ public class StateMachine extends StateMachineBase {
 
     @Override
     protected void onSettings_BackToMainAction(Component c, ActionEvent event) {
-        showForm("SettingsLogin", null);
+        showForm("Main", null);
     }
 
     @Override
@@ -1616,13 +1596,13 @@ public class StateMachine extends StateMachineBase {
     @Override
     protected void beforeAdminCreateName(final Form f) {
 
-        Command home = new Command("Home") {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-
-                showForm("TransactionMenu", null);
-            }
-        };
+//        Command home = new Command("Home") {
+//            @Override
+//            public void actionPerformed(ActionEvent evt) {
+//
+//                showForm("TransactionMenu", null);
+//            }
+//        };
 
         Command create = new Command("Create") {
             @Override
@@ -1662,7 +1642,7 @@ public class StateMachine extends StateMachineBase {
             }
         };
 
-        f.getMenuBar().addCommand(home);
+        //f.getMenuBar().addCommand(home);
         f.getMenuBar().addCommand(create);
         f.getMenuBar().addCommand(cancel);
 
@@ -3305,7 +3285,7 @@ public class StateMachine extends StateMachineBase {
         if ("".equals(acctnum)) {
             Dialog.show("", "you haven't entered an account number yet", "OK", null);
         } else {
-            verifyCustomer(mfb.getCode(), acctnum);
+            verifyCustomer(appUser.getMfb_code(), acctnum);
 
             if (!("200".equals(status))) {
                 Dialog.show("", "something may have gone wrong", "OK", null);
@@ -3625,7 +3605,7 @@ public class StateMachine extends StateMachineBase {
             Dialog.show("", " please provide account number", "OK", null);
         } else {
 
-            this.verifyCustomer(mfb.getCode(), accountNumber);
+            this.verifyCustomer(appUser.getMfb_code(), accountNumber);
 
             if (!("200".equals(status))) {
                 Dialog.show("", "something may have gone wrong", "OK", null);
@@ -4100,7 +4080,7 @@ public class StateMachine extends StateMachineBase {
             Dialog.show("", " please provide account number", "OK", null);
         } else {
 
-            this.verifyCustomer(mfb.getCode(), accountNumber);
+            this.verifyCustomer(appUser.getMfb_code(), accountNumber);
 
             if (!("200".equals(status))) {
                 Dialog.show("", "something may have gone wrong", "OK", null);
@@ -4453,7 +4433,7 @@ public class StateMachine extends StateMachineBase {
 
     @Override
     protected void beforeMain(Form f) {
-        Storage.getInstance().deleteStorageFile("OfflineTeller");
+        //Storage.getInstance().deleteStorageFile("OfflineTeller");
 //        OfflineTeller = (Hashtable<String, String>) Storage.getInstance().readObject("OfflineTeller");
 //        System.out.println(OfflineTeller);
         //Storage.getInstance().exists("Application_Settings")
@@ -4510,7 +4490,7 @@ public class StateMachine extends StateMachineBase {
         };
 
 
-        f.getMenuBar().addCommand(logout);
+        f.addCommand(logout);
 
     }
 
@@ -4830,7 +4810,7 @@ public class StateMachine extends StateMachineBase {
                     Dialog.show("", " please provide account number", "OK", null);
                 } else {
 
-                    verifyCustomer(mfb.getCode(), accountNumber);
+                    verifyCustomer(appUser.getMfb_code(), accountNumber);
 
                     if (!("200".equals(status))) {
                         Dialog.show("", "something may have gone wrong", "OK", null);
@@ -5020,8 +5000,9 @@ public class StateMachine extends StateMachineBase {
                 String email = findNewUserEmailTextField(f).getText();
                 String tranPWD = findTranPasswordTextField(f).getText();
                 String tillAcct = findTellerTilTextField(f).getText();
+                String bankCode = findBankCodeTextField(f).getText();
 
-                if (("".equals(username)) || ("".equals(password)) || ("".equals(tillAcct)) || ("".equals(email)) || ("".equals(tranPWD))) {
+                if (("".equals(bankCode)) || ("".equals(username)) || ("".equals(password)) || ("".equals(tillAcct)) || ("".equals(email)) || ("".equals(tranPWD))) {
                     Dialog.show("", "all fields are required", "OK", null);
                 } else {
 
@@ -5029,7 +5010,7 @@ public class StateMachine extends StateMachineBase {
                         Dialog.show("", "passwords should be more than six(6) characters", "OK", null);
                     } else {
 
-                        signUp(username, encodePWD(password), email, encodePWD(tranPWD), tillAcct);
+                        signUp(username, encodePWD(password), email, encodePWD(tranPWD), tillAcct, bankCode);
 
                         if ((status == null) || !("200".equals(status))) {
                             Dialog.show("Oh Dear", "Could not create Teller, please check your internet", "OK", null);
@@ -5337,8 +5318,8 @@ public class StateMachine extends StateMachineBase {
         };
 
         f.setBackCommand(cancel);
-        f.getMenuBar().addCommand(logUser);
-        f.getMenuBar().addCommand(cancel);
+        f.addCommand(logUser);
+        f.addCommand(cancel);
     }
 
     @Override
@@ -5379,9 +5360,9 @@ public class StateMachine extends StateMachineBase {
             }
         };
 
-        f.getMenuBar().addCommand(cancel);
+        f.addCommand(cancel);
         f.setBackCommand(cancel);
-        f.getMenuBar().addCommand(setLogin);
+        f.addCommand(setLogin);
     }
 
     @Override
@@ -5412,7 +5393,7 @@ public class StateMachine extends StateMachineBase {
                     Dialog.show("", " please provide account number", "OK", null);
                 } else {
 
-                    verifyCustomer(mfb.getCode(), accountNumber);
+                    verifyCustomer(appUser.getMfb_code(), accountNumber);
 
                     if (!("200".equals(status))) {
                         Dialog.show("", "something may have gone wrong", "OK", null);
@@ -5456,7 +5437,421 @@ public class StateMachine extends StateMachineBase {
                 back();
             }
         };
-        f.getMenuBar().addCommand(verify);
-        f.getMenuBar().addCommand(cancel);
+        f.addCommand(verify);
+        f.addCommand(cancel);
+    }
+
+    @Override
+    protected void onAppUserLogin_LoginAction(Component c, ActionEvent event) {
+        String username = findTellerUsername(c.getComponentForm()).getText();
+        String password = findPassword(c.getComponentForm()).getText();
+
+        if (("".equals(username)) || ("".equals(password))) {
+
+            Dialog.show("Missing", "Please provide Username and Password", "OK", null);
+        } else {
+            login(username, encodePWD(password));
+
+            if (status == null || !(status.equals("200"))) {
+
+                Dialog.show("", "unable to login", "OK", null);
+
+
+            } else {
+                status = "";
+
+                String respCode = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/Retval");
+                String respMsg = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/Retmsg");
+
+                if ("1".equals(respCode)) {
+                    String email = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/Email");
+                    String mfbCode = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/Mfbcode");
+                    String tranPassword = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/TranPwd");
+                    String tillAcct = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/TillAcct");
+                    String objectID = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/ObjectID");
+                    String offlineStatus = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/OfflineTeller");
+
+                    appUser = new AppUsers(username, email, objectID, offlineStatus, mfbCode, tranPassword, tillAcct);
+                    //
+                    ((Dialog) Display.getInstance().getCurrent()).dispose();
+
+                    Dialog.show("Logged In", appUser.getUsername().toUpperCase() + "  welcome", "OK", null);
+                    //status = "";
+                    showForm("TransactionMenu", null);
+
+                } else {
+                    Dialog.show("", respMsg, "OK", null);
+                }
+
+            }
+
+        }
+    }
+
+    @Override
+    protected void onAppUserLogin_CancelAction(Component c, ActionEvent event) {
+        ((Dialog) Display.getInstance().getCurrent()).dispose();
+    }
+
+    @Override
+    protected void beforeAppUserLogin(final Form f) {
+
+        Command logUser = new Command("Login") {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                //super.actionPerformed(evt); //To change body of generated methods, choose Tools | Templates.
+
+                String username = findTellerUsername(f).getText();
+                String password = findPassword(f).getText();
+
+                if (("".equals(username)) || ("".equals(password))) {
+                    Dialog.show("Missing", "Please provide Username and Password", "OK", null);
+                } else {
+                    login(username, encodePWD(password));
+
+                    if (status == null || !(status.equals("200"))) {
+
+                        Dialog.show("", "unable to login", "OK", null);
+
+
+                    } else {
+                        status = "";
+                        String respCode = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/Retval");
+                        String respMsg = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/Retmsg");
+
+                        if ("1".equals(respCode)) {
+                            String email = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/Email");
+                            String mfbCode = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/Mfbcode");
+                            String tranPassword = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/TranPwd");
+                            String tillAcct = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/TillAcct");
+                            String objectID = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/ObjectID");
+                            String offlineStatus = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/OfflineTeller");
+
+                            appUser = new AppUsers(username, email, objectID, offlineStatus, mfbCode, tranPassword, tillAcct);
+                            //
+                            ((Dialog) Display.getInstance().getCurrent()).dispose();
+                            Dialog.show("Logged In", appUser.getUsername().toUpperCase() + "  welcome", "OK", null);
+                            //status = "";
+                            showForm("TransactionMenu", null);
+
+                        } else {
+                            Dialog.show("", respMsg, "OK", null);
+                        }
+                    }
+
+                }
+            }
+        };
+
+        Command cancel = new Command("Cancel") {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                //super.actionPerformed(evt); //To change body of generated methods, choose Tools | Templates.
+                ((Dialog) Display.getInstance().getCurrent()).dispose();
+                //showForm("Main", null);
+            }
+        };
+
+        f.setBackCommand(cancel);
+        f.addCommand(logUser);
+        f.addCommand(cancel);
+    }
+
+    @Override
+    protected void onAppUserLoginOffline_OfflineUserLoginAction(Component c, ActionEvent event) {
+        if (Storage.getInstance().exists("Application_Settings")) {
+            try {
+                app_Settings = (Hashtable<String, String>) Storage.getInstance().readObject("Application_Settings");
+            } catch (Exception e) {
+                Dialog.show("Oh dear", "error has been encountered, reading application settings", "OK", null);
+            }
+
+            String name = findOfflineUsername(c.getComponentForm()).getText();
+            String password = findOfflinePassword(c.getComponentForm()).getText();
+            if (("".equals(name)) || ("".equals(password))) {
+                Dialog.show("Sorry", "both fields are required to continue", "OK", null);
+            } else {
+                if (Storage.getInstance().exists("OfflineTeller")) {
+                    //Storage.getInstance().readObject(name)
+                    try {
+                        OfflineTeller = (Hashtable<String, String>) Storage.getInstance().readObject("OfflineTeller");
+                    } catch (Exception e) {
+                        Dialog.show("Error", e.getMessage(), "OK", null);
+
+                    }
+                    if ((name.equals(OfflineTeller.get("teller_ID").toString())) && ((this.encodePWD(password)).equals(OfflineTeller.get("password").toString()))) {
+                        appUser = new AppUsers(OfflineTeller.get("teller_ID").toString(), OfflineTeller.get("email").toString(), OfflineTeller.get("object_id").toString(), OfflineTeller.get("offline_status").toString(), OfflineTeller.get("mfb_code").toString(), OfflineTeller.get("password").toString(), OfflineTeller.get("til_account").toString());
+                        ((Dialog) Display.getInstance().getCurrent()).dispose();
+                        showForm("OfflineMenu", null);
+                    } else {
+                        Dialog.show("Oh dear!", "invalid login credentials", "OK", null);
+                    }
+                } else {
+                    Dialog.show("First time Login", "about to perform a check online", "OK", null);
+                    login(name, encodePWD(password));
+
+                    if (status == null || !(status.equals("200"))) {
+
+                        Dialog.show("Oh dear", "could not perform check. please ensure: \n"
+                                + "1. are you a registered mTeller user? \n"
+                                + "2. have you typed your username and password correctly?\n"
+                                + "3. do you have internet on your device?", "OK", null);
+
+
+                    } else {
+                        status = "";
+
+                        String respCode = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/Retval");
+                        String respMsg = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/Retmsg");
+
+                        if ("1".equals(respCode)) {
+                            String email = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/Email");
+                            String mfbCode = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/Mfbcode");
+                            String tranPassword = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/TranPwd");
+                            String tillAcct = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/TillAcct");
+                            String objectID = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/ObjectID");
+                            String offlineStatus = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/OfflineTeller");
+
+                            if (offlineStatus.equals("0")) {
+                                Dialog.show("Sorry", "You are not configured to perform offline Transactions, "
+                                        + "please contact your Administrator", "OK", null);
+                            } else {
+                                appUser = new AppUsers(name, email, objectID, offlineStatus, mfbCode, tranPassword, tillAcct);
+
+                                OfflineTeller = new Hashtable<String, String>();
+                                OfflineTeller.put("teller_ID", appUser.getUsername());
+                                OfflineTeller.put("mfb_code", appUser.getMfb_code());
+                                OfflineTeller.put("til_account", appUser.getTil_acct());
+                                OfflineTeller.put("email", appUser.getEmail());
+                                OfflineTeller.put("password", encodePWD(password));
+                                //OfflineTeller.put("email_verified", appUser.getEmailVerified());
+                                //OfflineTeller.put("session_string", appUser.getSessionToken());
+                                OfflineTeller.put("mfb_code", appUser.getMfb_code());
+                                OfflineTeller.put("offline_status", appUser.getOfflineStatus());
+                                OfflineTeller.put("object_id", appUser.getObJectId());
+
+                                try {
+                                    Storage.getInstance().writeObject("OfflineTeller", OfflineTeller);
+                                    Dialog.show("", "Login success", "OK", null);
+                                    OfflineTeller = (Hashtable<String, String>) Storage.getInstance().readObject("OfflineTeller");
+                                    ((Dialog) Display.getInstance().getCurrent()).dispose();
+                                    showForm("OfflineMenu", null);
+                                } catch (Exception e) {
+                                    ((Dialog) Display.getInstance().getCurrent()).dispose();
+                                    Dialog.show("Error", e.getMessage(), "OK", null);
+
+                                }
+
+                            }
+
+                            //
+
+
+                        } else {
+                            Dialog.show("Oh dear", respMsg, "OK", null);
+                        }
+                    }
+                }
+            }
+        } else {
+            ((Dialog) Display.getInstance().getCurrent()).dispose();
+            Dialog.show("Oh dear", "Application settings cannot be found, go to Settings and provide Application settings", "OK", null);
+        }
+
+    }
+
+    @Override
+    protected void onAppUserLoginOffline_CancelAction(Component c, ActionEvent event) {
+        ((Dialog) Display.getInstance().getCurrent()).dispose();
+    }
+
+    @Override
+    protected void beforeAppUserLoginOffline(final Form f) {
+
+
+        Command home = new Command("Cancel") {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                //super.actionPerformed(evt); //To change body of generated methods, choose Tools | Templates.
+                //showForm("Main", null);
+                ((Dialog) Display.getInstance().getCurrent()).dispose();
+            }
+        };
+
+
+        f.addCommand(home);
+        f.setBackCommand(home);
+
+        Command logins = new Command("Login") {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                //super.actionPerformed(evt); //To change body of generated methods, choose Tools | Templates.
+
+                app_Settings = (Hashtable<String, String>) Storage.getInstance().readObject("Application_Settings");
+                String name = findOfflineUsername(f).getText();
+                String password = findOfflinePassword(f).getText();
+                if (("".equals(name)) || ("".equals(password))) {
+                    Dialog.show("Sorry", "both fields are required to continue", "OK", null);
+                } else {
+                    if (Storage.getInstance().exists("OfflineTeller")) {
+                        //Storage.getInstance().readObject(name)
+                        try {
+                            OfflineTeller = (Hashtable<String, String>) Storage.getInstance().readObject("OfflineTeller");
+                        } catch (Exception e) {
+                            Dialog.show("Error", e.getMessage(), "OK", null);
+
+                        }
+                        if ((name.equals(OfflineTeller.get("teller_ID").toString())) && ((encodePWD(password)).equals(OfflineTeller.get("password").toString()))) {
+                            appUser = new AppUsers(OfflineTeller.get("teller_ID").toString(), OfflineTeller.get("email").toString(), OfflineTeller.get("object_id").toString(), OfflineTeller.get("offline_status").toString(), OfflineTeller.get("mfb_code").toString(), OfflineTeller.get("password").toString(), OfflineTeller.get("til_account").toString());
+                            ((Dialog) Display.getInstance().getCurrent()).dispose();
+                            showForm("OfflineMenu", null);
+                        } else {
+                            Dialog.show("Oh dear!", "invalid login credentials", "OK", null);
+                        }
+                    } else {
+                        Dialog.show("First time Login", "about to perform a check online", "OK", null);
+                        login(name, encodePWD(password));
+
+                        if (status == null || !(status.equals("200"))) {
+
+                            Dialog.show("Oh dear", "could not perform check. please ensure: \n"
+                                    + "1. are you a registered mTeller user? \n"
+                                    + "2. have you typed your username and password correctly?\n"
+                                    + "3. do you have internet on your device?", "OK", null);
+
+
+                        } else {
+                            status = "";
+
+                            String respCode = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/Retval");
+                            String respMsg = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/Retmsg");
+
+                            if ("1".equals(respCode)) {
+                                String email = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/Email");
+                                String mfbCode = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/Mfbcode");
+                                String tranPassword = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/TranPwd");
+                                String tillAcct = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/TillAcct");
+                                String objectID = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/ObjectID");
+                                String offlineStatus = loginResponse.getAsString("/soap:Envelope/soap:Body/MTellerLoginQueryResponse/MTellerLoginQueryResult/OfflineTeller");
+
+                                if (appUser.getOfflineStatus().equals("0")) {
+                                    Dialog.show("Sorry", "You are not configured to perform offline Transactions, "
+                                            + "please contact your Administrator", "OK", null);
+                                } else {
+                                    appUser = new AppUsers(name, email, objectID, offlineStatus, mfbCode, tranPassword, tillAcct);
+
+                                    OfflineTeller = new Hashtable<String, String>();
+                                    OfflineTeller.put("teller_ID", appUser.getUsername());
+                                    OfflineTeller.put("mfb_code", appUser.getMfb_code());
+                                    OfflineTeller.put("til_account", appUser.getTil_acct());
+                                    OfflineTeller.put("email", appUser.getEmail());
+                                    OfflineTeller.put("password", encodePWD(password));
+                                    //OfflineTeller.put("email_verified", appUser.getEmailVerified());
+                                    //OfflineTeller.put("session_string", appUser.getSessionToken());
+                                    OfflineTeller.put("mfb_code", appUser.getMfb_code());
+                                    OfflineTeller.put("offline_status", appUser.getOfflineStatus());
+                                    OfflineTeller.put("object_id", appUser.getObJectId());
+
+                                    try {
+                                        Storage.getInstance().writeObject("OfflineTeller", OfflineTeller);
+                                        Dialog.show("", "Login success", "OK", null);
+                                        OfflineTeller = (Hashtable<String, String>) Storage.getInstance().readObject("OfflineTeller");
+                                        ((Dialog) Display.getInstance().getCurrent()).dispose();
+                                        showForm("OfflineMenu", null);
+                                    } catch (Exception e) {
+                                        Dialog.show("Error", e.getMessage(), "OK", null);
+                                        //back();
+                                    }
+
+                                }
+
+                                //
+
+
+                            } else {
+                                Dialog.show("", respMsg, "OK", null);
+                            }
+                        }
+                    }
+                }
+
+            }
+        };
+
+        f.addCommand(logins);
+    }
+
+    @Override
+    protected void beforeSettingLogin(final Form f) {
+        
+        Command setLogin = new Command("Login") {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                //super.actionPerformed(evt); //To change body of generated methods, choose Tools | Templates.
+
+
+                String name = findAdminName(f).getText();
+                String password = findAdminPassword(f).getText();
+
+                if ((name.equals(defaultAdmin)) && (password.equals(defaultAdminPwd))) {
+                    ((Dialog)Display.getInstance().getCurrent()).dispose();
+                    showForm("Settings", null);
+                } else {
+                    if (Storage.getInstance().exists("phone_admin")) {
+                        phoneAdmin = (Hashtable<String, String>) Storage.getInstance().readObject("phone_admin");
+
+                        if (((phoneAdmin.get("admin_name").toString()).equals(name)) && ((phoneAdmin.get("admin_password").toString()).equals(password))) {
+                            ((Dialog)Display.getInstance().getCurrent()).dispose();
+                            showForm("Settings", null);
+                        } else {
+                            Dialog.show("", "Wrong Admin name and password combination", "OK", null);
+                        }
+                    } else {
+                        Dialog.show("", "Wrong Admin name and password combination", "OK", null);
+                    }
+                }
+            }
+        };
+
+        Command cancel = new Command("Cancel") {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                //super.actionPerformed(evt); //To change body of generated methods, choose Tools | Templates.
+                //showForm("Main", null);
+                ((Dialog)Display.getInstance().getCurrent()).dispose();
+            }
+        };
+
+        f.addCommand(cancel);
+        f.setBackCommand(cancel);
+        f.addCommand(setLogin);
+    }
+
+    @Override
+    protected void onSettingLogin_AdminLoginAction(Component c, ActionEvent event) {
+        String name = findAdminName(c.getComponentForm()).getText();
+        String password = findAdminPassword(c.getComponentForm()).getText();
+
+        if ((name.equals(defaultAdmin)) && (password.equals(defaultAdminPwd))) {
+            showForm("Settings", null);
+        } else {
+            if (Storage.getInstance().exists("phone_admin")) {
+                phoneAdmin = (Hashtable<String, String>) Storage.getInstance().readObject("phone_admin");
+
+                if (((phoneAdmin.get("admin_name").toString()).equals(name)) && ((phoneAdmin.get("admin_password").toString()).equals(password))) {
+                    showForm("Settings", null);
+                } else {
+                    Dialog.show("", "Wrong Admin name and password combination", "OK", null);
+                }
+            } else {
+                Dialog.show("", "Wrong Admin name and password combination", "OK", null);
+            }
+        }
+    }
+
+    @Override
+    protected void onSettingLogin_CancelAction(Component c, ActionEvent event) {
+        
+        ((Dialog)Display.getInstance().getCurrent()).dispose();
     }
 }
