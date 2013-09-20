@@ -705,15 +705,7 @@ public class StateMachine extends StateMachineBase {
             }
 
             // ************** End Buid Request Body **********************************
-//            @Override
-//            protected void readHeaders(Object connection) throws IOException {
-//
-//                String header[] = getHeaderFieldNames(connection);
-//                status = getHeader(connection, null);
-////
-////                System.out.println(header[1]);
-////                System.out.println("The status of the connection: " + status);
-//            }
+
             @Override
             protected void readResponse(InputStream input) throws IOException {
 
@@ -721,10 +713,6 @@ public class StateMachine extends StateMachineBase {
                 result = Result.fromContent(input, Result.XML);
 
 
-//                System.out.println("******************* message" + returncodemsg);
-                //  System.out.println("******************* name" + result.toString());
-
-                //System.out.println(result.toString());  
 
             }
         };
@@ -758,11 +746,7 @@ public class StateMachine extends StateMachineBase {
         manager.start();
         manager.addToQueueAndWait(request);
 
-        //if ("200".equals(status)){
-        // Dialog.show("Status", status, "OK", null);
-        //}
-
-
+       
     }
 
     @Override
@@ -817,26 +801,12 @@ public class StateMachine extends StateMachineBase {
             }
 
             // ************** End Buid Request Body **********************************
-//            @Override
-//            protected void readHeaders(Object connection) throws IOException {
-//
-//                String header[] = getHeaderFieldNames(connection);
-//                status = getHeader(connection, null);
-////
-////                System.out.println(header[1]);
-////                System.out.println("The status of the connection: " + status);
-//            }
+
             @Override
             protected void readResponse(InputStream input) throws IOException {
 
                 status = String.valueOf(getResponseCode());
                 result = Result.fromContent(input, Result.XML);
-
-
-//                System.out.println("******************* message" + returncodemsg);
-                // System.out.println("******************* name" + result.toString());
-
-                //System.out.println(result.toString());  
 
             }
         };
@@ -868,11 +838,6 @@ public class StateMachine extends StateMachineBase {
 
         manager.start();
         manager.addToQueueAndWait(request);
-
-//        //if ("200".equals(status)){
-//        Dialog.show("Status", status, "OK", null);
-//        System.out.println("After withdrawal and tracing ----------");
-        //}
 
     }
 
@@ -908,26 +873,12 @@ public class StateMachine extends StateMachineBase {
             }
 
             // ************** End Buid Request Body **********************************
-//            @Override
-//            protected void readHeaders(Object connection) throws IOException {
-//
-//                //String header[] = getHeaderFieldNames(connection);
-//                status = getHeader(connection, null);
-////
-////                System.out.println(header[1]);
-////                System.out.println("The status of the connection: " + status);
-//            }
+
             @Override
             protected void readResponse(InputStream input) throws IOException {
 
                 status = String.valueOf(getResponseCode());
                 result = Result.fromContent(input, Result.XML);
-
-
-//                System.out.println("******************* message" + returncodemsg);
-                //          System.out.println("******************* miniStatement " + result.toString());
-
-                //System.out.println(result.toString());  
 
             }
         };
@@ -958,10 +909,7 @@ public class StateMachine extends StateMachineBase {
         //NetworkManager manager = NetworkManager.getInstance();
         manager.start();
         manager.addToQueueAndWait(request);
-
-        //if ("200".equals(status)){
-        //  Dialog.show("Status", status, "OK", null);
-
+        
 
     }
 
@@ -1182,39 +1130,7 @@ public class StateMachine extends StateMachineBase {
     protected void onTransactionMenu_DepositOnlineAction(Component c, ActionEvent event) {
 
         showForm("DepositAcctNumber", null);
-//        
-//        if (MFBsList == null || MFBsList.isEmpty()) {
-//            fetchAllMFBs();
-//            if (!"200".equals(status)) {
-//                Dialog.show("", "Please check your internet", "OK", null);
-//            } else {
-//                status = "";
-//
-//                if (mfbResult == null || mfbResult.toString().equals("")) {
-//                    Dialog.show("Oh dear", "no MFBs were fetched", "OK", null);
-//                } else {
-//
-//                    MFBsList = new Vector<Hashtable>();
-//
-//                    for (Object o : mfbResult.getAsArray("/soap:Envelope/soap:Body/FetchMFBsResponse/FetchMFBsResult/FetchMFBs")) {
-//                        Result lineitem = Result.fromContent(((Element) o).getChildAt(0));
-//
-//                        returns = new Hashtable<String, String>();
-//
-//                        returns.put("mfb_id", lineitem.getAsString("MFBID"));
-//                        returns.put("mfb_name", lineitem.getAsString("MFBName"));
-//
-//                        MFBsList.add(returns);
-//
-//                    }
-//
-//                    showForm("DepositMFBs", null);
-//                }
-//
-//            }
-//        } else {
-//            showForm("DepositMFBs", null);
-//        }
+
     }
 
     @Override
