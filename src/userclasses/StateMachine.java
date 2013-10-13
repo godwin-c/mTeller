@@ -16,6 +16,7 @@ import com.codename1.ui.util.Resources;
 import com.codename1.xml.Element;
 import com.expertedge.mtnsaas.AppUsers;
 import com.expertedge.mtnsaas.Customers;
+import com.expertedge.mtnsaas.GodwinEncrypt;
 import com.expertedge.mtnsaas.MFBs;
 import com.expertedge.mtnsaas.MiniStatements;
 import com.expertedge.mtnsaas.OfflineTransactions;
@@ -23,8 +24,7 @@ import com.expertedge.mtnsaas.TransactionReplies;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-//import java.security.MessageDigest;
-//import java.security.NoSuchAlgorithmException;
+
 import java.util.Hashtable;
 import java.util.Random;
 import java.util.Vector;
@@ -36,11 +36,9 @@ import java.util.Vector;
 public class StateMachine extends StateMachineBase {
 
     String defaultAdmin;
-    String defaultAdminPwd; ////https://192.168.2.36:8243/primeswitch/1.0
+    String defaultAdminPwd;
     String status;
     boolean answer;
-//    String appId;
-//    String restApiKey;
     Hashtable<String, String> app_Settings;
     Hashtable<String, String> phoneAdmin;
     private Vector<Hashtable> MFBsList;
@@ -69,7 +67,6 @@ public class StateMachine extends StateMachineBase {
     private EncodedImage photo;
     private EncodedImage signature;
     private Hashtable<String, String> offlineDeposit;
-    //String emailVerified;
     private String tranAmount;
     private String narration;
     private String tellerNumber;
@@ -100,6 +97,11 @@ public class StateMachine extends StateMachineBase {
 //        restApiKey = "LQkUG6qCVm72POwSeZJIB3kmZXO5dFoOTElJVnqy";
     }
 
+    /**
+     * this method is used to cancel back commands on the forms mentioned The
+     * back command was canceled because I didn't want the user to go back to
+     * previous form
+     */
     @Override
     protected boolean allowBackTo(String formName) {
         if ("Main".equals(formName) || ("OfflineLogin".equals(formName)) || ("OfflineMenu".equals(formName)) || ("OnlineLogin".equals(formName))) {
@@ -111,14 +113,17 @@ public class StateMachine extends StateMachineBase {
 
     }
 
-    private String encodePWD(String password) {
-        String text = com.codename1.util.Base64.encode(password.getBytes());
-        //String text = "Q" + password + "4";
-        String pwd = com.codename1.util.Base64.encode(text.getBytes());
-
-        return pwd;
-    }
-
+//    private String encodePWD(String password) {
+//        String text = com.codename1.util.Base64.encode(password.getBytes());
+//        //String text = "Q" + password + "4";
+//        String pwd = com.codename1.util.Base64.encode(text.getBytes());
+//
+//        return pwd;
+//    }
+    /**
+     * this method queries the database for all registered MFBs
+     *
+     */
     public void fetchAllMFBs() {
         InputParameter = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:tem='http://tempuri.org/'>"
                 + "<soapenv:Header/>"
@@ -176,23 +181,16 @@ public class StateMachine extends StateMachineBase {
         request.setDuplicateSupported(true);
         request.setDisposeOnCompletion(dlg);
 
-
-        //NetworkManager manager = NetworkManager.getInstance();
         manager.start();
 
         manager.addToQueueAndWait(request);
     }
 
+    /**
+     * this method is called to register a new Application user
+     *
+     */
     public void signUp(String tellerID, String password, String email, String tranPWD, String tillAcct, String mfbCode) {
-//
-//        Hashtable data = new Hashtable();
-//        data.put("username", tellerID);
-//        data.put("password", password);
-//        data.put("tran_password", tranPWD);
-//        data.put("email", email);
-//        data.put("till_account", tillAcct);
-//        data.put("mfb_code", "00");
-//        data.put("offlineTeller", false);
 
         InputParameter = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:tem='http://tempuri.org/'>"
                 + "<soapenv:Header/>"
@@ -243,15 +241,6 @@ public class StateMachine extends StateMachineBase {
                 //status = String.valueOf(getResposeCode());
 
                 signUpResponse = Result.fromContent(input, Result.XML);
-//                
-//                JSONParser p = new JSONParser();
-//                InputStreamReader inp = new InputStreamReader(input);
-//                Hashtable h = p.parse(inp);
-
-                // sessionString = h.get("sessionToken").toString();
-
-                //System.out.println(h.toString());
-
 
             }
         };
@@ -269,25 +258,25 @@ public class StateMachine extends StateMachineBase {
         Dialog dlg = ip.showInifiniteBlocking();
         dlg.setBackCommand(cancel);
 
-        // String url = "";// "https://api.parse.com/1/users";
+
         request.setUrl(app_Settings.get("App_URL").toString());
         //request.setUrl(app_Settings.get("App_URL").toString());
         request.setContentType("text/xml;charset=UTF-8");
-//        request.addRequestHeader("X-Parse-Application-Id", appId);
-//        request.addRequestHeader("X-Parse-REST-API-Key", restApiKey);
         request.setFailSilently(true);//stops user from seeing error message on failure
         request.setPost(true);
         //request.setTimeout(1234);
         request.setDuplicateSupported(true);
         request.setDisposeOnCompletion(dlg);
 
-
-        // NetworkManager manager = NetworkManager.getInstance();
         manager.start();
 
         manager.addToQueueAndWait(request);
     }
 
+    /**
+     * this method is called to login a registered user of the Application
+     *
+     */
     public void login(String tellerID, String password) {
 
         InputParameter = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:tem='http://tempuri.org/'>"
@@ -324,27 +313,8 @@ public class StateMachine extends StateMachineBase {
             protected void readResponse(InputStream input) throws IOException {
                 status = String.valueOf(getResponseCode());
                 System.out.println("Status of Login : " + status);
-//
-//                JSONParser p = new JSONParser();
-//                InputStreamReader inp = new InputStreamReader(input);
-//                Hashtable h = p.parse(inp);
-//
-//                System.out.println("The result of Login : " + h.toString());
+
                 loginResponse = Result.fromContent(input, Result.XML);
-
-//                String username = h.get("username").toString();
-//                String objectId = h.get("objectId").toString();
-//                String email = h.get("email").toString();
-//                String sessionString = h.get("sessionToken").toString();
-//                String emailVerified = h.get("emailVerified").toString();
-//                String offlineStatus = h.get("offlineTeller").toString();
-//                String code = h.get("mfb_code").toString();
-//                String tranPWD = h.get("tran_password").toString();
-//                String til_acct = h.get("till_account").toString();
-//
-//                appUser = new AppUsers(username, email, objectId, sessionString, emailVerified, offlineStatus, code, tranPWD, til_acct);
-
-
 
 
             }
@@ -359,40 +329,35 @@ public class StateMachine extends StateMachineBase {
             }
         };
 
-//        progressDialog = new Dialog("Just a second...");
-//        InfiniteProgress loadingProgress = new InfiniteProgress();
-//        progressDialog.addComponent(loadingProgress);
+
 
         InfiniteProgress ip = new InfiniteProgress();
         Dialog dlg = ip.showInifiniteBlocking();
         dlg.setBackCommand(cancel);
 
-        //String url = "https://api.parse.com/1/login";
+
         request.setUrl(app_Settings.get("App_URL").toString());
         request.setContentType("text/xml;charset=UTF-8");
-//        request.addRequestHeader("X-Parse-Application-Id", appId);
-//        request.addRequestHeader("X-Parse-REST-API-Key", restApiKey);
+
         request.setFailSilently(true);//stops user from seeing error message on failure
         request.setPost(true);
-        //request.setHttpMethod("PUT");
-//        request.addArgument("username", tellerID);
-//        request.addArgument("password", password);
+
         request.setDuplicateSupported(true);
         request.setDisposeOnCompletion(dlg);
 
 
-        //NetworkManager manager = NetworkManager.getInstance();
         manager.start();
 
         manager.addToQueueAndWait(request);
         //manager.setTimeout(3000);
     }
 
+    /**
+     * this method is called to configure a registered user of the Application
+     * to perform offline transactions
+     *
+     */
     private void configureOfflineTeller(String tellerID, String objectID, String mfbCode) {
-
-//        Hashtable h = new Hashtable();
-//        h.put("offlineTeller", offlineStatus);
-//        h.put("mfb_code", mfbCode);
 
         InputParameter = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:tem='http://tempuri.org/'>"
                 + "<soapenv:Header/>"
@@ -413,7 +378,7 @@ public class StateMachine extends StateMachineBase {
                 + "</soapenv:Body>"
                 + "</soapenv:Envelope>";
 
-        //final String json = Result.fromContent(h).toString();
+
 
         final ConnectionRequest request = new ConnectionRequest() {
             @Override
@@ -435,14 +400,7 @@ public class StateMachine extends StateMachineBase {
                 status = String.valueOf(getResponseCode());
 
                 offlineTellerResponse = Result.fromContent(input, Result.XML);
-                //Header(connection, "status");
-//                JSONParser p = new JSONParser();
-//                InputStreamReader inp = new InputStreamReader(input);
-//                Hashtable h = p.parse(inp);
 
-//                System.out.println("--------------------After Saving the Contact------------------------------");
-//
-//                System.out.println(h.toString());
 
             }
         };
@@ -478,6 +436,10 @@ public class StateMachine extends StateMachineBase {
 
     }
 
+    /**
+     * this method is called to view a customer's Account details
+     *
+     */
     private void verifyCustomer(String mfbCode, String accountNumber) {
 
         InputParameter = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:prim='http://prime.ee.org/' xmlns:tem='http://tempuri.org/'>"
@@ -503,13 +465,7 @@ public class StateMachine extends StateMachineBase {
             }
 
             // ************** End Buid Request Body **********************************
-//            @Override
-//            protected void readHeaders(Object connection) throws IOException {
-//
-//                String header[] = getHeaderFieldNames(connection);
-//                status = getHeader(connection, null);
-//
-//            }
+//            
             @Override
             protected void readResponse(InputStream input) throws IOException {
 
@@ -521,7 +477,7 @@ public class StateMachine extends StateMachineBase {
             }
         };
 
-        // System.out.println("Authorization : " + "Bearer " + app_Settings.get("Bearer_Key").toString());
+
 
         final NetworkManager manager = NetworkManager.getInstance();
         Command cancel = new Command("Cancel") {
@@ -555,6 +511,11 @@ public class StateMachine extends StateMachineBase {
 
     }
 
+    /**
+     * this method is called to perform deposit transaction into a customer's
+     * Account
+     *
+     */
     private void performDeposit(String acctNumber, String amount, String mfbCode,
             String tranDesc, String tellerNumber, String tranCode) {
 
@@ -598,28 +559,12 @@ public class StateMachine extends StateMachineBase {
             }
 
 //            // ************** End Buid Request Body **********************************
-//            @Override
-//            protected void readHeaders(Object connection) throws IOException {
-//
-//                String header[] = getHeaderFieldNames(connection);
-//                status = getHeader(connection, null);
-//
-////                System.out.println(header[1]);
-////                System.out.println("The status of the connection: " + status);
-//            }
             @Override
             protected void readResponse(InputStream input) throws IOException {
 
                 status = String.valueOf(getResponseCode());
 
                 result = Result.fromContent(input, Result.XML);
-
-
-//                System.out.println("******************* message" + returncodemsg);
-                //   System.out.println("******************* name" + result.toString());
-
-                //System.out.println(result.toString());  
-
             }
         };
 
@@ -653,11 +598,14 @@ public class StateMachine extends StateMachineBase {
         manager.start();
         manager.addToQueueAndWait(request);
         manager.setTimeout(15000);
-        //if ("200".equals(status)){
-        //Dialog.show("Status", status, "OK", null);
 
     }
 
+    /**
+     * this method(though not in use) is called to perform a cheque withdrawal
+     * transaction from a customer's Account
+     *
+     */
     private void doChequeWithdrawal(String acctNum, String mfbId, String amount, String tranDesc,
             String chequeNumber, String tranCharge, String tranCode) {
 
@@ -705,7 +653,6 @@ public class StateMachine extends StateMachineBase {
             }
 
             // ************** End Buid Request Body **********************************
-
             @Override
             protected void readResponse(InputStream input) throws IOException {
 
@@ -746,14 +693,23 @@ public class StateMachine extends StateMachineBase {
         manager.start();
         manager.addToQueueAndWait(request);
 
-       
+
     }
 
+    /**
+     * this method is called to assign a back command to the forms that their
+     * back commands were not disabled by default
+     */
     @Override
     public void back() {
         super.back(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * this method is called to perform withdrawal transaction on customers's
+     * account
+     *
+     */
     private void doWithdrawal(String acctNum, String mfbId, String amount, String tranDesc,
             String tellerNumber, String tranCharge, String tranCode) {
 
@@ -801,7 +757,6 @@ public class StateMachine extends StateMachineBase {
             }
 
             // ************** End Buid Request Body **********************************
-
             @Override
             protected void readResponse(InputStream input) throws IOException {
 
@@ -841,6 +796,10 @@ public class StateMachine extends StateMachineBase {
 
     }
 
+    /**
+     * this method is called to fetch a customer's mini-statements
+     *
+     */
     private void fetchMiniStatementFor(String accountNumber, String mfbCode) {
 
 
@@ -873,7 +832,6 @@ public class StateMachine extends StateMachineBase {
             }
 
             // ************** End Buid Request Body **********************************
-
             @Override
             protected void readResponse(InputStream input) throws IOException {
 
@@ -909,10 +867,15 @@ public class StateMachine extends StateMachineBase {
         //NetworkManager manager = NetworkManager.getInstance();
         manager.start();
         manager.addToQueueAndWait(request);
-        
+
 
     }
 
+    /**
+     * After performing any transaction, this method logs the transaction
+     * details to the database for records
+     *
+     */
     private void uploadTranReplies(String acctNumber, String amount, String tranType,
             String post_seq) {
 
@@ -979,8 +942,7 @@ public class StateMachine extends StateMachineBase {
         //String url = "https://api.parse.com/1/classes/Transaction_Replies";
         request.setUrl(app_Settings.get("App_URL").toString());
         request.setContentType("text/xml;charset=UTF-8");
-//        request.addRequestHeader("X-Parse-Application-Id", appId);
-//        request.addRequestHeader("X-Parse-REST-API-Key", restApiKey);
+
         request.setFailSilently(true);//stops user from seeing error message on failure
         request.setPost(true);
         //request.setTimeout(1234);
@@ -995,6 +957,10 @@ public class StateMachine extends StateMachineBase {
 
     }
 
+    /**
+     * This is where I generate the request ID I send along with other details
+     * while performing deposit and withdrawal transactions
+     */
     private String getRequestID() {
 
         java.util.Calendar cal = java.util.Calendar.getInstance();
@@ -1014,25 +980,9 @@ public class StateMachine extends StateMachineBase {
 
     }
 
-//    private String getTodayID() {
-//
-//
-//        Random rn = new Random();
-//        int maximum = 9;
-//        int minimum = 0;
-//        int range = maximum - minimum + 1;
-//
-//        Integer.toString(rn.nextInt(range) + minimum);
-//
-//        return Integer.toString(rn.nextInt(range) + minimum)
-//                + "" + Integer.toString(rn.nextInt(range) + minimum)
-//                + "" + Integer.toString(rn.nextInt(range) + minimum)
-//                + "" + Integer.toString(rn.nextInt(range) + minimum)
-//                + "" + Integer.toString(rn.nextInt(range) + minimum)
-//                + "" + Integer.toString(rn.nextInt(range) + minimum);
-//
-//
-//    }
+    /**
+     * This is the method I use in getting the system current date and time
+     */
     private String getCurrentDate() {
 
 
@@ -1053,6 +1003,9 @@ public class StateMachine extends StateMachineBase {
 
     }
 
+    /**
+     * When the user clicks on "Login" button on the "Main" form
+     */
     @Override
     protected void onMain_UserLoginAction(Component c, ActionEvent event) {
 
@@ -1067,10 +1020,12 @@ public class StateMachine extends StateMachineBase {
 
     }
 
+    /**
+     * When the user clicks on "GoOffline" button on the "Main" form
+     */
     @Override
     protected void onMain_UserGoOfflineAction(Component c, ActionEvent event) {
 
-        //showForm("OfflineLogin", null);
 
         if (Storage.getInstance().exists("Application_Settings")) {
             app_Settings = (Hashtable<String, String>) Storage.getInstance().readObject("Application_Settings");
@@ -1081,6 +1036,10 @@ public class StateMachine extends StateMachineBase {
         }
     }
 
+    /**
+     * After the user must have provided login details in the login form, this
+     * method is used to collet the information and login the user
+     */
     @Override
     protected void onOnlineLogin_LoginUserAction(Component c, ActionEvent event) {
 
@@ -1090,7 +1049,9 @@ public class StateMachine extends StateMachineBase {
         if (("".equals(username)) || ("".equals(password))) {
             Dialog.show("Missing", "Please provide Username and Password", "OK", null);
         } else {
-            login(username, encodePWD(password));
+            GodwinEncrypt encryptMyPassword = new GodwinEncrypt(password);
+            String myEncryptedPassword = encryptMyPassword.asHex();
+            login(username, myEncryptedPassword);
 
             if (status == null || !(status.equals("200"))) {
 
@@ -1126,6 +1087,10 @@ public class StateMachine extends StateMachineBase {
         }
     }
 
+    /**
+     * In the Transaction menu, when the user clicks on "Deposit" it calls this
+     * action
+     */
     @Override
     protected void onTransactionMenu_DepositOnlineAction(Component c, ActionEvent event) {
 
@@ -1133,17 +1098,23 @@ public class StateMachine extends StateMachineBase {
 
     }
 
+    /**
+     * When there are more MFBs, this is a List model for all MFBs fetched
+     */
     @Override
     protected boolean initListModelWithdrawaBankMultiList(List cmp) {
         cmp.setModel(new DefaultListModel(MFBsList));
         return true;
     }
 
+    /**
+     * When the user clicks on the Withdrawal button on the Transaction menu
+     */
     @Override
     protected void onTransactionMenu_WithdrawOnlineAction(Component c, ActionEvent event) {
 
         showForm("WithdrawalAcctNumber", null);
-        
+
 //        if (MFBsList == null || (MFBsList.isEmpty())) {
 //            fetchAllMFBs();
 //            if ("200".equals(status)) {
@@ -1185,11 +1156,14 @@ public class StateMachine extends StateMachineBase {
         return true;
     }
 
+    /**
+     * When the user clicks on the Mini-statement button on the transaction menu
+     */
     @Override
     protected void onTransactionMenu_MiniStatementAction(Component c, ActionEvent event) {
 
-         showForm("MiniStatForm", null);
-         
+        showForm("MiniStatForm", null);
+
 //        if (MFBsList == null || MFBsList.isEmpty()) {
 //            fetchAllMFBs();
 //            if ("200".equals(status)) {
@@ -1224,11 +1198,15 @@ public class StateMachine extends StateMachineBase {
 //        }
     }
 
+    /**
+     * When the user clicks on the balance inquiry Button on the transaction
+     * menu
+     */
     @Override
     protected void onTransactionMenu_BalanceInquiryAction(Component c, ActionEvent event) {
-        
+
         showForm("BalInquiryAcctNumber", null);
-        
+
 //        if (MFBsList == null || MFBsList.isEmpty()) {
 //            fetchAllMFBs();
 //            if ("200".equals(status)) {
@@ -1269,12 +1247,19 @@ public class StateMachine extends StateMachineBase {
         return true;
     }
 
+    /**
+     * When the user clicks on the "Create User" button on the "Main" form.
+     */
     @Override
     protected void onMain_CreateNewUserAction(Component c, ActionEvent event) {
 
         showForm("NewAppUser", null);
     }
 
+    /**
+     * After the user must have provided all details in the "New App User" form,
+     * this method is used to collect the information and Create the user
+     */
     @Override
     protected void onNewAppUser_SignUpUserAction(Component c, ActionEvent event) {
 
@@ -1293,7 +1278,13 @@ public class StateMachine extends StateMachineBase {
                 Dialog.show("", "passwords should be more than six(6) characters", "OK", null);
             } else {
 
-                signUp(username, encodePWD(password), email, encodePWD(tranPWD), tillAcct, bankCode);
+                GodwinEncrypt encryptMyPassword = new GodwinEncrypt(password);
+                String myEncryptedPassword = encryptMyPassword.asHex();
+
+                GodwinEncrypt encryptMyTranPassword = new GodwinEncrypt(tranPWD);
+                String myEncryptedTranPassword = encryptMyTranPassword.asHex();
+
+                signUp(username, myEncryptedPassword, email, myEncryptedTranPassword, tillAcct, bankCode);
 
                 if ((status == null) || !("200".equals(status))) {
                     Dialog.show("Oh Dear", "Could not create Teller, please check your internet", "OK", null);
@@ -1323,18 +1314,27 @@ public class StateMachine extends StateMachineBase {
         }
     }
 
+    /**
+     * Cancel action on sign up form
+     */
     @Override
     protected void onNewAppUser_CancelSignUpAction(Component c, ActionEvent event) {
 
         showForm("Main", null);
     }
 
+    /**
+     * cancel action on "Login"form
+     */
     @Override
     protected void onOnlineLogin_CancelAction(Component c, ActionEvent event) {
 
         showForm("Main", null);
     }
 
+    /**
+     * Not in use
+     */
     @Override
     protected void onBalInquiryMFBs_BalInquiryMFBMultiListAction(Component c, ActionEvent event) {
 
@@ -1346,6 +1346,10 @@ public class StateMachine extends StateMachineBase {
         showForm("BalInquiryAcctNumber", null);
     }
 
+    /**
+     * This method is called before "Settings" form is displayed, to set the
+     * things to display
+     */
     @Override
     protected void beforeSettings(Form f) {
 
@@ -1378,6 +1382,10 @@ public class StateMachine extends StateMachineBase {
         c.removeComponent(findAdminSettingsContainer(c));
     }
 
+    /**
+     * this method is called when the "Admin Settings" button is clicked on the
+     * settings form user
+     */
     @Override
     protected void onSettings_AdminSettingsAction(Component c, ActionEvent event) {
 
@@ -1389,6 +1397,10 @@ public class StateMachine extends StateMachineBase {
         c.getComponentForm().revalidate();//animateLayout(10000);//ateLayoutFade(10000, 50);//revalidate();
     }
 
+    /**
+     * This method is called when "App settings" is clicked on the "settings"
+     * form
+     */
     @Override
     protected void onSettings_AppSettingsAction(Component c, ActionEvent event) {
 
@@ -1401,12 +1413,19 @@ public class StateMachine extends StateMachineBase {
     }
 //mtellerAdmin mteller123de
 
+    /**
+     * This is called when the "Settings" button is clicked on the "Main" form
+     */
     @Override
     protected void onMain_SettingsAction(Component c, ActionEvent event) {
 
         showForm("SettingLogin", null);
     }
 
+    /**
+     * When the Admin provides the Admin name and password, this is the action
+     * of the Login Button
+     */
     @Override
     protected void onSettingsLogin_AdminLoginAction(Component c, ActionEvent event) {
 
@@ -1430,11 +1449,18 @@ public class StateMachine extends StateMachineBase {
         }
     }
 
+    /**
+     * Cancel action on Admin Login
+     */
     @Override
     protected void onSettingsLogin_AdminCancelAction(Component c, ActionEvent event) {
         showForm("Main", null);
     }
 
+    /**
+     * this method is called to save the application settings provided by the
+     * admin
+     */
     @Override
     protected void onSettings_SaveAppSettingsAction(Component c, ActionEvent event) {
 
@@ -1461,27 +1487,42 @@ public class StateMachine extends StateMachineBase {
 
     }
 
+    /**
+     * cancel action on the settings page
+     */
     @Override
     protected void onSettings_CancelAppSettingsAction(Component c, ActionEvent event) {
         showForm("Main", null);
 
     }
 
+    /**
+     * Action on "Create Admin" button on the "settings" form
+     */
     @Override
     protected void onSettings_CreateAdminAction(Component c, ActionEvent event) {
         showForm("AdminCreateName", null);
     }
 
+    /**
+     * action on "Configure Offline teller" on the settings form
+     */
     @Override
     protected void onSettings_ConfigureOfflineTellerAction(Component c, ActionEvent event) {
         showForm("OfflineTellerCreate", null);
     }
 
+    /**
+     * Back button action on Settings form
+     */
     @Override
     protected void onSettings_BackToMainAction(Component c, ActionEvent event) {
         showForm("Main", null);
     }
 
+    /**
+     * This is the action on "Save Admin" on the settings form
+     */
     @Override
     protected void onAdminCreateName_SaveAdminAction(Component c, ActionEvent event) {
 
@@ -1509,6 +1550,9 @@ public class StateMachine extends StateMachineBase {
         }
     }
 
+    /**
+     * A method called before the form to create An Admin
+     */
     @Override
     protected void beforeAdminCreateName(final Form f) {
 
@@ -1569,12 +1613,20 @@ public class StateMachine extends StateMachineBase {
         }
     }
 
+    /**
+     * cancel action on the "create admin" form
+     */
     @Override
     protected void onAdminCreateName_CancelAddAdminAction(Component c, ActionEvent event) {
         showForm("Settings", null);
         //back();
     }
 
+    /**
+     * This is a method that gets all information needed to configure an offline
+     * teller and call a method to first check if the user exists before
+     * configuring the user for offline transactions.
+     */
     @Override
     protected void onOfflineTellerCreate_AddOfflineTellerAction(Component c, ActionEvent event) {
 
@@ -1588,7 +1640,10 @@ public class StateMachine extends StateMachineBase {
 //                Dialog.show("", "password shoulb be more than \n'6' characters", "OK", null);
 //            } else {
 
-            login(name, encodePWD(password));
+            GodwinEncrypt encryptMyPassword = new GodwinEncrypt(password);
+            String myEncryptedPassword = encryptMyPassword.asHex();
+
+            login(name, myEncryptedPassword);
 
             if (status == null || !(status.equals("200"))) {
 
@@ -1685,11 +1740,17 @@ public class StateMachine extends StateMachineBase {
         }
     }
 
+    /**
+     * cancel action on Create offline teller form
+     */
     @Override
     protected void onOfflineTellerCreate_CancelOfflineTellerAction(Component c, ActionEvent event) {
         back();
     }
 
+    /**
+     * Method called to delete an existing offline teller on the device
+     */
     @Override
     protected void onSettings_ChangeOfflineTellerAction(Component c, ActionEvent event) {
 
@@ -1721,12 +1782,20 @@ public class StateMachine extends StateMachineBase {
         Dialog.show("Confirm", area, cmds);
     }
 
+    /**
+     * cancel action on "Offline login" form
+     */
     @Override
     protected void onOfflineLogin_CancelAction(Component c, ActionEvent event) {
 
         showForm("Main", null);
     }
 
+    /**
+     * The method that collects all the credentials for the user to go offline,
+     * it first checks if the user has gone offline before and then downloads
+     * the user's credentials if not
+     */
     @Override
     protected void onOfflineLogin_LoginOfflineAction(Component c, ActionEvent event) {
         app_Settings = (Hashtable<String, String>) Storage.getInstance().readObject("Application_Settings");
@@ -1743,7 +1812,10 @@ public class StateMachine extends StateMachineBase {
                     Dialog.show("Error", e.getMessage(), "OK", null);
 
                 }
-                if ((name.equals(OfflineTeller.get("teller_ID").toString())) && ((this.encodePWD(password)).equals(OfflineTeller.get("password").toString()))) {
+                GodwinEncrypt encryptMyPassword = new GodwinEncrypt(password);
+                String myEncryptedPassword = encryptMyPassword.asHex();
+
+                if ((name.equals(OfflineTeller.get("teller_ID").toString())) && ((myEncryptedPassword).equals(OfflineTeller.get("password").toString()))) {
                     appUser = new AppUsers(OfflineTeller.get("teller_ID").toString(), OfflineTeller.get("email").toString(), OfflineTeller.get("object_id").toString(), OfflineTeller.get("offline_status").toString(), OfflineTeller.get("mfb_code").toString(), OfflineTeller.get("password").toString(), OfflineTeller.get("til_account").toString());
                     showForm("OfflineMenu", null);
                 } else {
@@ -1751,7 +1823,11 @@ public class StateMachine extends StateMachineBase {
                 }
             } else {
                 Dialog.show("First time Login", "about to perform a check online", "OK", null);
-                login(name, encodePWD(password));
+
+                GodwinEncrypt encryptMyPassword = new GodwinEncrypt(password);
+                String myEncryptedPassword = encryptMyPassword.asHex();
+
+                login(name, myEncryptedPassword);
 
                 if (status == null || !(status.equals("200"))) {
 
@@ -1779,6 +1855,7 @@ public class StateMachine extends StateMachineBase {
                             Dialog.show("Sorry", "You are not configured to perform offline Transactions, "
                                     + "please contact your Administrator", "OK", null);
                         } else {
+
                             appUser = new AppUsers(name, email, objectID, offlineStatus, mfbCode, tranPassword, tillAcct);
 
                             OfflineTeller = new Hashtable<String, String>();
@@ -1786,7 +1863,7 @@ public class StateMachine extends StateMachineBase {
                             OfflineTeller.put("mfb_code", appUser.getMfb_code());
                             OfflineTeller.put("til_account", appUser.getTil_acct());
                             OfflineTeller.put("email", appUser.getEmail());
-                            OfflineTeller.put("password", encodePWD(password));
+                            OfflineTeller.put("password", myEncryptedPassword);
                             //OfflineTeller.put("email_verified", appUser.getEmailVerified());
                             //OfflineTeller.put("session_string", appUser.getSessionToken());
                             OfflineTeller.put("mfb_code", appUser.getMfb_code());
@@ -1858,6 +1935,10 @@ public class StateMachine extends StateMachineBase {
         }
     }
 
+    /**
+     * the action on the "plus image" or rather, "add account" in the fetch
+     * customers for offline transaction
+     */
     @Override
     protected void onAccountToPullInfo_AddAccountAction(Component c, ActionEvent event) {
 
@@ -1877,6 +1958,9 @@ public class StateMachine extends StateMachineBase {
         }
     }
 
+    /**
+     * action to perform before displaying the "Account to pull " form
+     */
     @Override
     protected void beforeAccountToPullInfo(final Form f) {
 
@@ -2028,6 +2112,10 @@ public class StateMachine extends StateMachineBase {
         f.getMenuBar().addCommand(cancel);
     }
 
+    /**
+     * After providing all the accounts to pull, this action actually calles a
+     * method to pull all the information about the accounts
+     */
     @Override
     protected void onAccountToPullInfo_FetchInfoAction(Component c, ActionEvent event) {
 
@@ -2128,12 +2216,18 @@ public class StateMachine extends StateMachineBase {
         }
     }
 
+    /**
+     * List model of accounts to pull
+     */
     @Override
     protected boolean initListModelAccountList(List cmp) {
         cmp.setModel(new DefaultListModel(addAccount));
         return true;
     }
 
+    /**
+     * Action on the accounts to pull list
+     */
     @Override
     protected void onAccountToPullInfo_AccountListAction(final Component c, ActionEvent event) {
 
@@ -2174,11 +2268,17 @@ public class StateMachine extends StateMachineBase {
         Dialog.show("Account", area, cmds);
     }
 
+    /**
+     * cancel action on the "pull accounts" form
+     */
     @Override
     protected void onAccountToPullInfo_CancelFetchAction(Component c, ActionEvent event) {
         showForm("OfflineMenu", null);
     }
 
+    /**
+     * Action onn the "Pull accounts" button on the Offline Menu
+     */
     @Override
     protected void onOfflineMenu_PullAccountsAction(Component c, ActionEvent event) {
 
@@ -2191,6 +2291,10 @@ public class StateMachine extends StateMachineBase {
 
     }
 
+    /**
+     * An action on the "View Offline Transactions" button on the "offline Menu"
+     * form
+     */
     @Override
     protected void onOfflineMenu_ViewOfflineTransAction(Component c, ActionEvent event) {
 
@@ -2209,6 +2313,9 @@ public class StateMachine extends StateMachineBase {
 
     }
 
+    /**
+     * Action on the 'Offline deposit" button on the offline menu
+     */
     @Override
     protected void onOfflineMenu_OfflineDepositAction(Component c, ActionEvent event) {
         if (Storage.getInstance().exists("storedCustomers")) {
@@ -2225,6 +2332,10 @@ public class StateMachine extends StateMachineBase {
         }
     }
 
+    /**
+     * this is a method that is called before "offline transaction display" form
+     * is shown the method sets up the page for display
+     */
     @Override
     protected void beforeOfflineTransactionsDisplay(Form f) {
 
@@ -2457,12 +2568,19 @@ public class StateMachine extends StateMachineBase {
         f.getMenuBar().addCommand(uploadTran);
     }
 
+    /**
+     * Offline transactions List model
+     */
     @Override
     protected boolean initListModelAllOfflineTransactionsMultiList(List cmp) {
         cmp.setModel(new DefaultListModel(offlineTransactionsStored));
         return true;
     }
 
+    /**
+     * Action on the offline transactions list, to show the details of the
+     * selected transaction
+     */
     @Override
     protected void onOfflineTransactionsDisplay_AllOfflineTransactionsMultiListAction(Component c, ActionEvent event) {
 
@@ -2475,6 +2593,10 @@ public class StateMachine extends StateMachineBase {
         showForm("EachOfflineTransaction", null);
     }
 
+    /**
+     * Before each offline transaction is displayed, this method sets up the
+     * form for display
+     */
     @Override
     protected void beforeEachOfflineTransaction(Form f) {
         f.setScrollable(false);
@@ -2500,6 +2622,10 @@ public class StateMachine extends StateMachineBase {
         f.setBackCommand(home);
     }
 
+    /**
+     * The action on "Upload Transaction" button on the "Each offline
+     * transaction" form
+     */
     @Override
     protected void onEachOfflineTransaction_UploadSingleTranAction(Component c, ActionEvent event) {
 
@@ -2705,12 +2831,20 @@ public class StateMachine extends StateMachineBase {
         }
     }
 
+    /**
+     * cancel action on "Each offline transaction" form
+     */
     @Override
     protected void onEachOfflineTransaction_CancelAction(Component c, ActionEvent event) {
 
         back();
     }
 
+    /**
+     * action on the "Upload all Transaction" button in "Offline transaction"
+     * form it checks if there are transactions stored on the phone, pulls it up
+     * and then upload all transactions to the server
+     */
     @Override
     protected void onOfflineTransactionsDisplay_UploadAllTransactionsAction(Component c, ActionEvent event) {
 
@@ -2811,23 +2945,18 @@ public class StateMachine extends StateMachineBase {
                         Hashtable hashtable1 = offlineTransactionsStored.elementAt(j);
 
                         if (hashtable.equals(hashtable1)) {
-//                        System.out.println("Hashtable...." + hashtable.toString());
-//                        System.out.println("Hashtable1...." + hashtable1.toString());
+
                             offlineTransactionsStored.removeElementAt(j);
                         }
                     }
-                    //  if(hashtable.equals(storedTransactionsUploaded))       
+
                 }
 
                 if (offlineTransactionsStored.isEmpty()) {
                     try {
 
                         Storage.getInstance().deleteStorageFile("storedTransactions");
-                        //Dialog.show("", "Transaction stored", "ok", null);
 
-                        //offlineTransactionsStored = (Vector<Hashtable>) Storage.getInstance().readObject("storedTransactions");
-                        //  System.out.println("Offline Transactions : " + offlineTransactionsStored.toString());
-                        //back();
 
                     } catch (Exception e) {
                         Dialog.show("", "error reading storage media " + "'" + e.getMessage() + "'", "ok", null);
@@ -2847,19 +2976,8 @@ public class StateMachine extends StateMachineBase {
                         Dialog.show("", "error reading storage media " + "'" + e.getMessage() + "'", "ok", null);
                     }
                 }
-//                try {
-//
-//                    Storage.getInstance().writeObject("storedTransactions", offlineTransactionsStored);
-//                    //Dialog.show("", "Transaction stored", "ok", null);
-//
-//                    offlineTransactionsStored = (Vector<Hashtable>) Storage.getInstance().readObject("storedTransactions");
-//                    //  System.out.println("Offline Transactions : " + offlineTransactionsStored.toString());
-//                    //back();
-//
-//                } catch (Exception e) {
-//                    Dialog.show("", "error reading storage media " + "'" + e.getMessage() + "'", "ok", null);
-//                }
 
+                // Log the transaction details to the Server
                 Dialog.show("", "about to run a check", "OK", null);
 
                 if ((Storage.getInstance().exists("storedReplies"))) {
@@ -2948,6 +3066,9 @@ public class StateMachine extends StateMachineBase {
         }
     }
 
+    /**
+     * method called to set up the display for transaction upload summary
+     */
     @Override
     protected void beforeSummaryOfUpload(Form f) {
 
@@ -2971,18 +3092,29 @@ public class StateMachine extends StateMachineBase {
         f.setBackCommand(home);
     }
 
+    /**
+     * List model for Transactions that were uploaded when the Upload was run
+     */
     @Override
     protected boolean initListModelTransactionsUploadedMultiList(List cmp) {
-        cmp.setModel(new DefaultListModel(storedTransactionsNotUploaded));
+        cmp.setModel(new DefaultListModel(storedTransactionsUploaded));
         return true;
     }
 
+    /**
+     * List model for transactions that were not uploaded when the upload was
+     * run
+     */
     @Override
     protected boolean initListModelTransactionsNotUploadedMultiList(List cmp) {
         cmp.setModel(new DefaultListModel(storedTransactionsNotUploaded));
         return true;
     }
 
+    /**
+     * The action to be performed before displaying a summary of the accounts
+     * that were pulled for offline transaction form
+     */
     @Override
     protected void beforeSummaryOfDownload(Form f) {
 
@@ -3010,30 +3142,49 @@ public class StateMachine extends StateMachineBase {
         f.setBackCommand(home);
     }
 
+    /**
+     * List model for accounts stored after the download for offline transaction
+     */
     @Override
     protected boolean initListModelAccountsStoredList(List cmp) {
         cmp.setModel(new DefaultListModel(accountsStored));
         return true;
     }
 
+    /**
+     * List model for accounts that returned error internet status while being
+     * downloaded for offline transaction
+     */
     @Override
     protected boolean initListModelAccountsWithErrorStatusList(List cmp) {
         cmp.setModel(new DefaultListModel(accountWithErrorStatus));
         return true;
     }
 
+    /**
+     * List model for account that returned error return code from the database
+     * server while being downloaded from the server
+     */
     @Override
     protected boolean initListModelAccountsWithErrorReturnCodeList(List cmp) {
         cmp.setModel(new DefaultListModel(accountWithErrorReturnCode));
         return true;
     }
 
+    /**
+     * List model for customers that were successfully downloaded and stored for
+     * offline transactions
+     */
     @Override
     protected boolean initListModelStoredCustomersMultiList(List cmp) {
         cmp.setModel(new DefaultListModel(customersToStore));
         return true;
     }
 
+    /**
+     * The action to be performed when a customer is selected from the list of
+     * customers stored
+     */
     @Override
     protected void onStoredCustomers_StoredCustomersMultiListAction(final Component c, ActionEvent event) {
 
@@ -3083,6 +3234,10 @@ public class StateMachine extends StateMachineBase {
 
     }
 
+    /**
+     * This is method is called to convert the Base64 Image strings recieved
+     * into images for display on the Stored customers form.
+     */
     @Override
     protected void beforeStoredCustomer(Form f) {
         f.setScrollable(false);
@@ -3125,6 +3280,10 @@ public class StateMachine extends StateMachineBase {
         });
     }
 
+    /**
+     * When "Deposit" is clicked on the offline menu, this method handles the
+     * deposit action
+     */
     @Override
     protected void onOfflineDepositForm_DepositToPhoneAction(Component c, ActionEvent event) {
 
@@ -3171,18 +3330,27 @@ public class StateMachine extends StateMachineBase {
         }
     }
 
+    /**
+     * Cancel action on the offline deposit form
+     */
     @Override
     protected void onOfflineDepositForm_CancelAction(Component c, ActionEvent event) {
 
         back();
     }
 
+    /**
+     * List model for all MFBs (not in use anymore)
+     */
     @Override
     protected boolean initListModelDepositMFBsMultiList(List cmp) {
         cmp.setModel(new DefaultListModel(MFBsList));
         return true;
     }
 
+    /**
+     * The action on each MFB on the List for deposit(not in use )
+     */
     @Override
     protected void onDepositMFBs_DepositMFBsMultiListAction(Component c, ActionEvent event) {
 
@@ -3194,6 +3362,10 @@ public class StateMachine extends StateMachineBase {
         showForm("DepositAcctNumber", null);
     }
 
+    /**
+     * This method calls the "verifyCustomer()" method to verify the customer
+     * before performing a deposit transaction
+     */
     @Override
     protected void onDepositAcctNumber_VerifyDepositAction(Component c, ActionEvent event) {
 
@@ -3241,12 +3413,19 @@ public class StateMachine extends StateMachineBase {
         }
     }
 
+    /**
+     * The cancel action on the Deposit form
+     */
     @Override
     protected void onDepositAcctNumber_CancelDepositAction(Component c, ActionEvent event) {
 
         back();
     }
 
+    /**
+     * The action to be performed before displaying the customer to perform
+     * deposit transaction
+     */
     @Override
     protected void beforeCustomerToDeposit(Form f) {
 
@@ -3299,11 +3478,20 @@ public class StateMachine extends StateMachineBase {
         f.getMenuBar().addCommand(cancel);
     }
 
+    /**
+     * The cancel action on the form that displays customer to perform deposit
+     * transaction
+     */
     @Override
     protected void onCustomerToDeposit_CancelDepositAction(Component c, ActionEvent event) {
         back();
     }
 
+    /**
+     * This method receives the amount, description and teller number from the
+     * "Amount to Deposit" form and calls another form, telling the user to
+     * enter transaction password
+     */
     @Override
     protected void onAmountToDeposit_SendAmountToDepositAction(Component c, ActionEvent event) {
         tranAmount = findAmountToDepositField(c.getComponentForm()).getText();
@@ -3318,20 +3506,36 @@ public class StateMachine extends StateMachineBase {
 
     }
 
+    /**
+     * The cancel action on "Amount to Deposit" form
+     */
     @Override
     protected void onAmountToDeposit_CancelAmountAction(Component c, ActionEvent event) {
         back();
     }
 
+    /**
+     * This is the action on "OK" button on the screen displaying the customer
+     * to perform deposit action, it opens up another form telling the user to
+     * enter Amount to deposit
+     */
     @Override
     protected void onCustomerToDeposit_OkToDepositAction(Component c, ActionEvent event) {
         showForm("AmountToDeposit", null);
     }
 
+    /**
+     * This action checks the transaction password if it is valid, then performs
+     * the deposit transaction
+     */
     @Override
     protected void onDailyTokenDeposit_CheckTokenAction(Component c, ActionEvent event) {
         String tranPWD = findTranPWDDepositTextField(c.getComponentForm()).getText();
-        if (appUser.getTranPWD().equals(this.encodePWD(tranPWD))) {
+
+        GodwinEncrypt encryptMyPassword = new GodwinEncrypt(tranPWD);
+        String myEncryptedPassword = encryptMyPassword.asHex();
+
+        if (appUser.getTranPWD().equals(myEncryptedPassword)) {
             //Hashtable storedToken = new Hashtable();
 //            try {
 //                storedToken = (Hashtable) Storage.getInstance().readObject("TodayToken");
@@ -3345,7 +3549,7 @@ public class StateMachine extends StateMachineBase {
 
 
 
-            performDeposit(customer.getAcctNumber(), tranAmount, mfb.getCode(),
+            performDeposit(customer.getAcctNumber(), tranAmount, appUser.getMfb_code(),
                     narration, tellerNumber, appUser.getUsername() + "" + getRequestID());
 
 
@@ -3495,11 +3699,17 @@ public class StateMachine extends StateMachineBase {
         }
     }
 
+    /**
+     * This is the cancel action on the form that asks for transaction password
+     */
     @Override
     protected void onDailyTokenDeposit_CancelCheckTokenAction(Component c, ActionEvent event) {
         back();
     }
 
+    /**
+     * This is the action on the list of mfbs (no longer in use)
+     */
     @Override
     protected void onWithdrawalMFBs_WithdrawaBankMultiListAction(Component c, ActionEvent event) {
         List l = (List) c;
@@ -3510,6 +3720,10 @@ public class StateMachine extends StateMachineBase {
         showForm("WithdrawalAcctNumber", null);
     }
 
+    /**
+     * This method gets the account number to perform withdrawal transaction and
+     * sends it for verification
+     */
     @Override
     protected void onWithdrawalAcctNumber_WithdrawalVerifyAction(Component c, ActionEvent event) {
 
@@ -3557,6 +3771,10 @@ public class StateMachine extends StateMachineBase {
         }
     }
 
+    /**
+     * This method displays the customer gotten from the verification of
+     * customer to perform withdrawal transaction
+     */
     @Override
     protected void beforeCustomerToWithdraw(Form f) {
 
@@ -3612,16 +3830,27 @@ public class StateMachine extends StateMachineBase {
 
     }
 
+    /**
+     * The action of the "OK" button on The form that displays a customer to be
+     * verified(The Form shown above)
+     */
     @Override
     protected void onCustomerToWithdraw_ContinueAction(Component c, ActionEvent event) {
         showForm("AmountToWithdraw", null);
     }
 
+    /**
+     * The action on the Cancel button on the form "Customer To Withdraw"
+     */
     @Override
     protected void onCustomerToWithdraw_CancelAction(Component c, ActionEvent event) {
         back();
     }
 
+    /**
+     * This method gets the amount and narration of the withdrawal transaction
+     * and then calls the form where you will asked to state the teller number
+     */
     @Override
     protected void onAmountToWithdraw_SendWithdrawAction(Component c, ActionEvent event) {
 
@@ -3645,11 +3874,19 @@ public class StateMachine extends StateMachineBase {
         }
     }
 
+    /**
+     * The action on "Cancel" button of the Form that asks for Amount and
+     * Narration
+     */
     @Override
     protected void onAmountToWithdraw_CancelWithdrawAction(Component c, ActionEvent event) {
         back();
     }
 
+    /**
+     * This method gets the account number to perform withdrawal transaction and
+     * sends it for verification
+     */
     @Override
     protected void onInstrumentForm_WithdrawAction(Component c, ActionEvent event) {
 
@@ -3664,16 +3901,26 @@ public class StateMachine extends StateMachineBase {
         }
     }
 
+    /**
+     * action on the "Cancel" button of the form that asks for Teller Number
+     */
     @Override
     protected void onInstrumentForm_CancelAction(Component c, ActionEvent event) {
         back();
     }
 
+    /**
+     * This method gets the transaction password of the Teller, checks if
+     * correct and then performs the withdrawal
+     */
     @Override
     protected void onDailyTokenWithdrawal_CheckTokenToWithdrawAction(Component c, ActionEvent event) {
-
         String tranPWD = findWithdrawalTranPWDTextField(c.getComponentForm()).getText();
-        if (appUser.getTranPWD().equals(this.encodePWD(tranPWD))) {
+
+        GodwinEncrypt encryptMyPassword = new GodwinEncrypt(tranPWD);
+        String myEncryptedPassword = encryptMyPassword.asHex();
+
+        if (appUser.getTranPWD().equals(myEncryptedPassword)) {
 //            Hashtable storedToken = new Hashtable();
 //            try {
 //                storedToken = (Hashtable) Storage.getInstance().readObject("TodayToken");
@@ -3690,7 +3937,7 @@ public class StateMachine extends StateMachineBase {
             if ((instrumentNo == null) || ("".equals(instrumentNo))) {
                 //  System.out.println("Transaction on non-cheque");
 
-                this.doWithdrawal(customer.getAcctNumber(), mfb.getCode(), tranAmount, narration, tellerNo, tranCharge, appUser.getUsername() + "" + getRequestID());
+                this.doWithdrawal(customer.getAcctNumber(), appUser.getMfb_code(), tranAmount, narration, tellerNo, tranCharge, appUser.getUsername() + "" + getRequestID());
 
                 if (!("200".equals(status))) {
                     Dialog.show("", "something may have gone wrong", "OK", null);
@@ -3827,7 +4074,7 @@ public class StateMachine extends StateMachineBase {
 
             } else {
                 // System.out.println("Transaction on cheque");
-                doChequeWithdrawal(customer.getAcctNumber(), mfb.getCode(), tranAmount,
+                doChequeWithdrawal(customer.getAcctNumber(), appUser.getMfb_code(), tranAmount,
                         narration, instrumentNo, tranCharge, appUser.getUsername() + "" + getRequestID());
 
                 if (!("200".equals(status))) {
@@ -3980,11 +4227,19 @@ public class StateMachine extends StateMachineBase {
         }
     }
 
+    /**
+     * The action of the "cancel" button on the form that asks for transaction
+     * password
+     */
     @Override
     protected void onDailyTokenWithdrawal_CancelWithdrawaTokenAction(Component c, ActionEvent event) {
         back();
     }
 
+    /**
+     * When the Teller enters an account number for Balance Inquiry, This method
+     * performs the Inquiry
+     */
     @Override
     protected void onBalInquiryAcctNumber_VerifyBalInquiryAction(Component c, ActionEvent event) {
 
@@ -4034,11 +4289,17 @@ public class StateMachine extends StateMachineBase {
         }
     }
 
+    /**
+     * action of the "Cancel" button on the Balance Inquiry form
+     */
     @Override
     protected void onBalInquiryAcctNumber_CancelBalInquiryAction(Component c, ActionEvent event) {
         back();
     }
 
+    /**
+     * This method displays the details of the Balance Inquiry
+     */
     @Override
     protected void beforeBalInquiryDisplay(Form f) {
 
@@ -4082,12 +4343,18 @@ public class StateMachine extends StateMachineBase {
         f.getMenuBar().addCommand(cancel);
     }
 
+    /**
+     * action on the "OK" button on the Balance Inquiry Display form
+     */
     @Override
     protected void onBalInquiryDisplay_BalInquiryOKAction(Component c, ActionEvent event) {
 
         back();
     }
 
+    /**
+     * action on each MFB for Mini Statement(Not in Use)
+     */
     @Override
     protected void onMiniStatMFBs_MiniStatMFBsMultiListAction(Component c, ActionEvent event) {
 
@@ -4099,6 +4366,10 @@ public class StateMachine extends StateMachineBase {
         showForm("MiniStatForm", null);
     }
 
+    /**
+     * Action on the "OK" button when the Teller enters account number for mini
+     * statement
+     */
     @Override
     protected void onMiniStatForm_MiniStatOKAction(Component c, ActionEvent event) {
 
@@ -4108,7 +4379,7 @@ public class StateMachine extends StateMachineBase {
             Dialog.show("", "please provide account number", "OK", null);
         } else {
 
-            this.fetchMiniStatementFor(acctNumber, mfb.getCode());
+            this.fetchMiniStatementFor(acctNumber, appUser.getMfb_code());
 
             if (!("200".equals(status))) {
                 Dialog.show("", "something may have gone wrong", "OK", null);
@@ -4161,17 +4432,27 @@ public class StateMachine extends StateMachineBase {
         }
     }
 
+    /**
+     * cancel action on Mini statement Form
+     */
     @Override
     protected void onMiniStatForm_CancelAction(Component c, ActionEvent event) {
         back();
     }
 
+    /**
+     * List model for Mini statement MFBs(Not in use)
+     */
     @Override
     protected boolean initListModelMiniStatMultiList(List cmp) {
         cmp.setModel(new DefaultListModel(allReturns));
         return true;
     }
 
+    /**
+     * On the List of Mini statements, when each is selected, this method
+     * displays the full details of Each mini statement
+     */
     @Override
     protected void onMiniStatDisplay_MiniStatMultiListAction(Component c, ActionEvent event) {
         List l = (List) c;
@@ -4193,6 +4474,9 @@ public class StateMachine extends StateMachineBase {
         showForm("EachMiniStat", null);
     }
 
+    /**
+     * The Form that displays the Mini statements
+     */
     @Override
     protected void beforeMiniStatDisplay(Form f) {
 
@@ -4210,6 +4494,9 @@ public class StateMachine extends StateMachineBase {
         f.getMenuBar().addCommand(home);
     }
 
+    /**
+     * the form that displays Each of the mini statements when selected
+     */
     @Override
     protected void beforeEachMiniStat(Form f) {
 
@@ -4253,6 +4540,9 @@ public class StateMachine extends StateMachineBase {
         f.setBackCommand(null);
     }
 
+    /**
+     * The Form that displays Offline Menu
+     */
     @Override
     protected void beforeOfflineMenu(Form f) {
 
@@ -4347,6 +4637,9 @@ public class StateMachine extends StateMachineBase {
         f.getMenuBar().addCommand(pullAcct);
     }
 
+    /**
+     * The Form that displays the Main Form(The Index form)
+     */
     @Override
     protected void beforeMain(Form f) {
         //Storage.getInstance().deleteStorageFile("OfflineTeller");
@@ -4410,6 +4703,9 @@ public class StateMachine extends StateMachineBase {
 
     }
 
+    /**
+     * The Form that displays the transaction menu
+     */
     @Override
     protected void beforeTransactionMenu(Form f) {
 
@@ -4468,6 +4764,9 @@ public class StateMachine extends StateMachineBase {
 
     }
 
+    /**
+     * Not in use
+     */
     @Override
     protected void beforeBalInquiryMFBs(Form f) {
 
@@ -4484,6 +4783,9 @@ public class StateMachine extends StateMachineBase {
         f.getMenuBar().addCommand(home);
     }
 
+    /**
+     * Not in use
+     */
     @Override
     protected void beforeDepositMFBs(Form f) {
 
@@ -4511,6 +4813,9 @@ public class StateMachine extends StateMachineBase {
         f.getMenuBar().addCommand(cancel);
     }
 
+    /**
+     * Not in use
+     */
     @Override
     protected void beforeMiniStatMFBs(Form f) {
 
@@ -4528,6 +4833,9 @@ public class StateMachine extends StateMachineBase {
         f.setBackCommand(home);
     }
 
+    /**
+     * Not in use
+     */
     @Override
     protected void beforeWithdrawalMFBs(Form f) {
 
@@ -4544,6 +4852,9 @@ public class StateMachine extends StateMachineBase {
         f.getMenuBar().addCommand(home);
     }
 
+    /**
+     * The Form that displays the Customers stored for Offline Transactions
+     */
     @Override
     protected void beforeStoredCustomers(Form f) {
 //        List l = findStoredCustomersMultiList(f);
@@ -4563,18 +4874,28 @@ public class StateMachine extends StateMachineBase {
         f.setBackCommand(home);
     }
 
+    /**
+     * The action on Each customer stored for offline transaction, taking the
+     * Teller to the offline deposit form
+     */
     @Override
     protected void onStoredCustomer_ShowDepositOfflineAction(Component c, ActionEvent event) {
 
         showForm("OfflineDepositForm", null);
     }
 
+    /**
+     * Cancel action on the Offline Transaction customers Form
+     */
     @Override
     protected void onStoredCustomer_CancelAction(Component c, ActionEvent event) {
 
         back();
     }
 
+    /**
+     * The Form that displays Offline Deposit Form
+     */
     @Override
     protected void beforeOfflineDepositForm(Form f) {
 
@@ -4591,12 +4912,18 @@ public class StateMachine extends StateMachineBase {
         f.setBackCommand(null);
     }
 
+    /**
+     * Cancel action on the Online withdrawal Form
+     */
     @Override
     protected void onWithdrawalAcctNumber_CancelWithdrawalAction(Component c, ActionEvent event) {
 
         back();
     }
 
+    /**
+     * This method enforces the User to enter password of more than 6 characters
+     */
     @Override
     protected void onNewAppUser_NewUserPasswordTextFieldAction(Component c, ActionEvent event) {
 
@@ -4607,6 +4934,10 @@ public class StateMachine extends StateMachineBase {
         }
     }
 
+    /**
+     * This method enforces the user to enter more than 6 characters as
+     * Transaction password
+     */
     @Override
     protected void onNewAppUser_TranPasswordTextFieldAction(Component c, ActionEvent event) {
 
@@ -4618,6 +4949,9 @@ public class StateMachine extends StateMachineBase {
 
     }
 
+    /**
+     * The Form that asks the Teller to enter Deposit amount(Online Deposit).
+     */
     @Override
     protected void beforeAmountToDeposit(final Form f) {
 
@@ -4660,6 +4994,9 @@ public class StateMachine extends StateMachineBase {
 
     }
 
+    /**
+     * The Form that asks the Teller to enter amount to withdraw
+     */
     @Override
     protected void beforeAmountToWithdraw(final Form f) {
 
@@ -4711,6 +5048,9 @@ public class StateMachine extends StateMachineBase {
         f.getMenuBar().addCommand(cancel);
     }
 
+    /**
+     * The Form that asks the teller to enter Account Number for Balance Inquiry
+     */
     @Override
     protected void beforeBalInquiryAcctNumber(final Form f) {
 
@@ -4786,6 +5126,9 @@ public class StateMachine extends StateMachineBase {
         f.getMenuBar().addCommand(inquire);
     }
 
+    /**
+     * The Form that asks the Teller to enter Transaction password
+     */
     @Override
     protected void beforeDailyTokenWithdrawal(Form f) {
 
@@ -4810,6 +5153,9 @@ public class StateMachine extends StateMachineBase {
 
     }
 
+    /**
+     * The Form that displays deposit form
+     */
     @Override
     protected void beforeDepositAcctNumber(Form f) {
 
@@ -4833,6 +5179,9 @@ public class StateMachine extends StateMachineBase {
         f.getMenuBar().addCommand(cancel);
     }
 
+    /**
+     * The Form that asks the Teller to enter teller number
+     */
     @Override
     protected void beforeInstrumentForm(final Form f) {
 
@@ -4874,6 +5223,9 @@ public class StateMachine extends StateMachineBase {
         f.getMenuBar().addCommand(withdraw);
     }
 
+    /**
+     * The Form that asks the Teller to enter account number for mini statement
+     */
     @Override
     protected void beforeMiniStatForm(Form f) {
 
@@ -4891,6 +5243,9 @@ public class StateMachine extends StateMachineBase {
 
     }
 
+    /**
+     * The Form that displays Registration Form for new Application user
+     */
     @Override
     protected void beforeNewAppUser(final Form f) {
 
@@ -4926,7 +5281,13 @@ public class StateMachine extends StateMachineBase {
                         Dialog.show("", "passwords should be more than six(6) characters", "OK", null);
                     } else {
 
-                        signUp(username, encodePWD(password), email, encodePWD(tranPWD), tillAcct, bankCode);
+                        GodwinEncrypt encryptMyPassword = new GodwinEncrypt(password);
+                        String myEncryptedPassword = encryptMyPassword.asHex();
+
+                        GodwinEncrypt encryptTranMyPassword = new GodwinEncrypt(tranPWD);
+                        String myEncryptedTranPassword = encryptTranMyPassword.asHex();
+
+                        signUp(username, myEncryptedPassword, email, myEncryptedTranPassword, tillAcct, bankCode);
 
                         if ((status == null) || !("200".equals(status))) {
                             Dialog.show("Oh Dear", "Could not create Teller, please check your internet", "OK", null);
@@ -4961,6 +5322,9 @@ public class StateMachine extends StateMachineBase {
 
     }
 
+    /**
+     * The Offline Login Form(Not in use)
+     */
     @Override
     protected void beforeOfflineLogin(final Form f) {
 
@@ -4995,7 +5359,11 @@ public class StateMachine extends StateMachineBase {
                             Dialog.show("Error", e.getMessage(), "OK", null);
 
                         }
-                        if ((name.equals(OfflineTeller.get("teller_ID").toString())) && ((encodePWD(password)).equals(OfflineTeller.get("password").toString()))) {
+
+                        GodwinEncrypt encryptMyPassword = new GodwinEncrypt(password);
+                        String myEncryptedPassword = encryptMyPassword.asHex();
+
+                        if ((name.equals(OfflineTeller.get("teller_ID").toString())) && ((myEncryptedPassword).equals(OfflineTeller.get("password").toString()))) {
                             appUser = new AppUsers(OfflineTeller.get("teller_ID").toString(), OfflineTeller.get("email").toString(), OfflineTeller.get("object_id").toString(), OfflineTeller.get("offline_status").toString(), OfflineTeller.get("mfb_code").toString(), OfflineTeller.get("password").toString(), OfflineTeller.get("til_account").toString());
                             showForm("OfflineMenu", null);
                         } else {
@@ -5003,7 +5371,11 @@ public class StateMachine extends StateMachineBase {
                         }
                     } else {
                         Dialog.show("First time Login", "about to perform a check online", "OK", null);
-                        login(name, encodePWD(password));
+
+                        GodwinEncrypt encryptMyPassword = new GodwinEncrypt(password);
+                        String myEncryptedPassword = encryptMyPassword.asHex();
+
+                        login(name, myEncryptedPassword);
 
                         if (status == null || !(status.equals("200"))) {
 
@@ -5031,6 +5403,7 @@ public class StateMachine extends StateMachineBase {
                                     Dialog.show("Sorry", "You are not configured to perform offline Transactions, "
                                             + "please contact your Administrator", "OK", null);
                                 } else {
+
                                     appUser = new AppUsers(name, email, objectID, offlineStatus, mfbCode, tranPassword, tillAcct);
 
                                     OfflineTeller = new Hashtable<String, String>();
@@ -5038,7 +5411,7 @@ public class StateMachine extends StateMachineBase {
                                     OfflineTeller.put("mfb_code", appUser.getMfb_code());
                                     OfflineTeller.put("til_account", appUser.getTil_acct());
                                     OfflineTeller.put("email", appUser.getEmail());
-                                    OfflineTeller.put("password", encodePWD(password));
+                                    OfflineTeller.put("password", myEncryptedPassword);
                                     //OfflineTeller.put("email_verified", appUser.getEmailVerified());
                                     //OfflineTeller.put("session_string", appUser.getSessionToken());
                                     OfflineTeller.put("mfb_code", appUser.getMfb_code());
@@ -5074,6 +5447,9 @@ public class StateMachine extends StateMachineBase {
 
     }
 
+    /**
+     * Offline Teller registration Form
+     */
     @Override
     protected void beforeOfflineTellerCreate(final Form f) {
 
@@ -5103,7 +5479,10 @@ public class StateMachine extends StateMachineBase {
 //                Dialog.show("", "password shoulb be more than \n'6' characters", "OK", null);
 //            } else {
 
-                    login(name, encodePWD(password));
+                    GodwinEncrypt encryptMyPassword = new GodwinEncrypt(password);
+                    String myEncryptedPassword = encryptMyPassword.asHex();
+
+                    login(name, myEncryptedPassword);
 
                     if (status == null || !(status.equals("200"))) {
 
@@ -5174,6 +5553,9 @@ public class StateMachine extends StateMachineBase {
         f.getMenuBar().addCommand(cre);
     }
 
+    /**
+     * Login Form (NOt in use)
+     */
     @Override
     protected void beforeOnlineLogin(final Form f) {
 
@@ -5188,7 +5570,11 @@ public class StateMachine extends StateMachineBase {
                 if (("".equals(username)) || ("".equals(password))) {
                     Dialog.show("Missing", "Please provide Username and Password", "OK", null);
                 } else {
-                    login(username, encodePWD(password));
+
+                    GodwinEncrypt encryptMyPassword = new GodwinEncrypt(password);
+                    String myEncryptedPassword = encryptMyPassword.asHex();
+
+                    login(username, myEncryptedPassword);
 
                     if (status == null || !(status.equals("200"))) {
 
@@ -5238,6 +5624,9 @@ public class StateMachine extends StateMachineBase {
         f.addCommand(cancel);
     }
 
+    /**
+     * Admin Login form (Not in use)
+     */
     @Override
     protected void beforeSettingsLogin(final Form f) {
 
@@ -5281,6 +5670,9 @@ public class StateMachine extends StateMachineBase {
         f.addCommand(setLogin);
     }
 
+    /**
+     * Adding menu options to the Withdrawal form
+     */
     @Override
     protected void beforeWithdrawalAcctNumber(final Form f) {
 
@@ -5357,6 +5749,10 @@ public class StateMachine extends StateMachineBase {
         f.addCommand(cancel);
     }
 
+     /**
+     * the login action on the Login dialog after the user must have entered the credentials
+     */
+    
     @Override
     protected void onAppUserLogin_LoginAction(Component c, ActionEvent event) {
         String username = findTellerUsername(c.getComponentForm()).getText();
@@ -5366,7 +5762,10 @@ public class StateMachine extends StateMachineBase {
 
             Dialog.show("Missing", "Please provide Username and Password", "OK", null);
         } else {
-            login(username, encodePWD(password));
+            GodwinEncrypt encryptMyPassword = new GodwinEncrypt(password);
+            String myEncryptedPassword = encryptMyPassword.asHex();
+
+            login(username, myEncryptedPassword);
 
             if (status == null || !(status.equals("200"))) {
 
@@ -5404,11 +5803,17 @@ public class StateMachine extends StateMachineBase {
         }
     }
 
+     /**
+     * cancel action on the login dialog
+     */
     @Override
     protected void onAppUserLogin_CancelAction(Component c, ActionEvent event) {
         ((Dialog) Display.getInstance().getCurrent()).dispose();
     }
 
+     /**
+     * adding menu option to the login dialog
+     */
     @Override
     protected void beforeAppUserLogin(final Form f) {
 
@@ -5423,7 +5828,11 @@ public class StateMachine extends StateMachineBase {
                 if (("".equals(username)) || ("".equals(password))) {
                     Dialog.show("Missing", "Please provide Username and Password", "OK", null);
                 } else {
-                    login(username, encodePWD(password));
+
+                    GodwinEncrypt encryptMyPassword = new GodwinEncrypt(password);
+                    String myEncryptedPassword = encryptMyPassword.asHex();
+
+                    login(username, myEncryptedPassword);
 
                     if (status == null || !(status.equals("200"))) {
 
@@ -5473,6 +5882,9 @@ public class StateMachine extends StateMachineBase {
         f.addCommand(cancel);
     }
 
+     /**
+     * login action for the offline login dialog
+     */
     @Override
     protected void onAppUserLoginOffline_OfflineUserLoginAction(Component c, ActionEvent event) {
         if (Storage.getInstance().exists("Application_Settings")) {
@@ -5495,7 +5907,11 @@ public class StateMachine extends StateMachineBase {
                         Dialog.show("Error", e.getMessage(), "OK", null);
 
                     }
-                    if ((name.equals(OfflineTeller.get("teller_ID").toString())) && ((this.encodePWD(password)).equals(OfflineTeller.get("password").toString()))) {
+
+                    GodwinEncrypt encryptMyPassword = new GodwinEncrypt(password);
+                    String myEncryptedPassword = encryptMyPassword.asHex();
+
+                    if ((name.equals(OfflineTeller.get("teller_ID").toString())) && ((myEncryptedPassword).equals(OfflineTeller.get("password").toString()))) {
                         appUser = new AppUsers(OfflineTeller.get("teller_ID").toString(), OfflineTeller.get("email").toString(), OfflineTeller.get("object_id").toString(), OfflineTeller.get("offline_status").toString(), OfflineTeller.get("mfb_code").toString(), OfflineTeller.get("password").toString(), OfflineTeller.get("til_account").toString());
                         ((Dialog) Display.getInstance().getCurrent()).dispose();
                         showForm("OfflineMenu", null);
@@ -5504,7 +5920,11 @@ public class StateMachine extends StateMachineBase {
                     }
                 } else {
                     Dialog.show("First time Login", "about to perform a check online", "OK", null);
-                    login(name, encodePWD(password));
+
+                    GodwinEncrypt encryptMyPassword = new GodwinEncrypt(password);
+                    String myEncryptedPassword = encryptMyPassword.asHex();
+
+                    login(name, myEncryptedPassword);
 
                     if (status == null || !(status.equals("200"))) {
 
@@ -5539,7 +5959,7 @@ public class StateMachine extends StateMachineBase {
                                 OfflineTeller.put("mfb_code", appUser.getMfb_code());
                                 OfflineTeller.put("til_account", appUser.getTil_acct());
                                 OfflineTeller.put("email", appUser.getEmail());
-                                OfflineTeller.put("password", encodePWD(password));
+                                OfflineTeller.put("password", myEncryptedPassword);
                                 //OfflineTeller.put("email_verified", appUser.getEmailVerified());
                                 //OfflineTeller.put("session_string", appUser.getSessionToken());
                                 OfflineTeller.put("mfb_code", appUser.getMfb_code());
@@ -5576,11 +5996,17 @@ public class StateMachine extends StateMachineBase {
 
     }
 
+     /**
+     * cancel action on the offline login dialog
+     */
     @Override
     protected void onAppUserLoginOffline_CancelAction(Component c, ActionEvent event) {
         ((Dialog) Display.getInstance().getCurrent()).dispose();
     }
 
+     /**
+     * adding menu option to the offline login dialog
+     */
     @Override
     protected void beforeAppUserLoginOffline(final Form f) {
 
@@ -5617,7 +6043,11 @@ public class StateMachine extends StateMachineBase {
                             Dialog.show("Error", e.getMessage(), "OK", null);
 
                         }
-                        if ((name.equals(OfflineTeller.get("teller_ID").toString())) && ((encodePWD(password)).equals(OfflineTeller.get("password").toString()))) {
+
+                        GodwinEncrypt encryptMyPassword = new GodwinEncrypt(password);
+                        String myEncryptedPassword = encryptMyPassword.asHex();
+
+                        if ((name.equals(OfflineTeller.get("teller_ID").toString())) && ((myEncryptedPassword).equals(OfflineTeller.get("password").toString()))) {
                             appUser = new AppUsers(OfflineTeller.get("teller_ID").toString(), OfflineTeller.get("email").toString(), OfflineTeller.get("object_id").toString(), OfflineTeller.get("offline_status").toString(), OfflineTeller.get("mfb_code").toString(), OfflineTeller.get("password").toString(), OfflineTeller.get("til_account").toString());
                             ((Dialog) Display.getInstance().getCurrent()).dispose();
                             showForm("OfflineMenu", null);
@@ -5626,7 +6056,11 @@ public class StateMachine extends StateMachineBase {
                         }
                     } else {
                         Dialog.show("First time Login", "about to perform a check online", "OK", null);
-                        login(name, encodePWD(password));
+
+                        GodwinEncrypt encryptMyPassword = new GodwinEncrypt(password);
+                        String myEncryptedPassword = encryptMyPassword.asHex();
+
+                        login(name, myEncryptedPassword);
 
                         if (status == null || !(status.equals("200"))) {
 
@@ -5661,7 +6095,7 @@ public class StateMachine extends StateMachineBase {
                                     OfflineTeller.put("mfb_code", appUser.getMfb_code());
                                     OfflineTeller.put("til_account", appUser.getTil_acct());
                                     OfflineTeller.put("email", appUser.getEmail());
-                                    OfflineTeller.put("password", encodePWD(password));
+                                    OfflineTeller.put("password", myEncryptedPassword);
                                     //OfflineTeller.put("email_verified", appUser.getEmailVerified());
                                     //OfflineTeller.put("session_string", appUser.getSessionToken());
                                     OfflineTeller.put("mfb_code", appUser.getMfb_code());
@@ -5697,9 +6131,12 @@ public class StateMachine extends StateMachineBase {
         f.addCommand(logins);
     }
 
+     /**
+     * adding menu option to the settings(Admin) login dialog
+     */
     @Override
     protected void beforeSettingLogin(final Form f) {
-        
+
         Command setLogin = new Command("Login") {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -5710,14 +6147,14 @@ public class StateMachine extends StateMachineBase {
                 String password = findAdminPassword(f).getText();
 
                 if ((name.equals(defaultAdmin)) && (password.equals(defaultAdminPwd))) {
-                    ((Dialog)Display.getInstance().getCurrent()).dispose();
+                    ((Dialog) Display.getInstance().getCurrent()).dispose();
                     showForm("Settings", null);
                 } else {
                     if (Storage.getInstance().exists("phone_admin")) {
                         phoneAdmin = (Hashtable<String, String>) Storage.getInstance().readObject("phone_admin");
 
                         if (((phoneAdmin.get("admin_name").toString()).equals(name)) && ((phoneAdmin.get("admin_password").toString()).equals(password))) {
-                            ((Dialog)Display.getInstance().getCurrent()).dispose();
+                            ((Dialog) Display.getInstance().getCurrent()).dispose();
                             showForm("Settings", null);
                         } else {
                             Dialog.show("", "Wrong Admin name and password combination", "OK", null);
@@ -5734,7 +6171,7 @@ public class StateMachine extends StateMachineBase {
             public void actionPerformed(ActionEvent evt) {
                 //super.actionPerformed(evt); //To change body of generated methods, choose Tools | Templates.
                 //showForm("Main", null);
-                ((Dialog)Display.getInstance().getCurrent()).dispose();
+                ((Dialog) Display.getInstance().getCurrent()).dispose();
             }
         };
 
@@ -5743,6 +6180,9 @@ public class StateMachine extends StateMachineBase {
         f.addCommand(setLogin);
     }
 
+     /**
+     * admin login action
+     */
     @Override
     protected void onSettingLogin_AdminLoginAction(Component c, ActionEvent event) {
         String name = findAdminName(c.getComponentForm()).getText();
@@ -5765,9 +6205,12 @@ public class StateMachine extends StateMachineBase {
         }
     }
 
+     /**
+     * cancel action on the Admin login dialog
+     */
     @Override
     protected void onSettingLogin_CancelAction(Component c, ActionEvent event) {
-        
-        ((Dialog)Display.getInstance().getCurrent()).dispose();
+
+        ((Dialog) Display.getInstance().getCurrent()).dispose();
     }
 }
